@@ -12,11 +12,15 @@ import crema.domain.MediaLibrary;
  */
 public class AddLibraryControllerTest {
 
+    private static final String DEFAULT_NAME = "New Media Library";
+
+    private static final String DEFAULT_PATH = System.getProperties().getProperty("java.home");
+
     private final AddLibraryController controller = new AddLibraryController();
 
-    private String path;
+    private String path = DEFAULT_PATH;
 
-    private String name;
+    private String name = DEFAULT_NAME;
 
     private MediaLibrary library;
 
@@ -24,6 +28,11 @@ public class AddLibraryControllerTest {
     public void testAddLibrary() {
         library = controller.addLibrary(path, name);
         Assert.assertNotNull(library);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullPath() {
+        library = controller.addLibrary(null, name);
     }
 
 }
