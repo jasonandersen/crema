@@ -19,8 +19,8 @@ public class AddLibraryController {
      * @return a populated domain object
      */
     public MediaLibrary addLibrary(String path, String name) {
-        Validate.notNull(path, "Media library path cannot be null");
-        Validate.notNull(name, "Media library name cannot be null");
+        Validate.notNull(path, "Media library path cannot be null.");
+        Validate.notNull(name, "Media library name cannot be null.");
         return new MediaLibrary();
     }
 }
