@@ -1,5 +1,7 @@
 package crema.view.controller;
 
+import org.apache.commons.lang.Validate;
+
 import crema.domain.MediaLibrary;
 
 /**
@@ -17,6 +19,8 @@ public class AddLibraryController {
      * @return a populated domain object
      */
     public MediaLibrary addLibrary(String path, String name) {
+        Validate.notNull(path, "Media library path cannot be null");
+        Validate.notNull(name, "Media library name cannot be null");
         return new MediaLibrary();
     }
 }
