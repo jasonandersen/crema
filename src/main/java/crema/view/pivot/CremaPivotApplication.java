@@ -26,7 +26,7 @@ public class CremaPivotApplication implements Application {
     private MainController mainController;
 
     public CremaPivotApplication() {
-        //mainController = BeanContext.getBean(MainController.class);
+        mainController = BeanContext.getBean(MainController.class);
     }
 
     /**
