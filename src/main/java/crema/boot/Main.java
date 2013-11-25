@@ -2,7 +2,7 @@ package crema.boot;
 
 import org.apache.pivot.wtk.DesktopApplicationContext;
 
-import crema.ui.pivot.CremaPivotApplication;
+import crema.view.pivot.CremaPivotApplication;
 
 /**
  * Boot strap the application.
@@ -18,4 +18,5 @@ public class Main {
     public static void main(String[] args) {
         DesktopApplicationContext.main(CremaPivotApplication.class, args);
     }
+
 }

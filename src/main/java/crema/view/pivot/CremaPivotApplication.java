@@ -1,4 +1,4 @@
-package crema.ui.pivot;
+package crema.view.pivot;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,6 +11,9 @@ import org.apache.pivot.wtk.Label;
 import org.apache.pivot.wtk.VerticalAlignment;
 import org.apache.pivot.wtk.Window;
 
+import crema.controller.MainController;
+import crema.util.BeanContext;
+
 /**
  * The primary class for the crema Apache Pivot-based UI.
  * 
@@ -19,6 +22,12 @@ import org.apache.pivot.wtk.Window;
 public class CremaPivotApplication implements Application {
 
     private Window window = null;
+
+    private MainController mainController;
+
+    public CremaPivotApplication() {
+        //mainController = BeanContext.getBean(MainController.class);
+    }
 
     /**
      * @see org.apache.pivot.wtk.Application#startup(org.apache.pivot.wtk.Display, org.apache.pivot.collections.Map)
@@ -29,7 +38,7 @@ public class CremaPivotApplication implements Application {
         window = new Window();
 
         Label label = new Label();
-        label.setText("Hello World!");
+        label.setText(BeanContext.getBean(String.class));
         label.getStyles().put("font", new Font("Arial", Font.BOLD, 24));
         label.getStyles().put("color", Color.RED);
         label.getStyles()
