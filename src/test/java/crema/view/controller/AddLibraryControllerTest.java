@@ -35,4 +35,10 @@ public class AddLibraryControllerTest {
         library = controller.addLibrary(null, name);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullName() {
+        library = controller.addLibrary(path, null);
+
+    }
+
 }
