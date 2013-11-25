@@ -2,6 +2,7 @@ package crema.cucumber;
 
 import org.junit.runner.RunWith;
 
+import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 /**
@@ -10,7 +11,7 @@ import cucumber.api.junit.Cucumber;
  * @since Nov 1, 2013
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(format = { "pretty", "html:target/cucumber" })
-public class CucumberJUnitRunner {
+@CucumberOptions(format = "pretty")
+public class CucumberJUnitRunnerTest {
     //noop
 }
