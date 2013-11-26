@@ -16,7 +16,7 @@ public class BeanContext {
      * instantiate context instance
      */
     static {
-        context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        context = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
     }
 
     /**

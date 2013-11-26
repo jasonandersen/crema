@@ -1,18 +1,16 @@
 package crema.view.pivot;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.io.InputStream;
 
+import org.apache.pivot.beans.BXMLSerializer;
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.wtk.Application;
 import org.apache.pivot.wtk.Display;
-import org.apache.pivot.wtk.HorizontalAlignment;
-import org.apache.pivot.wtk.Label;
-import org.apache.pivot.wtk.VerticalAlignment;
 import org.apache.pivot.wtk.Window;
 
 import crema.controller.MainController;
 import crema.util.BeanContext;
+import crema.util.PathUtil;
 
 /**
  * The primary class for the crema Apache Pivot-based UI.
@@ -30,25 +28,13 @@ public class CremaPivotApplication implements Application {
     }
 
     /**
+     * Boot up using BXML
      * @see org.apache.pivot.wtk.Application#startup(org.apache.pivot.wtk.Display, org.apache.pivot.collections.Map)
      */
-    public void startup(Display display, Map<String, String> properties)
-            throws Exception {
-
-        window = new Window();
-
-        Label label = new Label();
-        label.setText(BeanContext.getBean(String.class));
-        label.getStyles().put("font", new Font("Arial", Font.BOLD, 24));
-        label.getStyles().put("color", Color.RED);
-        label.getStyles()
-                .put("horizontalAlignment", HorizontalAlignment.CENTER);
-        label.getStyles().put("verticalAlignment", VerticalAlignment.CENTER);
-
-        window.setContent(label);
-        window.setTitle("Hello World!");
-        window.setMaximized(true);
-
+    public void startup(Display display, Map<String, String> properties) throws Exception {
+        BXMLSerializer bxmlSerializer = new BXMLSerializer();
+        InputStream is = PathUtil.readInputStreamFromClassPath("bxml/main.bxml");
+        window = (Window) bxmlSerializer.readObject(is);
         window.open(display);
     }
 
@@ -59,7 +45,6 @@ public class CremaPivotApplication implements Application {
         if (window != null) {
             window.close();
         }
-
         return false;
     }
 
