@@ -10,6 +10,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class BeanContext {
 
+    /*
+     * TODO - how do I get test contexts to load dynamically in here??
+     */
+
     private static final ApplicationContext context;
 
     /**
