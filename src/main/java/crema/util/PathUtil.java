@@ -11,11 +11,17 @@ import org.springframework.core.io.ClassPathResource;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-@Deprecated
 public class PathUtil {
 
     private PathUtil() {
         //no instantiation for you!
+    }
+
+    /**
+     * @return the path representing Java's temp directory
+     */
+    public static String getJavaTempDirectoryPath() {
+        return System.getProperty("java.io.tmpdir");
     }
 
     /**

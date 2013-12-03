@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import crema.service.OSDirectoryService;
+import crema.util.PathUtil;
 
 /**
  * Mock implementation of {@link OSDirectoryService}. Will always return the
@@ -23,7 +24,7 @@ public class MockOSDirectoryService implements OSDirectoryService {
      * @see crema.service.OSDirectoryService#getUserHomeDirectoryPath()
      */
     public String getUserHomeDirectoryPath() {
-        String path = System.getProperty("java.io.tmpdir");
+        String path = PathUtil.getJavaTempDirectoryPath();
         log.debug("user home directory: {}", path);
         return path;
     }

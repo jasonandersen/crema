@@ -10,23 +10,19 @@ import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
 
 import crema.service.CremaDirectoryService;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * Cucumber step definitions class
+ * Step definitions related to crema directory tests
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-@ContextConfiguration(locations = { "classpath:crema/cucumber/cucumber.xml" })
-@DirtiesContext
-public class CucumberStepDefs {
+public class CremaDirectoryStepDefs extends AbstractCucumberStepDefs {
 
-    private static Logger log = LoggerFactory.getLogger(CucumberStepDefs.class);
+    private static Logger log = LoggerFactory.getLogger(CremaDirectoryStepDefs.class);
 
     @Autowired
     private CremaDirectoryService preferencesService;
