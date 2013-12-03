@@ -14,4 +14,13 @@ public abstract class AbstractCremaException extends Exception {
     public AbstractCremaException(String message) {
         super(message);
     }
+
+    /**
+     * Constructor
+     * @param message
+     * @param e
+     */
+    public AbstractCremaException(String message, Throwable e) {
+        super(message, e);
+    }
 }

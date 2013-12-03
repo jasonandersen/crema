@@ -1,5 +1,7 @@
 package crema.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,11 +12,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class OSDirectoryServiceImpl implements OSDirectoryService {
 
+    private static Logger log = LoggerFactory.getLogger(OSDirectoryServiceImpl.class);
+
     /**
      * @see crema.service.OSDirectoryService#getUserHomeDirectoryPath()
      */
     public String getUserHomeDirectoryPath() {
-        return System.getProperty("user.home");
+        String path = System.getProperty("user.home");
+        log.debug("user home directory: {}", path);
+        return path;
     }
 
 }

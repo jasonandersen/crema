@@ -16,7 +16,6 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import crema.exception.PreferencesException;
 import crema.test.AbstractSpringTest;
-import crema.test.MockingUtil;
 
 /**
  * Testing the ability to specify a crema default directory
@@ -24,24 +23,19 @@ import crema.test.MockingUtil;
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @DirtiesContext
-public class CremaDirectoryPreferencesTest extends AbstractSpringTest {
+public class CremaDirectoryServicesTest extends AbstractSpringTest {
 
-    private static final Logger log = LoggerFactory.getLogger(CremaDirectoryPreferencesTest.class);
+    private static final Logger log = LoggerFactory.getLogger(CremaDirectoryServicesTest.class);
 
     private static final String TEMP_DIR = System.getProperty("java.io.tmpdir");
 
     @Autowired
-    private PreferencesService target;
+    private CremaDirectoryService target;
 
     private File cremaDir;
 
     @Before
     public void setup() throws PreferencesException {
-        //setup the mock OSDirectoryService
-        log.debug("mocking OSDirectoryService to return the user home dir: {}", TEMP_DIR);
-        PreferencesServiceImpl service = (PreferencesServiceImpl) target;
-        OSDirectoryService mockOsDirService = MockingUtil.mockOSDirectoryService();
-        service.setOSDirectoryService(mockOsDirService);
         if (target != null) {
             cremaDir = target.getCremaDirectory();
         }

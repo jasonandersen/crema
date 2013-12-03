@@ -14,4 +14,13 @@ public class PreferencesException extends AbstractCremaException {
     public PreferencesException(String message) {
         super(message);
     }
+
+    /**
+     * Constructor
+     * @param message
+     * @param e
+     */
+    public PreferencesException(String message, Throwable e) {
+        super(message, e);
+    }
 }

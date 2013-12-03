@@ -10,11 +10,10 @@ import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
-import crema.service.PreferencesService;
-import crema.service.PreferencesServiceImpl;
-import crema.test.MockingUtil;
+import crema.service.CremaDirectoryService;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -24,12 +23,13 @@ import cucumber.api.java.en.When;
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @ContextConfiguration(locations = { "classpath:crema/cucumber/cucumber.xml" })
+@DirtiesContext
 public class CucumberStepDefs {
 
     private static Logger log = LoggerFactory.getLogger(CucumberStepDefs.class);
 
     @Autowired
-    private PreferencesService preferencesService;
+    private CremaDirectoryService preferencesService;
 
     private File cremaDirectory;
 
@@ -40,7 +40,6 @@ public class CucumberStepDefs {
     @Before
     public void setup() {
         log.debug("setting up Cucumber step defs");
-        ((PreferencesServiceImpl) preferencesService).setOSDirectoryService(MockingUtil.mockOSDirectoryService());
     }
 
     @After
