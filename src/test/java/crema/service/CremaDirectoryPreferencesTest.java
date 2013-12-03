@@ -3,8 +3,6 @@ package crema.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.io.File;
 
@@ -18,6 +16,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import crema.exception.PreferencesException;
 import crema.test.AbstractSpringTest;
+import crema.test.MockingUtil;
 
 /**
  * Testing the ability to specify a crema default directory
@@ -41,7 +40,8 @@ public class CremaDirectoryPreferencesTest extends AbstractSpringTest {
         //setup the mock OSDirectoryService
         log.debug("mocking OSDirectoryService to return the user home dir: {}", TEMP_DIR);
         PreferencesServiceImpl service = (PreferencesServiceImpl) target;
-        service.setOSDirectoryService(mockOSDirectoryService());
+        OSDirectoryService mockOsDirService = MockingUtil.mockOSDirectoryService();
+        service.setOSDirectoryService(mockOsDirService);
         if (target != null) {
             cremaDir = target.getCremaDirectory();
         }
@@ -89,14 +89,4 @@ public class CremaDirectoryPreferencesTest extends AbstractSpringTest {
         assertTrue(cremaDir.canWrite());
     }
 
-    /**
-     * @return a mocked OS directory service that will return a user home directory
-     *      in a temp directory that we can later clean up without affecting a user's
-     *      actual crema directory
-     */
-    private OSDirectoryService mockOSDirectoryService() {
-        OSDirectoryService mock = mock(OSDirectoryService.class);
-        when(mock.getUserHomeDirectoryPath()).thenReturn(TEMP_DIR);
-        return mock;
-    }
 }
