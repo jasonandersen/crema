@@ -11,6 +11,8 @@ import java.io.File;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -25,6 +27,8 @@ import crema.test.AbstractSpringTest;
 @DirtiesContext
 public class CremaDirectoryPreferencesTest extends AbstractSpringTest {
 
+    private static final Logger log = LoggerFactory.getLogger(CremaDirectoryPreferencesTest.class);
+
     private static final String TEMP_DIR = System.getProperty("java.io.tmpdir");
 
     @Autowired
@@ -35,6 +39,7 @@ public class CremaDirectoryPreferencesTest extends AbstractSpringTest {
     @Before
     public void setup() throws PreferencesException {
         //setup the mock OSDirectoryService
+        log.debug("mocking OSDirectoryService to return the user home dir: {}", TEMP_DIR);
         PreferencesServiceImpl service = (PreferencesServiceImpl) target;
         service.setOSDirectoryService(mockOSDirectoryService());
         if (target != null) {
@@ -44,6 +49,7 @@ public class CremaDirectoryPreferencesTest extends AbstractSpringTest {
 
     @After
     public void tearDown() {
+        log.debug("deleting the testing directory: {}", cremaDir);
         cremaDir.delete();
     }
 
