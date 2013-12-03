@@ -13,6 +13,11 @@
             <artifactId>spring-context</artifactId>
             <version>3.2.5.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.2.5.RELEASE</version>
+        </dependency>
 
 		<!-- Cucumber -->
         <dependency>
@@ -37,6 +42,15 @@
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-html</artifactId>
             <version>0.2.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
         </dependency>
 
 		<!-- Apache Pivot -->
@@ -63,15 +77,26 @@
             <version>2.1</version>
         </dependency>
 
-        <!-- db4o database --> 
+        <!-- db4o database -->
         <dependency>
             <groupId>com.db4o</groupId>
             <artifactId>db4o-core-java5</artifactId>
             <version>8.1-SNAPSHOT</version>
         </dependency>
+        
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+        </dependency>
 
     </dependencies>
-
 
     <repositories>
         <repository>
