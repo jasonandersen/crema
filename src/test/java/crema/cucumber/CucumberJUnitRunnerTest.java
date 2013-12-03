@@ -6,9 +6,9 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 /**
+ * JUnit runner class for cucumber tests.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
- * @since Nov 1, 2013
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(format = "pretty")

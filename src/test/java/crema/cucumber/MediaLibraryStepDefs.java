@@ -2,14 +2,17 @@ package crema.cucumber;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
 import org.junit.After;
+import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.domain.MediaLibrary;
+import crema.exception.DuplicateMediaLibraryException;
 import crema.service.MediaLibraryService;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -29,9 +32,17 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     private MediaLibrary mediaLibrary;
 
+    private Exception exception;
+
     /*
      * test setup and teardown
      */
+
+    @Before
+    public void setup() {
+        mediaLibrary = null;
+        exception = null;
+    }
 
     @After
     public void tearDownDirectory() {
@@ -61,13 +72,27 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
         assertTrue(mediaDirectory.canRead());
     }
 
+    @Given("^I have an existing media library named \"([^\"]*)\"$")
+    public void I_have_an_existing_media_library_named(String libraryName) throws Throwable {
+        mediaLibraryService.createMediaLibrary(mediaDirectory, libraryName);
+    }
+
+    @Given("^I have an existing media library with the directory$")
+    public void I_have_an_existing_media_library_with_the_directory() throws Throwable {
+        mediaLibraryService.createMediaLibrary(mediaDirectory, "Pre-existing Media Library");
+    }
+
     /*
      * WHEN steps
      */
 
     @When("^I choose the directory as a media library named \"([^\"]*)\"$")
     public void I_choose_the_directory_as_a_media_library_named(String libraryName) throws Throwable {
-        mediaLibraryService.createMediaLibrary(mediaDirectory, libraryName);
+        try {
+            mediaLibraryService.createMediaLibrary(mediaDirectory, libraryName);
+        } catch (Exception e) {
+            exception = e;
+        }
     }
 
     /*
@@ -78,12 +103,20 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
     public void I_have_a_media_library_named(String libraryName) throws Throwable {
         mediaLibrary = mediaLibraryService.readMediaLibrary(libraryName);
         assertEquals(libraryName, mediaLibrary.getName());
+        assertNull(exception);
     }
 
     @Then("^the directory for media library \"([^\"]*)\" matches the directory$")
     public void the_directory_for_media_library_matches_the_directory(String libraryName) throws Throwable {
         mediaLibrary = mediaLibraryService.readMediaLibrary(libraryName);
         assertEquals(mediaDirectory, mediaLibrary.getBaseDirectory());
+        assertNull(exception);
+    }
+
+    @Then("^I get a duplicate media library error$")
+    public void I_get_a_duplicate_media_library_error() throws Throwable {
+        assertNotNull(exception);
+        assertTrue(exception instanceof DuplicateMediaLibraryException);
     }
 
 }

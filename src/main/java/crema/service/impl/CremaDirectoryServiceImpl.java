@@ -1,4 +1,4 @@
-package crema.service;
+package crema.service.impl;
 
 import java.io.File;
 
@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import crema.exception.PreferencesException;
+import crema.service.CremaDirectoryService;
+import crema.service.OSDirectoryService;
+import crema.service.PreferencesService;
 
 /**
  * Implementation of {@link CremaDirectoryService}.

@@ -1,10 +1,12 @@
-package crema.service;
+package crema.service.impl;
 
 import java.util.prefs.Preferences;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import crema.service.PreferencesService;
 
 /**
  * Implementation of {@link PreferencesService} using the Java Preferences API.

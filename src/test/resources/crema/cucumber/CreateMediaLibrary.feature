@@ -17,3 +17,18 @@ Scenario: add a new media library with a blank name
     When I choose the directory as a media library named ""
     Then I have a media library named "Media Library 1"
 
+Scenario: add a new media library with a duplicate name
+    Given I have an existing media library named "Library 1"
+    And I have a directory
+    And the directory exists
+    And the directory can be read
+    When I choose the directory as a media library named "Library 1"
+    Then I get a duplicate media library error
+
+Scenario: add a new media library with a duplicate directory
+    Given I have a directory
+    And the directory exists
+    And the directory can be read
+    And I have an existing media library with the directory
+    When I choose the directory as a media library named "Library 1"
+    Then I get a duplicate media library error
