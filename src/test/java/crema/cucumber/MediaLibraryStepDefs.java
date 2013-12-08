@@ -9,10 +9,12 @@ import java.io.File;
 
 import org.junit.After;
 import org.junit.Before;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.domain.MediaLibrary;
 import crema.exception.DuplicateMediaLibraryException;
+import crema.exception.InvalidMediaLibraryDirectoryException;
 import crema.service.MediaLibraryService;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -82,6 +84,18 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
         mediaLibraryService.createMediaLibrary(mediaDirectory, "Pre-existing Media Library");
     }
 
+    @Given("^the directory cannot be read$")
+    public void the_directory_cannot_be_read() throws Throwable {
+        mediaDirectory = Mockito.spy(mediaDirectory);
+        Mockito.when(mediaDirectory.canRead()).thenReturn(false);
+    }
+
+    @Given("^the directory does not exist$")
+    public void the_directory_does_not_exist() throws Throwable {
+        mediaDirectory = Mockito.spy(mediaDirectory);
+        Mockito.when(mediaDirectory.exists()).thenReturn(false);
+    }
+
     /*
      * WHEN steps
      */
@@ -117,6 +131,12 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
     public void I_get_a_duplicate_media_library_error() throws Throwable {
         assertNotNull(exception);
         assertTrue(exception instanceof DuplicateMediaLibraryException);
+    }
+
+    @Then("^I get a invalid directory media library error$")
+    public void I_get_a_invalid_directory_media_library_error() throws Throwable {
+        assertNotNull(exception);
+        assertTrue(exception instanceof InvalidMediaLibraryDirectoryException);
     }
 
 }
