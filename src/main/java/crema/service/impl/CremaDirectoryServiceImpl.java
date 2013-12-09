@@ -118,6 +118,7 @@ public class CremaDirectoryServiceImpl implements CremaDirectoryService {
             path.append(File.separator);
         }
         path.append(CREMA_DIR_NAME);
+        path.append(File.separator);
         log.debug("building default crema directory: {}", path);
         return path.toString();
     }

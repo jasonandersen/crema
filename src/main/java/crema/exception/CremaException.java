@@ -5,13 +5,13 @@ package crema.exception;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public abstract class AbstractCremaException extends Exception {
+public abstract class CremaException extends Exception {
 
     /**
      * Constructor
      * @param message
      */
-    public AbstractCremaException(String message) {
+    public CremaException(String message) {
         super(message);
     }
 
@@ -20,7 +20,7 @@ public abstract class AbstractCremaException extends Exception {
      * @param message
      * @param e
      */
-    public AbstractCremaException(String message, Throwable e) {
+    public CremaException(String message, Throwable e) {
         super(message, e);
     }
 }

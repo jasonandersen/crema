@@ -7,7 +7,7 @@ import crema.domain.MediaLibrary;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class MediaLibraryException extends AbstractCremaException {
+public class MediaLibraryException extends CremaException {
 
     /**
      * Constructor

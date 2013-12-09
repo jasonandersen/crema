@@ -25,11 +25,11 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
      * @see crema.service.MediaLibraryService#createMediaLibrary(java.io.File, java.lang.String)
      */
     public MediaLibrary createMediaLibrary(File path, String name) throws MediaLibraryException {
-        validateDirectory(path);
         MediaLibrary library = new MediaLibrary();
         library.setBaseDirectory(path);
         library.setName(name);
-        return mediaLibraryDao.save(library);
+        mediaLibraryDao.save(library);
+        return library;
     }
 
     /**
@@ -37,13 +37,6 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
      */
     public MediaLibrary readMediaLibrary(String libraryName) {
         return null;
-    }
-
-    /**
-     * @param path
-     */
-    private void validateDirectory(File path) {
-        //TODO we should definitely do something here
     }
 
 }

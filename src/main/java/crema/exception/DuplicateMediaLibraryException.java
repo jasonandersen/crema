@@ -5,7 +5,7 @@ package crema.exception;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class DuplicateMediaLibraryException extends AbstractCremaException {
+public class DuplicateMediaLibraryException extends CremaException {
 
     /**
      * Constructor

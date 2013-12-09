@@ -14,5 +14,9 @@
     <bean id="openingMessage" class="java.lang.String">
         <constructor-arg value="Hello World - I came from an application context XML file!" />
     </bean>
+    
+    <bean id="defaultDatabaseFile" class="java.lang.String">
+        <constructor-arg value="crema.db" />
+    </bean>
 
 </beans>

@@ -5,7 +5,7 @@ package crema.exception;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class PreferencesException extends AbstractCremaException {
+public class PreferencesException extends CremaException {
 
     /**
      * Constructor

@@ -9,8 +9,6 @@ import java.io.File;
  */
 public class MediaLibrary {
 
-    //TODO implement
-
     private File baseDirectory;
 
     private String name;
@@ -29,6 +27,14 @@ public class MediaLibrary {
 
     public void setBaseDirectory(File baseDirectory) {
         this.baseDirectory = baseDirectory;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return String.format("[MediaLibrary]name=%s;baseDirectory=%s", name, baseDirectory);
     }
 
 }

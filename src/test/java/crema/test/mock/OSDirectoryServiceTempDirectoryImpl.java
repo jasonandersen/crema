@@ -16,9 +16,9 @@ import crema.util.PathUtil;
  */
 @Primary
 @Service
-public class MockOSDirectoryService implements OSDirectoryService {
+public class OSDirectoryServiceTempDirectoryImpl implements OSDirectoryService {
 
-    private static Logger log = LoggerFactory.getLogger(MockOSDirectoryService.class);
+    private static Logger log = LoggerFactory.getLogger(OSDirectoryServiceTempDirectoryImpl.class);
 
     /**
      * @see crema.service.OSDirectoryService#getUserHomeDirectoryPath()

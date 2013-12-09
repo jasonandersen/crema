@@ -11,6 +11,10 @@ public interface PreferencesService {
      * Directory used to store application data
      */
     public static final String KEY_CREMA_DIRECTORY = "crema.dir";
+    /**
+     * Crema database file
+     */
+    public static final String KEY_CREMA_DB_FILE = "crema.db.file";
 
     /**
      * @param key

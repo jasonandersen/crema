@@ -14,6 +14,12 @@ public interface MediaLibraryDAO {
      * @param library
      * @return the instance of the library that's been persisted
      */
-    public MediaLibrary save(MediaLibrary library);
+    public void save(MediaLibrary library);
+
+    /**
+     * @param name
+     * @return the instance of the library with the specified name, will return null if the name is not found
+     */
+    public MediaLibrary read(String name);
 
 }
