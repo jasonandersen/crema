@@ -12,14 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.exception.PreferencesException;
-import crema.test.AbstractSpringTest;
+import crema.test.AbstractIntegrationTest;
 
 /**
  * Testing that preferences get persisted.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class CremaDirectoryPreferencesPersistedTest extends AbstractSpringTest {
+public class CremaDirectoryPreferencesPersistedTest extends AbstractIntegrationTest {
 
     private static final Logger log = LoggerFactory.getLogger(CremaDirectoryServicesTest.class);
 

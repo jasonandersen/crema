@@ -5,7 +5,7 @@ package crema.exception;
  *
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class InvalidMediaLibraryDirectoryException extends CremaException {
+public class InvalidMediaLibraryDirectoryException extends MediaLibraryException {
 
     /**
      * Constructor

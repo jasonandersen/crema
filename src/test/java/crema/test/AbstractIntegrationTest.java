@@ -4,17 +4,20 @@ import java.io.File;
 
 import javax.annotation.PostConstruct;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import crema.exception.PreferencesException;
 import crema.service.CremaDirectoryService;
+import crema.test.mock.DatabaseTruncateService;
 import crema.test.mock.PreferencesServiceInMemoryImpl;
 
 /**
@@ -24,9 +27,10 @@ import crema.test.mock.PreferencesServiceInMemoryImpl;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/applicationContext.xml")
-public abstract class AbstractSpringTest {
+@DirtiesContext
+public abstract class AbstractIntegrationTest {
 
-    private static Logger log = LoggerFactory.getLogger(AbstractSpringTest.class);
+    private static Logger log = LoggerFactory.getLogger(AbstractIntegrationTest.class);
 
     private static File cremaDir;
 
@@ -35,6 +39,9 @@ public abstract class AbstractSpringTest {
 
     @Autowired
     private CremaDirectoryService cremaDirectory;
+
+    @Autowired
+    private DatabaseTruncateService truncateService;
 
     @PostConstruct
     public void setupCremaDirectory() throws PreferencesException {
@@ -59,6 +66,15 @@ public abstract class AbstractSpringTest {
     @Before
     public void setupPreferencesForTest() throws PreferencesException {
         testPreferencesService.clearPreferences();
+    }
+
+    /**
+     * Before each test, clear out the database.
+     */
+    @Before
+    @After
+    public void truncateDatabase() {
+        truncateService.truncate();
     }
 
 }

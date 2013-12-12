@@ -77,6 +77,7 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     @Given("^I have an existing media library named \"([^\"]*)\"$")
     public void I_have_an_existing_media_library_named(String libraryName) throws Throwable {
+        mediaDirectory = TestUtil.buildTestMediaDirectory(getClass());
         mediaLibraryService.createMediaLibrary(mediaDirectory, libraryName);
     }
 

@@ -9,14 +9,14 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.dao.db4o.DatabaseFile;
-import crema.test.AbstractSpringTest;
+import crema.test.AbstractIntegrationTest;
 
 /**
  * Testing the {@link DatabaseFile} class.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class DatabaseFileTest extends AbstractSpringTest {
+public class DatabaseFileTest extends AbstractIntegrationTest {
 
     @Autowired
     private DatabaseFile dbFile;

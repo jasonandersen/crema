@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.db4o.query.Predicate;
-
 import crema.dao.MediaLibraryDAO;
 import crema.domain.MediaLibrary;
 
@@ -37,14 +35,14 @@ public class MediaLibraryDAOImpl implements MediaLibraryDAO {
      * @see crema.dao.MediaLibraryDAO#read(java.lang.String)
      */
     public MediaLibrary read(final String name) {
+        /*
+         * NOTE - I originally tried to use a native query here but ended up getting a strange
+         * Db4oException. For reasons I don't understand, query-by-example works.
+         */
         log.debug("reading MediaLibrary named  {}", name);
-        Predicate<MediaLibrary> queryPredicate = new Predicate<MediaLibrary>() {
-            @Override
-            public boolean match(MediaLibrary library) {
-                return library.getName().equalsIgnoreCase(name);
-            }
-        };
-        List<MediaLibrary> results = containerContext.query(queryPredicate);
+        MediaLibrary example = new MediaLibrary();
+        example.setName(name);
+        List<MediaLibrary> results = containerContext.getObjectContainer().queryByExample(example);
         log.debug("{} results found for MediaLibrary named {}", results.size(), name);
         return results.isEmpty() ? null : results.get(0);
     }

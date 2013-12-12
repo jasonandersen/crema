@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 
 import crema.exception.PreferencesException;
-import crema.test.AbstractSpringTest;
+import crema.test.AbstractIntegrationTest;
 
 /**
  * Testing the ability to specify a crema default directory
@@ -23,7 +23,7 @@ import crema.test.AbstractSpringTest;
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @DirtiesContext
-public class CremaDirectoryServicesTest extends AbstractSpringTest {
+public class CremaDirectoryServicesTest extends AbstractIntegrationTest {
 
     private static final Logger log = LoggerFactory.getLogger(CremaDirectoryServicesTest.class);
 

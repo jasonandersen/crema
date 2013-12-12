@@ -8,7 +8,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.domain.MediaLibrary;
-import crema.test.AbstractSpringTest;
+import crema.exception.DuplicateMediaLibraryException;
+import crema.test.AbstractIntegrationTest;
 import crema.test.TestUtil;
 
 /**
@@ -16,7 +17,7 @@ import crema.test.TestUtil;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class MediaLibraryDAOTest extends AbstractSpringTest {
+public class MediaLibraryDAOTest extends AbstractIntegrationTest {
 
     @Autowired
     private MediaLibraryDAO dao;
@@ -42,6 +43,15 @@ public class MediaLibraryDAOTest extends AbstractSpringTest {
         MediaLibrary savedLibrary = dao.read(name);
         assertNotNull(savedLibrary);
         assertSame(library, savedLibrary);
+    }
+
+    @Test(expected = DuplicateMediaLibraryException.class)
+    public void testDuplicateMediaLibraryName() {
+        MediaLibrary duplicate = new MediaLibrary();
+        duplicate.setName("I like monkeys");
+        duplicate.setBaseDirectory(TestUtil.buildTestMediaDirectory(getClass()));
+        dao.save(library);
+        dao.save(duplicate);
     }
 
 }

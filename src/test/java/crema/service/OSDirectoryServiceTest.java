@@ -10,14 +10,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import crema.test.AbstractSpringTest;
+import crema.test.AbstractIntegrationTest;
 
 /**
  * Tests the OSDirectoryService implementation.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class OSDirectoryServiceTest extends AbstractSpringTest {
+public class OSDirectoryServiceTest extends AbstractIntegrationTest {
 
     private static final String ENV_VAR = "%userprofile%";
 

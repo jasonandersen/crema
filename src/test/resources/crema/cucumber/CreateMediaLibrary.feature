@@ -10,13 +10,6 @@ Scenario: add a new media library
     Then I have a media library named "Library 1"
     And the directory for media library "Library 1" matches the directory
     
-Scenario: add a new media library with a blank name
-    Given I have a directory
-    And the directory exists
-    And the directory can be read
-    When I choose the directory as a media library named ""
-    Then I have a media library named "Media Library 1"
-
 Scenario: add a new media library with a duplicate name
     Given I have an existing media library named "Library 1"
     And I have a directory

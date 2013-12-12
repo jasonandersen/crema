@@ -1,7 +1,16 @@
 package crema.cucumber;
 
-import org.junit.runner.RunWith;
+import java.io.File;
 
+import org.junit.AfterClass;
+import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import crema.dao.db4o.DatabaseFile;
+import crema.test.IntegrationTest;
+import crema.util.BeanContext;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
@@ -12,6 +21,28 @@ import cucumber.api.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(format = "pretty")
+@Category(IntegrationTest.class)
 public class CucumberJUnitRunnerTest {
-    //noop
+
+    private static Logger log = LoggerFactory.getLogger(CucumberJUnitRunnerTest.class);
+
+    //@BeforeClass
+    public static void setup() {
+        log.info("setting up Cucumber tests");
+        DatabaseFile dbFile = BeanContext.getBean(DatabaseFile.class);
+        File databaseFile = new File(dbFile.getPath());
+        databaseFile.delete();
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        /*
+         * For reasons I can't figure out, the Cucumber tests seem to dirty up the context. Since we're not
+         * using a Spring JUnit runner, we can't use the @DirtiesContext annotation so we're just going to
+         * programmatically refresh the context after the Cucumber tests are done to make sure they don't
+         * interfere with any following tests.
+         */
+        log.info("cleaning up after Cucumber tests");
+        BeanContext.refreshContext();
+    }
 }
