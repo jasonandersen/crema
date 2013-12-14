@@ -89,7 +89,9 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     public void cleanupContainer() {
         log.warn("closing object container");
         if (getObjectContainer() != null) {
-            getObjectContainer().close();
+            while (!getObjectContainer().close()) {
+                //keep calling close until the last session is closed
+            }
         }
     }
 
