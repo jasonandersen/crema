@@ -15,7 +15,7 @@ import crema.exception.DuplicateMediaLibraryException;
 import crema.exception.InvalidMediaLibraryDirectoryException;
 import crema.service.MediaLibraryService;
 import crema.test.TestUtil;
-import crema.test.beans.DatabaseTruncateService;
+import crema.test.beans.DatabaseTruncator;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -35,7 +35,7 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
     private MediaLibraryService mediaLibraryService;
 
     @Autowired
-    private DatabaseTruncateService truncator;
+    private DatabaseTruncator truncator;
 
     private MediaLibrary mediaLibrary;
 

@@ -17,12 +17,12 @@ import crema.test.AbstractIntegrationTest;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class OSDirectoryServiceTest extends AbstractIntegrationTest {
+public class OSDirectoryLocatorTest extends AbstractIntegrationTest {
 
     private static final String ENV_VAR = "%userprofile%";
 
     @Autowired
-    private OSDirectoryService target;
+    private OSDirectoryLocator target;
 
     private File userHomeDir;
 

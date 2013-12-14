@@ -9,7 +9,7 @@ import crema.exception.PreferencesException;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public interface CremaDirectoryService {
+public interface CremaDirectoryLocator {
 
     /**
      * @return a file reference to the crema directory, guaranteed to exist and be writeable

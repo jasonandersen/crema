@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import crema.service.CremaDirectoryService;
+import crema.service.CremaDirectoryLocator;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -25,7 +25,7 @@ public class CremaDirectoryStepDefs extends AbstractCucumberStepDefs {
     private static Logger log = LoggerFactory.getLogger(CremaDirectoryStepDefs.class);
 
     @Autowired
-    private CremaDirectoryService preferencesService;
+    private CremaDirectoryLocator preferencesService;
 
     private File cremaDirectory;
 

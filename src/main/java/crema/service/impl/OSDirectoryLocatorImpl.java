@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import crema.service.OSDirectoryService;
+import crema.service.OSDirectoryLocator;
 
 /**
  * Provides services to obtain operating system specific directories.
@@ -12,12 +12,12 @@ import crema.service.OSDirectoryService;
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @Service
-public class OSDirectoryServiceImpl implements OSDirectoryService {
+public class OSDirectoryLocatorImpl implements OSDirectoryLocator {
 
-    private static Logger log = LoggerFactory.getLogger(OSDirectoryServiceImpl.class);
+    private static Logger log = LoggerFactory.getLogger(OSDirectoryLocatorImpl.class);
 
     /**
-     * @see crema.service.OSDirectoryService#getUserHomeDirectoryPath()
+     * @see crema.service.OSDirectoryLocator#getUserHomeDirectoryPath()
      */
     public String getUserHomeDirectoryPath() {
         String path = System.getProperty("user.home");

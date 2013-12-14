@@ -18,9 +18,9 @@ import crema.domain.MediaLibrary;
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @Service
-public class DatabaseTruncateService {
+public class DatabaseTruncator {
 
-    private static Logger log = LoggerFactory.getLogger(DatabaseTruncateService.class);
+    private static Logger log = LoggerFactory.getLogger(DatabaseTruncator.class);
 
     @Autowired
     private ObjectContainerContext containerContext;

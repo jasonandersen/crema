@@ -16,8 +16,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import crema.exception.PreferencesException;
-import crema.service.CremaDirectoryService;
-import crema.test.beans.DatabaseTruncateService;
+import crema.service.CremaDirectoryLocator;
+import crema.test.beans.DatabaseTruncator;
 import crema.test.beans.PreferencesServiceInMemoryImpl;
 
 /**
@@ -38,10 +38,10 @@ public abstract class AbstractIntegrationTest {
     private PreferencesServiceInMemoryImpl testPreferencesService;
 
     @Autowired
-    private CremaDirectoryService cremaDirectory;
+    private CremaDirectoryLocator cremaDirectory;
 
     @Autowired
-    private DatabaseTruncateService truncateService;
+    private DatabaseTruncator truncator;
 
     @PostConstruct
     public void setupCremaDirectory() throws PreferencesException {
@@ -74,7 +74,7 @@ public abstract class AbstractIntegrationTest {
     @Before
     @After
     public void truncateDatabase() {
-        truncateService.truncate();
+        truncator.truncate();
     }
 
 }

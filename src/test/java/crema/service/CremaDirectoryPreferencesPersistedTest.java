@@ -21,10 +21,10 @@ import crema.test.AbstractIntegrationTest;
  */
 public class CremaDirectoryPreferencesPersistedTest extends AbstractIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(CremaDirectoryServicesTest.class);
+    private static final Logger log = LoggerFactory.getLogger(CremaDirectoryLocatorTest.class);
 
     @Autowired
-    private CremaDirectoryService target;
+    private CremaDirectoryLocator target;
 
     private File cremaDir;
 

@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 
 import crema.exception.CremaException;
 import crema.exception.PreferencesException;
-import crema.service.CremaDirectoryService;
+import crema.service.CremaDirectoryLocator;
 import crema.service.Preferences;
 
 /**
- * Utility to retrieve a local database file.
+ * Utility to retrieve the local database file.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
@@ -34,7 +34,7 @@ public class DatabaseFileLocator {
     private Preferences preferences;
 
     @Autowired
-    private CremaDirectoryService cremaDirectoryService;
+    private CremaDirectoryLocator cremaDirectoryLocator;
 
     private File databaseFile;
 
@@ -87,7 +87,7 @@ public class DatabaseFileLocator {
      */
     private String createDefaultFilePath() throws PreferencesException {
         StringBuilder path = new StringBuilder();
-        path.append(cremaDirectoryService.getCremaDirectory().getPath());
+        path.append(cremaDirectoryLocator.getCremaDirectory().getPath());
         path.append(File.separator);
         path.append(defaultDatabaseFileName);
         log.info("building default database file name: {}", path);

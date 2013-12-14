@@ -6,7 +6,7 @@ package crema.service;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public interface OSDirectoryService {
+public interface OSDirectoryLocator {
 
     /**
      * @return a file that represents a user's home directory

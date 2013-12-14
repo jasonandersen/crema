@@ -8,31 +8,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import crema.exception.PreferencesException;
-import crema.service.CremaDirectoryService;
-import crema.service.OSDirectoryService;
+import crema.service.CremaDirectoryLocator;
+import crema.service.OSDirectoryLocator;
 import crema.service.Preferences;
 
 /**
- * Implementation of {@link CremaDirectoryService}.
+ * Implementation of {@link CremaDirectoryLocator}.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
- * @see crema.service.CremaDirectoryService
+ * @see crema.service.CremaDirectoryLocator
  */
 @Service
-public class CremaDirectoryServiceImpl implements CremaDirectoryService {
+public class CremaDirectoryLocatorImpl implements CremaDirectoryLocator {
 
     private static final String CREMA_DIR_NAME = ".crema";
 
-    private static Logger log = LoggerFactory.getLogger(CremaDirectoryServiceImpl.class);
+    private static Logger log = LoggerFactory.getLogger(CremaDirectoryLocatorImpl.class);
 
     @Autowired
-    private OSDirectoryService osDirService;
+    private OSDirectoryLocator osDirLocator;
 
     @Autowired
     private Preferences preferencesService;
 
     /**
-     * @see crema.service.CremaDirectoryService#isCremaDirectorySpecified()
+     * @see crema.service.CremaDirectoryLocator#isCremaDirectorySpecified()
      */
     public boolean isCremaDirectorySpecified() {
         String path = preferencesService.getString(Preferences.KEY_CREMA_DIRECTORY);
@@ -40,7 +40,7 @@ public class CremaDirectoryServiceImpl implements CremaDirectoryService {
     }
 
     /**
-     * @see crema.service.CremaDirectoryService#getCremaDirectory()
+     * @see crema.service.CremaDirectoryLocator#getCremaDirectory()
      */
     public File getCremaDirectory() throws PreferencesException {
         File dir = loadDirectoryFromPreferences();
@@ -53,10 +53,10 @@ public class CremaDirectoryServiceImpl implements CremaDirectoryService {
 
     /**
      * Setter method to enable testing.
-     * @param osDirService
+     * @param osDirLocator
      */
-    public void setOSDirectoryService(OSDirectoryService osDirService) {
-        this.osDirService = osDirService;
+    public void setOSDirectoryService(OSDirectoryLocator osDirLocator) {
+        this.osDirLocator = osDirLocator;
     }
 
     /**
@@ -112,7 +112,7 @@ public class CremaDirectoryServiceImpl implements CremaDirectoryService {
      */
     private String buildDefaultCremaDirectoryPath() {
         StringBuffer path = new StringBuffer();
-        String userHomeDir = osDirService.getUserHomeDirectoryPath();
+        String userHomeDir = osDirLocator.getUserHomeDirectoryPath();
         path.append(userHomeDir);
         if (!userHomeDir.endsWith(File.separator)) {
             path.append(File.separator);

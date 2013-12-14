@@ -23,14 +23,14 @@ import crema.test.AbstractIntegrationTest;
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @DirtiesContext
-public class CremaDirectoryServicesTest extends AbstractIntegrationTest {
+public class CremaDirectoryLocatorTest extends AbstractIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(CremaDirectoryServicesTest.class);
+    private static final Logger log = LoggerFactory.getLogger(CremaDirectoryLocatorTest.class);
 
     private static final String TEMP_DIR = System.getProperty("java.io.tmpdir");
 
     @Autowired
-    private CremaDirectoryService target;
+    private CremaDirectoryLocator target;
 
     private File cremaDir;
 
