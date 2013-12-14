@@ -7,8 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.junit.After;
-import org.junit.Before;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +15,9 @@ import crema.exception.DuplicateMediaLibraryException;
 import crema.exception.InvalidMediaLibraryDirectoryException;
 import crema.service.MediaLibraryService;
 import crema.test.TestUtil;
+import crema.test.beans.DatabaseTruncateService;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -32,6 +33,9 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     @Autowired
     private MediaLibraryService mediaLibraryService;
+
+    @Autowired
+    private DatabaseTruncateService truncator;
 
     private MediaLibrary mediaLibrary;
 
@@ -52,6 +56,15 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
         if (mediaDirectory != null && mediaDirectory.exists()) {
             mediaDirectory.delete();
         }
+    }
+
+    /**
+     * Clean out the database after each test.
+     */
+    @Before
+    @After
+    public void truncateDatabase() {
+        truncator.truncate();
     }
 
     /*

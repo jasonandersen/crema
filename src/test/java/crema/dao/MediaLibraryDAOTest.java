@@ -37,7 +37,7 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
     }
 
     @Test
-    public void testSave() {
+    public void testSave() throws DuplicateMediaLibraryException {
         String name = library.getName();
         dao.save(library);
         MediaLibrary savedLibrary = dao.read(name);
@@ -46,7 +46,7 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
     }
 
     @Test(expected = DuplicateMediaLibraryException.class)
-    public void testDuplicateMediaLibraryName() {
+    public void testDuplicateMediaLibraryName() throws DuplicateMediaLibraryException {
         MediaLibrary duplicate = new MediaLibrary();
         duplicate.setName("I like monkeys");
         duplicate.setBaseDirectory(TestUtil.buildTestMediaDirectory(getClass()));

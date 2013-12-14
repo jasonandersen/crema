@@ -1,4 +1,4 @@
-package crema.test.mock;
+package crema.test.beans;
 
 import java.util.List;
 

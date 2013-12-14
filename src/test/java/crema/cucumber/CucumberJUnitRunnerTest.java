@@ -1,14 +1,11 @@
 package crema.cucumber;
 
-import java.io.File;
-
 import org.junit.AfterClass;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import crema.dao.db4o.DatabaseFile;
 import crema.test.IntegrationTest;
 import crema.util.BeanContext;
 import cucumber.api.CucumberOptions;
@@ -19,20 +16,13 @@ import cucumber.api.junit.Cucumber;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
+//@Ignore
 @RunWith(Cucumber.class)
 @CucumberOptions(format = "pretty")
 @Category(IntegrationTest.class)
 public class CucumberJUnitRunnerTest {
 
     private static Logger log = LoggerFactory.getLogger(CucumberJUnitRunnerTest.class);
-
-    //@BeforeClass
-    public static void setup() {
-        log.info("setting up Cucumber tests");
-        DatabaseFile dbFile = BeanContext.getBean(DatabaseFile.class);
-        File databaseFile = new File(dbFile.getPath());
-        databaseFile.delete();
-    }
 
     @AfterClass
     public static void tearDown() {

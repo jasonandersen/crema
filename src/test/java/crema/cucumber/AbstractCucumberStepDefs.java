@@ -9,5 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
  */
 @ContextConfiguration(locations = { "classpath:crema/cucumber/cucumber.xml" })
 public abstract class AbstractCucumberStepDefs {
+
     //noop
+
 }

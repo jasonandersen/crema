@@ -5,7 +5,7 @@ package crema.exception;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class DuplicateMediaLibraryException extends CremaException {
+public class DuplicateMediaLibraryException extends MediaLibraryException {
 
     /**
      * Constructor
@@ -13,6 +13,15 @@ public class DuplicateMediaLibraryException extends CremaException {
      */
     public DuplicateMediaLibraryException(String message) {
         super(message);
+    }
+
+    /**
+     * Constructor
+     * @param message
+     * @param e
+     */
+    public DuplicateMediaLibraryException(String message, Throwable e) {
+        super(message, e);
     }
 
 }

@@ -17,7 +17,7 @@ public interface MediaLibraryService {
      * @param path
      * @param name
      * @return the created MediaLibrary
-     * @throws MediaLibraryException when the specified directory does not exist or cannot be read or written to
+     * @throws MediaLibraryException 
      */
     public MediaLibrary createMediaLibrary(File path, String name) throws MediaLibraryException;
 

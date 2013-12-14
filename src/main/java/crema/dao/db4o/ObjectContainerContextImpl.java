@@ -30,7 +30,7 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     private static Logger log = LoggerFactory.getLogger(ObjectContainerContextImpl.class);
 
     @Autowired
-    private DatabaseFile dbFile;
+    private DatabaseFileLocator dbFileLocator;
 
     private ObjectContainer container;
 
@@ -70,8 +70,8 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     @PostConstruct
     public void initializeContainer() {
         log.info("initializing");
-        configureContainer();
-        container = Db4oEmbedded.openFile(dbFile.getPath());
+        EmbeddedConfiguration config = configureContainer();
+        container = Db4oEmbedded.openFile(config, dbFileLocator.getPath());
     }
 
     /**
@@ -89,12 +89,13 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     /**
      * Configure the db4o database
      */
-    private void configureContainer() {
+    private EmbeddedConfiguration configureContainer() {
         log.info("configure db4o");
         EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
         //MediaLibrary indexing
         config.common().objectClass(MediaLibrary.class).objectField("name").indexed(true);
         config.common().add(new UniqueFieldValueConstraint(MediaLibrary.class, "name"));
+        return config;
     }
 
 }

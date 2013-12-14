@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import crema.exception.CremaException;
 import crema.exception.PreferencesException;
 import crema.service.CremaDirectoryService;
-import crema.service.PreferencesService;
+import crema.service.Preferences;
 
 /**
  * Utility to retrieve a local database file.
@@ -22,34 +22,40 @@ import crema.service.PreferencesService;
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @Component
-public class DatabaseFile {
+public class DatabaseFileLocator {
 
-    private static Logger log = LoggerFactory.getLogger(DatabaseFile.class);
+    private static Logger log = LoggerFactory.getLogger(DatabaseFileLocator.class);
 
     @Autowired
     @Qualifier("defaultDatabaseFile")
     private String defaultDatabaseFileName;
 
     @Autowired
-    private PreferencesService preferences;
+    private Preferences preferences;
 
     @Autowired
     private CremaDirectoryService cremaDirectoryService;
 
     private File databaseFile;
 
+    /**
+     * Initialize the database file
+     * @throws CremaException
+     * @throws IOException
+     */
     @PostConstruct
     public void initialize() throws CremaException, IOException {
         log.info("initializing");
-        String path = preferences.getString(PreferencesService.KEY_CREMA_DB_FILE);
+        String path = preferences.getString(Preferences.KEY_CREMA_DB_FILE);
         if (path == null) {
             path = createDefaultFilePath();
-            preferences.putString(PreferencesService.KEY_CREMA_DB_FILE, path);
+            preferences.putString(Preferences.KEY_CREMA_DB_FILE, path);
         }
         File file = new File(path);
         if (!file.exists()) {
             createDatabaseFile(file);
         }
+        log.info("setting database file path as {}", file);
         databaseFile = file;
     }
 

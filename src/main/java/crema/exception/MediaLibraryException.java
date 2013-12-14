@@ -17,4 +17,13 @@ public class MediaLibraryException extends CremaException {
         super(message);
     }
 
+    /**
+     * Constructor
+     * @param message
+     * @param e
+     */
+    public MediaLibraryException(String message, Throwable e) {
+        super(message, e);
+    }
+
 }

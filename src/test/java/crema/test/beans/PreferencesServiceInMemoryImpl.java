@@ -1,4 +1,4 @@
-package crema.test.mock;
+package crema.test.beans;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import crema.service.PreferencesService;
+import crema.service.Preferences;
 
 /**
- * Test implementation of {@link PreferencesService} backed by an in-memory hashmap.
+ * Test implementation of {@link Preferences} backed by an in-memory hashmap.
  * This implementation allows tests to read and write application preferences without
  * corrupting the user's actual preferences.
  * 
@@ -19,7 +19,7 @@ import crema.service.PreferencesService;
  */
 @Primary
 @Service
-public class PreferencesServiceInMemoryImpl implements PreferencesService {
+public class PreferencesServiceInMemoryImpl implements Preferences {
 
     private static Logger log = LoggerFactory.getLogger(PreferencesServiceInMemoryImpl.class);
 
@@ -42,7 +42,7 @@ public class PreferencesServiceInMemoryImpl implements PreferencesService {
     }
 
     /**
-     * @see crema.service.PreferencesService#getString(java.lang.String)
+     * @see crema.service.Preferences#getString(java.lang.String)
      */
     public String getString(String key) {
         String value = preferences.get(key);
@@ -51,7 +51,7 @@ public class PreferencesServiceInMemoryImpl implements PreferencesService {
     }
 
     /**
-     * @see crema.service.PreferencesService#putString(java.lang.String, java.lang.String)
+     * @see crema.service.Preferences#putString(java.lang.String, java.lang.String)
      */
     public void putString(String key, String value) {
         log.info("putting preference '{}' as '{}'", key, value);

@@ -7,8 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.db4o.constraints.UniqueFieldValueConstraintViolationException;
+
 import crema.dao.MediaLibraryDAO;
 import crema.domain.MediaLibrary;
+import crema.exception.DuplicateMediaLibraryException;
 
 /**
  * Implementation of the {@link MediaLibraryDAO} interface using db4o.
@@ -24,11 +27,16 @@ public class MediaLibraryDAOImpl implements MediaLibraryDAO {
     private ObjectContainerContext containerContext;
 
     /**
+     * @throws DuplicateMediaLibraryException 
      * @see crema.dao.MediaLibraryDAO#save(crema.domain.MediaLibrary)
      */
-    public void save(MediaLibrary library) {
+    public void save(MediaLibrary library) throws DuplicateMediaLibraryException {
         log.debug("saving MediaLibrary: {}", library);
-        containerContext.store(library);
+        try {
+            containerContext.store(library);
+        } catch (UniqueFieldValueConstraintViolationException e) {
+            throw new DuplicateMediaLibraryException(e.getMessage(), e);
+        }
     }
 
     /**

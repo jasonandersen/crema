@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import crema.exception.PreferencesException;
 import crema.service.CremaDirectoryService;
 import crema.service.OSDirectoryService;
-import crema.service.PreferencesService;
+import crema.service.Preferences;
 
 /**
  * Implementation of {@link CremaDirectoryService}.
@@ -29,13 +29,13 @@ public class CremaDirectoryServiceImpl implements CremaDirectoryService {
     private OSDirectoryService osDirService;
 
     @Autowired
-    private PreferencesService preferencesService;
+    private Preferences preferencesService;
 
     /**
      * @see crema.service.CremaDirectoryService#isCremaDirectorySpecified()
      */
     public boolean isCremaDirectorySpecified() {
-        String path = preferencesService.getString(PreferencesService.KEY_CREMA_DIRECTORY);
+        String path = preferencesService.getString(Preferences.KEY_CREMA_DIRECTORY);
         return path != null;
     }
 
@@ -63,8 +63,8 @@ public class CremaDirectoryServiceImpl implements CremaDirectoryService {
      * @return the crema directory stored in the Java preferences, will return null if not found
      */
     private File loadDirectoryFromPreferences() {
-        log.debug("reading crema directory from preferences key: {}", PreferencesService.KEY_CREMA_DIRECTORY);
-        String path = preferencesService.getString(PreferencesService.KEY_CREMA_DIRECTORY);
+        log.debug("reading crema directory from preferences key: {}", Preferences.KEY_CREMA_DIRECTORY);
+        String path = preferencesService.getString(Preferences.KEY_CREMA_DIRECTORY);
         return path != null ? new File(path) : null;
     }
 
@@ -83,7 +83,7 @@ public class CremaDirectoryServiceImpl implements CremaDirectoryService {
                         String.format("The crema directory %s could not be created.", dir.getPath()));
             }
         }
-        preferencesService.putString(PreferencesService.KEY_CREMA_DIRECTORY, dir.getPath());
+        preferencesService.putString(Preferences.KEY_CREMA_DIRECTORY, dir.getPath());
         return dir;
     }
 

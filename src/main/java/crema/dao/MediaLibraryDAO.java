@@ -1,6 +1,7 @@
 package crema.dao;
 
 import crema.domain.MediaLibrary;
+import crema.exception.DuplicateMediaLibraryException;
 
 /**
  * Data access object for {@link MediaLibrary} objects.
@@ -13,8 +14,9 @@ public interface MediaLibraryDAO {
      * Persist a media library
      * @param library
      * @return the instance of the library that's been persisted
+     * @throws DuplicateMediaLibraryException 
      */
-    public void save(MediaLibrary library);
+    public void save(MediaLibrary library) throws DuplicateMediaLibraryException;
 
     /**
      * @param name

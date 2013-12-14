@@ -5,7 +5,7 @@ package crema.service;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public interface PreferencesService {
+public interface Preferences {
 
     /**
      * Directory used to store application data

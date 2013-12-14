@@ -8,18 +8,18 @@ import java.io.File;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import crema.dao.db4o.DatabaseFile;
+import crema.dao.db4o.DatabaseFileLocator;
 import crema.test.AbstractIntegrationTest;
 
 /**
- * Testing the {@link DatabaseFile} class.
+ * Testing the {@link DatabaseFileLocator} class.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 public class DatabaseFileTest extends AbstractIntegrationTest {
 
     @Autowired
-    private DatabaseFile dbFile;
+    private DatabaseFileLocator dbFile;
 
     @Test
     public void testInjection() {

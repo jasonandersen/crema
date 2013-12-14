@@ -17,8 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import crema.exception.PreferencesException;
 import crema.service.CremaDirectoryService;
-import crema.test.mock.DatabaseTruncateService;
-import crema.test.mock.PreferencesServiceInMemoryImpl;
+import crema.test.beans.DatabaseTruncateService;
+import crema.test.beans.PreferencesServiceInMemoryImpl;
 
 /**
  * Base class for unit tests based on the spring context.
