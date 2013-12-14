@@ -2,31 +2,22 @@ package crema.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 /**
  * Provides access to singleton beans.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class BeanContext {
-
-    /*
-     * TODO - how do I get test contexts to load dynamically in here??
-     */
+@Component
+public class BeanContext implements ApplicationContextAware {
 
     private static Logger log = LoggerFactory.getLogger(BeanContext.class);
-    private static final ApplicationContext context;
-
-    /**
-     * instantiate context instance
-     */
-    static {
-        log.info("setting singleton reference to ApplicationContext");
-        context = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
-    }
+    private static ApplicationContext context;
 
     /**
      * Private constructor - only static access
@@ -61,6 +52,17 @@ public class BeanContext {
      */
     public static void refreshContext() {
         log.warn("refreshing ApplicationContext");
-        ((ConfigurableApplicationContext) context).refresh();
+        ConfigurableApplicationContext configAppContext = (ConfigurableApplicationContext) context;
+        configAppContext.close();
+        configAppContext.start();
     }
+
+    /**
+     * @see org.springframework.context.ApplicationContextAware#setApplicationContext(org.springframework.context.ApplicationContext)
+     */
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        log.info("setting singleton reference to ApplicationContext");
+        context = applicationContext;
+    }
+
 }

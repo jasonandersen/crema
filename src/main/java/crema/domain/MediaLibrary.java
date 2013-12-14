@@ -9,6 +9,10 @@ import java.io.File;
  */
 public class MediaLibrary {
 
+    public static final String FIELD_NAME = "name";
+
+    public static final String FIELD_BASE_DIR = "baseDirectory";
+
     private File baseDirectory;
 
     private String name;

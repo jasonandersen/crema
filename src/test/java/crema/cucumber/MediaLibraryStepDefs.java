@@ -39,6 +39,8 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     private MediaLibrary mediaLibrary;
 
+    private MediaLibrary preExistingMediaLibrary;
+
     private Exception exception;
 
     /*
@@ -48,6 +50,7 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
     @Before
     public void setup() {
         mediaLibrary = null;
+        preExistingMediaLibrary = null;
         exception = null;
     }
 
@@ -96,7 +99,9 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     @Given("^I have an existing media library with the directory$")
     public void I_have_an_existing_media_library_with_the_directory() throws Throwable {
-        mediaLibraryService.createMediaLibrary(mediaDirectory, "Pre-existing Media Library");
+        preExistingMediaLibrary = mediaLibraryService.createMediaLibrary(mediaDirectory, "Pre-existing Media Library");
+        assertNotNull(preExistingMediaLibrary);
+        assertEquals(preExistingMediaLibrary.getBaseDirectory(), mediaDirectory);
     }
 
     @Given("^the directory cannot be read$")

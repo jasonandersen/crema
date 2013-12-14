@@ -18,14 +18,6 @@ Scenario: add a new media library with a duplicate name
     When I choose the directory as a media library named "Library 1"
     Then I get a duplicate media library error
 
-Scenario: add a new media library with a duplicate directory
-    Given I have a directory
-    And the directory exists
-    And the directory can be read
-    And I have an existing media library with the directory
-    When I choose the directory as a media library named "Library 1"
-    Then I get a duplicate media library error
-    
 Scenario: add a new media library for a directory that doesn't exist
     Given I have a directory
     And the directory does not exist

@@ -16,7 +16,6 @@ import cucumber.api.junit.Cucumber;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-//@Ignore
 @RunWith(Cucumber.class)
 @CucumberOptions(format = "pretty")
 @Category(IntegrationTest.class)

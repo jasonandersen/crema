@@ -50,6 +50,13 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     }
 
     /**
+     * @see crema.dao.db4o.ObjectContainerContext#rollBack()
+     */
+    public void rollBack() {
+        container.rollback();
+    }
+
+    /**
      * @return the {@link ObjectContainer} for the db4o database.
      */
     public ObjectContainer getObjectContainer() {
@@ -93,8 +100,11 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
         log.info("configure db4o");
         EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
         //MediaLibrary indexing
-        config.common().objectClass(MediaLibrary.class).objectField("name").indexed(true);
-        config.common().add(new UniqueFieldValueConstraint(MediaLibrary.class, "name"));
+        config.common().objectClass(MediaLibrary.class).objectField(MediaLibrary.FIELD_NAME).indexed(true);
+        config.common().add(new UniqueFieldValueConstraint(MediaLibrary.class, MediaLibrary.FIELD_NAME));
+        config.common().objectClass(MediaLibrary.class).objectField(MediaLibrary.FIELD_BASE_DIR).indexed(true);
+        config.common().add(new UniqueFieldValueConstraint(MediaLibrary.class, MediaLibrary.FIELD_BASE_DIR));
+
         return config;
     }
 

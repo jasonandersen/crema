@@ -30,4 +30,9 @@ public interface ObjectContainerContext {
      */
     public ObjectContainer getObjectContainer();
 
+    /**
+     * Rolls back a transaction
+     */
+    public void rollBack();
+
 }

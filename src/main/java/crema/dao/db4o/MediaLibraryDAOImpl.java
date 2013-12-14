@@ -35,6 +35,7 @@ public class MediaLibraryDAOImpl implements MediaLibraryDAO {
         try {
             containerContext.store(library);
         } catch (UniqueFieldValueConstraintViolationException e) {
+            containerContext.rollBack();
             throw new DuplicateMediaLibraryException(e.getMessage(), e);
         }
     }
