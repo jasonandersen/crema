@@ -19,9 +19,18 @@ public class PreferencesImpl implements crema.service.Preferences {
     protected Preferences preferences;
 
     /**
-     * Constructor
+     * Constructor - use this constructor!
      */
     public PreferencesImpl() {
+        this(PreferencesImpl.class);
+    }
+
+    /**
+     * Protected constructor for testing purposes to allow tests to define a different class
+     * node to write preferences to so as not to interfere with existing preferences.
+     * @param nodeClass
+     */
+    protected PreferencesImpl(Class<?> nodeClass) {
         log.info("instantiating user preferences for class {}", getClass());
         preferences = Preferences.userNodeForPackage(getClass());
     }
