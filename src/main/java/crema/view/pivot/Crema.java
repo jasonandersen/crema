@@ -6,6 +6,11 @@ import org.apache.pivot.wtk.Application;
 import org.apache.pivot.wtk.Display;
 import org.apache.pivot.wtk.Label;
 import org.apache.pivot.wtk.Window;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import crema.util.BeanContext;
 
@@ -14,7 +19,11 @@ import crema.util.BeanContext;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class CremaPivotApplication implements Application {
+public class Crema implements Application {
+
+    private static Logger log = LoggerFactory.getLogger(Crema.class);
+
+    private static final String APP_CONTEXT_PATH = "spring/applicationContext.xml";
 
     private Window window;
 
@@ -23,7 +32,12 @@ public class CremaPivotApplication implements Application {
     @BXML
     public Label label;
 
-    public CremaPivotApplication() {
+    /**
+     * Constructor
+     */
+    public Crema() {
+        log.info("Crema application initializing");
+        initializeApplicationContext();
         bxmlService = BeanContext.getBean(BxmlService.class);
     }
 
@@ -32,6 +46,7 @@ public class CremaPivotApplication implements Application {
      * @see org.apache.pivot.wtk.Application#startup(org.apache.pivot.wtk.Display, org.apache.pivot.collections.Map)
      */
     public void startup(Display display, Map<String, String> properties) throws Exception {
+        log.info("startup called");
         window = bxmlService.readWindowFromBxml(getClass(), "main.bxml");
         window.open(display);
     }
@@ -40,6 +55,7 @@ public class CremaPivotApplication implements Application {
      * @see org.apache.pivot.wtk.Application#shutdown(boolean)
      */
     public boolean shutdown(boolean optional) throws Exception {
+        log.info("shutdown called");
         if (window != null) {
             window.close();
         }
@@ -50,14 +66,23 @@ public class CremaPivotApplication implements Application {
      * @see org.apache.pivot.wtk.Application#suspend()
      */
     public void suspend() throws Exception {
-        //noop
+        log.info("suspend called");
     }
 
     /**
      * @see org.apache.pivot.wtk.Application#resume()
      */
     public void resume() throws Exception {
-        //noop
+        log.info("resume called");
     }
 
+    /**
+     * initialize Spring's application context
+     */
+    private ApplicationContext initializeApplicationContext() {
+        log.info("initializing Spring application context from {}", APP_CONTEXT_PATH);
+        ApplicationContext context = new ClassPathXmlApplicationContext(APP_CONTEXT_PATH);
+        ((ConfigurableApplicationContext) context).registerShutdownHook();
+        return context;
+    }
 }
