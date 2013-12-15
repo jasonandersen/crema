@@ -1,10 +1,8 @@
 package crema.view.pivot;
 
-import org.apache.pivot.beans.BXML;
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.wtk.Application;
 import org.apache.pivot.wtk.Display;
-import org.apache.pivot.wtk.Label;
 import org.apache.pivot.wtk.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +26,6 @@ public class Crema implements Application {
     private Window window;
 
     private BxmlService bxmlService;
-
-    @BXML
-    public Label label;
 
     /**
      * Constructor
