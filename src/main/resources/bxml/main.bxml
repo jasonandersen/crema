@@ -1,8 +1,8 @@
-<crema:Main title="Hello BXML!" maximized="true"
-    xmlns:bxml="http://pivot.apache.org/bxml"
-    xmlns:crema="crema.view.pivot.window"
+<crema:Main title="Hello BXML!" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:crema="crema.view.pivot.window"
     xmlns="org.apache.pivot.wtk">
-    
-    <Label bxml:id="label" text="Hello BXML!" styles="{font:'Arial bold 24', color:'#ff0000', horizontalAlignment:'center', verticalAlignment:'center'}"/>
-    
+
+    <Label bxml:id="label" text="Hello BXML!"
+        styles="{font:'Arial bold 24', color:'#ff0000', horizontalAlignment:'center', verticalAlignment:'center'}" />
+
+
 </crema:Main>

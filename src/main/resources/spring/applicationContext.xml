@@ -11,8 +11,8 @@
     
     <context:component-scan base-package="crema" />
     
-    <bean id="openingMessage" class="java.lang.String">
-        <constructor-arg value="Hello World - I came from an application context XML file!" />
+    <bean id="defaultCremaDirectoryName" class="java.lang.String">
+        <constructor-arg value=".crema" />
     </bean>
     
     <bean id="defaultDatabaseFile" class="java.lang.String">

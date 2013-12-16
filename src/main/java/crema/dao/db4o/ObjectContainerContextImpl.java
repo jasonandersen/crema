@@ -32,14 +32,15 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     @Autowired
     private DatabaseFileLocator dbFileLocator;
 
-    private ObjectContainer container;
+    private ObjectContainer objectContainer;
 
     /**
      * @see crema.dao.db4o.ObjectContainerContext#store(java.lang.Object)
      */
     public void store(Object object) {
-        getObjectContainer().store(object);
-        getObjectContainer().commit();
+        ObjectContainer container = getObjectContainer();
+        container.store(object);
+        container.commit();
     }
 
     /**
@@ -53,20 +54,23 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
      * @see crema.dao.db4o.ObjectContainerContext#rollBack()
      */
     public void rollBack() {
-        container.rollback();
+        getObjectContainer().rollback();
     }
 
     /**
+     * NOTE - always use this method to retrieve the {@link ObjectContainer} reference
+     * even from within this class. This method will provide certain fault tolerance and
+     * maybe used going forward to spawn sessions if this application becomes multi-threaded.
      * @return the {@link ObjectContainer} for the db4o database.
      */
     public ObjectContainer getObjectContainer() {
-        if (container.ext().isClosed()) {
+        if (objectContainer.ext().isClosed()) {
             /*
              * if the container has been closed - try to recover before failing
              */
             initializeContainer();
         }
-        return container;
+        return objectContainer;
     }
 
     /**
@@ -78,7 +82,7 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     public void initializeContainer() {
         log.info("initializing");
         EmbeddedConfiguration config = configureContainer();
-        container = Db4oEmbedded.openFile(config, dbFileLocator.getPath());
+        objectContainer = Db4oEmbedded.openFile(config, dbFileLocator.getPath());
     }
 
     /**
@@ -88,8 +92,8 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     @PreDestroy
     public void cleanupContainer() {
         log.warn("closing object container");
-        if (getObjectContainer() != null) {
-            while (!getObjectContainer().close()) {
+        if (objectContainer != null) {
+            while (!objectContainer.close()) {
                 //keep calling close until the last session is closed
             }
         }
@@ -104,8 +108,6 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
         //MediaLibrary indexing
         config.common().objectClass(MediaLibrary.class).objectField(MediaLibrary.FIELD_NAME).indexed(true);
         config.common().add(new UniqueFieldValueConstraint(MediaLibrary.class, MediaLibrary.FIELD_NAME));
-        config.common().objectClass(MediaLibrary.class).objectField(MediaLibrary.FIELD_BASE_DIR).indexed(true);
-        config.common().add(new UniqueFieldValueConstraint(MediaLibrary.class, MediaLibrary.FIELD_BASE_DIR));
 
         return config;
     }

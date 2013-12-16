@@ -5,6 +5,7 @@ import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import crema.exception.PreferencesException;
@@ -21,9 +22,11 @@ import crema.service.Preferences;
 @Service
 public class CremaDirectoryLocatorImpl implements CremaDirectoryLocator {
 
-    private static final String CREMA_DIR_NAME = ".crema";
-
     private static Logger log = LoggerFactory.getLogger(CremaDirectoryLocatorImpl.class);
+
+    @Autowired
+    @Qualifier("defaultCremaDirectoryName")
+    private String defaultCremaDirectoryName;
 
     @Autowired
     private OSDirectoryLocator osDirLocator;
@@ -117,7 +120,7 @@ public class CremaDirectoryLocatorImpl implements CremaDirectoryLocator {
         if (!userHomeDir.endsWith(File.separator)) {
             path.append(File.separator);
         }
-        path.append(CREMA_DIR_NAME);
+        path.append(defaultCremaDirectoryName);
         path.append(File.separator);
         log.debug("building default crema directory: {}", path);
         return path.toString();

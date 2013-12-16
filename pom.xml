@@ -125,7 +125,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>crema.boot.Main</mainClass>
+                                    <mainClass>crema.boot.Crema</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>

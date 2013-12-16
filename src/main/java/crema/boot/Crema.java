@@ -4,16 +4,16 @@ import org.apache.pivot.wtk.DesktopApplicationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import crema.view.pivot.Crema;
+import crema.view.pivot.CremaApplication;
 
 /**
- * Boot strap the application.
+ * Boot strap the application into Desktop mode.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class Main {
+public class Crema {
 
-    private static Logger log = LoggerFactory.getLogger(Main.class);
+    private static Logger log = LoggerFactory.getLogger(Crema.class);
 
     /**
      * Boot strap method. Let's get the party started!
@@ -21,7 +21,7 @@ public class Main {
      */
     public static void main(String[] args) {
         log.info("application booting up in desktop application mode");
-        DesktopApplicationContext.main(Crema.class, args);
+        DesktopApplicationContext.main(CremaApplication.class, args);
     }
 
 }
