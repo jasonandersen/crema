@@ -1,8 +1,13 @@
 <crema:Main title="Hello BXML!" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:crema="crema.view.pivot.window"
     xmlns="org.apache.pivot.wtk">
 
-    <Label bxml:id="label" text="Hello BXML!"
-        styles="{font:'Arial bold 24', color:'#ff0000', horizontalAlignment:'center', verticalAlignment:'center'}" />
-
+    <Border styles="{padding:4}">
+        <BoxPane orientation="vertical" styles="{fill:true}">
+            <FlowPane bxml:id="flowPane" styles="{padding:2}">
+                <PushButton bxml:id="addMediaLibraryButton" buttonData="Add Media Library" />
+                <Label bxml:id="libraryPathLabel" text="" />
+            </FlowPane>
+        </BoxPane>
+    </Border>
 
 </crema:Main>
