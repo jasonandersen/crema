@@ -2,6 +2,8 @@ package crema.view.pivot.action;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.apache.pivot.wtk.Component;
+import org.apache.pivot.wtk.FileBrowserSheet;
 import org.apache.pivot.wtk.Window;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +22,21 @@ public class AddMediaLibraryActionTest extends AbstractIntegrationTest {
     @Autowired
     private AddMediaLibraryAction action;
 
+    private Window ownerWindow;
+
+    private FileBrowserSheet fileBrowserSheet;
+
+    private Component component;
+
     @Before
     public void setup() {
-        action.setOwner(mockOwnerWindow());
+        //build mocks
+        ownerWindow = Mockito.mock(Window.class);
+        fileBrowserSheet = Mockito.mock(FileBrowserSheet.class);
+        component = Mockito.mock(Component.class);
+
+        action.setOwner(ownerWindow);
+        action.setFileBrowserSheet(fileBrowserSheet);
     }
 
     @Test
@@ -30,11 +44,17 @@ public class AddMediaLibraryActionTest extends AbstractIntegrationTest {
         assertNotNull(action);
     }
 
+    //@Test
+    public void testRun() {
+        action.perform(component);
+        triggerFileSheetClosedEvent();
+    }
+
     /**
-     * @return
+     * Triggers the closed event.
      */
-    private Window mockOwnerWindow() {
-        return Mockito.spy(new Window());
+    private void triggerFileSheetClosedEvent() {
+        fileBrowserSheet.getSheetCloseListener().sheetClosed(fileBrowserSheet);
     }
 
 }

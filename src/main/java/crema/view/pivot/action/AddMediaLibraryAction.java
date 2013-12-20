@@ -73,6 +73,14 @@ public class AddMediaLibraryAction extends Action {
     }
 
     /**
+     * Protected setter to allow tests to inject a mock
+     * @param fileBrowserSheet2
+     */
+    protected void setFileBrowserSheet(FileBrowserSheet fileBrowserSheet) {
+        this.fileBrowserSheet = fileBrowserSheet;
+    }
+
+    /**
      * Call the service to create the library
      * @return the created library
      */
