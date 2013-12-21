@@ -8,19 +8,19 @@ package crema.exception;
 public class DuplicateMediaLibraryException extends MediaLibraryException {
 
     /**
-     * Constructor
+     * Constructor.
      * @param message
      */
-    public DuplicateMediaLibraryException(String message) {
+    public DuplicateMediaLibraryException(final String message) {
         super(message);
     }
 
     /**
-     * Constructor
+     * Constructor.
      * @param message
      * @param e
      */
-    public DuplicateMediaLibraryException(String message, Throwable e) {
+    public DuplicateMediaLibraryException(final String message, final Throwable e) {
         super(message, e);
     }
 

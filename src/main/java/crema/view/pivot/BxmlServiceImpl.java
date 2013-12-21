@@ -26,7 +26,8 @@ public class BxmlServiceImpl implements BxmlService {
      * @throws SerializationException 
      * @throws IOException 
      */
-    public Window readWindowFromBxml(Class<?> baseType, String fileName) throws IOException, SerializationException {
+    public Window readWindowFromBxml(final Class<?> baseType, final String fileName) throws IOException,
+            SerializationException {
         Validate.notNull(baseType);
         Validate.notNull(fileName);
         String bxmlPath = cleanFileName(fileName);
@@ -38,7 +39,7 @@ public class BxmlServiceImpl implements BxmlService {
      * @param fileName
      * @return a cleansed file name
      */
-    private String cleanFileName(String fileName) {
+    private String cleanFileName(final String fileName) {
         String bxmlPath = fileName;
         if (!fileName.startsWith(BXML_PATH_PREFIX)) {
             bxmlPath = BXML_PATH_PREFIX + fileName;

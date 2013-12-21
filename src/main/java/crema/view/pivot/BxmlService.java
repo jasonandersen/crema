@@ -13,12 +13,12 @@ import org.apache.pivot.wtk.Window;
 public interface BxmlService {
 
     /**
-     * Loads and deserializes a BXML file into a Window object
+     * Loads and deserializes a BXML file into a Window object.
      * @param baseType
      * @param fileName
      * @return a populatated Window object
      * @throws IOException
      * @throws SerializationException
      */
-    public Window readWindowFromBxml(Class<?> baseType, String fileName) throws IOException, SerializationException;
+    Window readWindowFromBxml(final Class<?> baseType, String fileName) throws IOException, SerializationException;
 }

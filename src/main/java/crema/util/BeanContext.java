@@ -2,7 +2,6 @@ package crema.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -20,29 +19,29 @@ public class BeanContext implements ApplicationContextAware {
     private static ApplicationContext context;
 
     /**
-     * Private constructor - only static access
+     * Private constructor - only static access.
      */
     private BeanContext() {
         //no instantiation for you!
     }
 
     /**
-     * Loads a bean of the specified type
+     * Loads a bean of the specified type.
      * @param type
      * @return
      */
-    public static <T> T getBean(Class<T> type) {
+    public static <T> T getBean(final Class<T> type) {
         return context.getBean(type);
     }
 
     /**
-     * Loads a bean by the name of the bean
+     * Loads a bean by the name of the bean.
      * @param name
      * @param expectedType
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getBean(String name, Class<T> expectedType) {
+    public static <T> T getBean(final String name, final Class<T> expectedType) {
         Object bean = context.getBean(name);
         return (T) bean;
     }
@@ -58,9 +57,10 @@ public class BeanContext implements ApplicationContextAware {
     }
 
     /**
-     * @see org.springframework.context.ApplicationContextAware#setApplicationContext(org.springframework.context.ApplicationContext)
+     * @see org.springframework.context.ApplicationContextAware#setApplicationContext(
+     *      org.springframework.context.ApplicationContext)
      */
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(final ApplicationContext applicationContext) {
         log.info("setting singleton reference to ApplicationContext");
         context = applicationContext;
     }

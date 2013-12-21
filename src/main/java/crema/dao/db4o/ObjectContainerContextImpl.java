@@ -1,6 +1,5 @@
 package crema.dao.db4o;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -37,7 +36,7 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     /**
      * @see crema.dao.db4o.ObjectContainerContext#store(java.lang.Object)
      */
-    public void store(Object object) {
+    public void store(final Object object) {
         ObjectContainer container = getObjectContainer();
         container.store(object);
         container.commit();
@@ -46,7 +45,7 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     /**
      * @see crema.dao.db4o.ObjectContainerContext#query(com.db4o.query.Predicate)
      */
-    public <T> List<T> query(Predicate<T> predicate) {
+    public <T> List<T> query(final Predicate<T> predicate) {
         return getObjectContainer().query(predicate);
     }
 
@@ -76,7 +75,6 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     /**
      * Initializes the container. DO NOT CALL THIS METHOD. This will be called by the
      * framework that manages the life cycle of this class.
-     * @throws IOException 
      */
     @PostConstruct
     public void initializeContainer() {
@@ -100,7 +98,7 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     }
 
     /**
-     * Configure the db4o database
+     * Configure the db4o database.
      */
     private EmbeddedConfiguration configureContainer() {
         log.info("configure db4o");

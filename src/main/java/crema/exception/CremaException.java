@@ -8,19 +8,19 @@ package crema.exception;
 public abstract class CremaException extends Exception {
 
     /**
-     * Constructor
+     * Constructor.
      * @param message
      */
-    public CremaException(String message) {
+    public CremaException(final String message) {
         super(message);
     }
 
     /**
-     * Constructor
+     * Constructor.
      * @param message
      * @param e
      */
-    public CremaException(String message, Throwable e) {
+    public CremaException(final String message, final Throwable e) {
         super(message, e);
     }
 }

@@ -17,11 +17,11 @@ public interface CremaDirectoryLocator {
      * @throws PreferencesException when crema directory cannot be created
      * @throws PreferencesException when crema directory cannot be written to
      */
-    public File getCremaDirectory() throws PreferencesException;
+    File getCremaDirectory() throws PreferencesException;
 
     /**
      * @return true if the crema directory has already been specified by a previous session
      */
-    public boolean isCremaDirectorySpecified();
+    boolean isCremaDirectorySpecified();
 
 }

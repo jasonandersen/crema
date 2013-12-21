@@ -1,6 +1,5 @@
 package crema.service;
 
-
 /**
  * Provides services to obtain operating system specific directories.
  * 
@@ -11,6 +10,6 @@ public interface OSDirectoryLocator {
     /**
      * @return a file that represents a user's home directory
      */
-    public String getUserHomeDirectoryPath();
+    String getUserHomeDirectoryPath();
 
 }

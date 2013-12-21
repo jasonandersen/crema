@@ -8,19 +8,19 @@ package crema.exception;
 public class PreferencesException extends CremaException {
 
     /**
-     * Constructor
+     * Constructor.
      * @param format
      */
-    public PreferencesException(String message) {
+    public PreferencesException(final String message) {
         super(message);
     }
 
     /**
-     * Constructor
+     * Constructor.
      * @param message
      * @param e
      */
-    public PreferencesException(String message, Throwable e) {
+    public PreferencesException(final String message, final Throwable e) {
         super(message, e);
     }
 }

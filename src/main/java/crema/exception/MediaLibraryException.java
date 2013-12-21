@@ -1,28 +1,26 @@
 package crema.exception;
 
-import crema.domain.MediaLibrary;
-
 /**
- * An exception relating to {@link MediaLibrary}s.
+ * An exception relating to MediaLibrarys.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 public class MediaLibraryException extends CremaException {
 
     /**
-     * Constructor
+     * Constructor.
      * @param message
      */
-    public MediaLibraryException(String message) {
+    public MediaLibraryException(final String message) {
         super(message);
     }
 
     /**
-     * Constructor
+     * Constructor.
      * @param message
      * @param e
      */
-    public MediaLibraryException(String message, Throwable e) {
+    public MediaLibraryException(final String message, final Throwable e) {
         super(message, e);
     }
 

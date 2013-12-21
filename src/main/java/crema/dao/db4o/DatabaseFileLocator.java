@@ -39,7 +39,7 @@ public class DatabaseFileLocator {
     private File databaseFile;
 
     /**
-     * Initialize the database file
+     * Initialize the database file.
      * @throws CremaException
      * @throws IOException
      */
@@ -69,11 +69,11 @@ public class DatabaseFileLocator {
     }
 
     /**
-     * Creates the database file
+     * Creates the database file.
      * @param file
      * @throws IOException 
      */
-    private void createDatabaseFile(File file) throws IOException {
+    private void createDatabaseFile(final File file) throws IOException {
         if (file.exists()) {
             return;
         }

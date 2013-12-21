@@ -27,9 +27,10 @@ public class Main extends Window implements Bindable {
     private PushButton addMediaLibraryButton;
 
     /**
-     * @see org.apache.pivot.beans.Bindable#initialize(org.apache.pivot.collections.Map, java.net.URL, org.apache.pivot.util.Resources)
+     * @see org.apache.pivot.beans.Bindable#initialize(
+     *      org.apache.pivot.collections.Map, java.net.URL, org.apache.pivot.util.Resources)
      */
-    public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
+    public void initialize(final Map<String, Object> namespace, final URL location, final Resources resources) {
         log.debug("initialize called");
         if (addMediaLibraryButton != null) {
             AddMediaLibraryAction action = BeanContext.getBean(AddMediaLibraryAction.class);

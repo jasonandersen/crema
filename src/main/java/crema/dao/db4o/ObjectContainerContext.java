@@ -13,26 +13,26 @@ import com.db4o.query.Predicate;
 public interface ObjectContainerContext {
 
     /**
-     * Stores an object in the object database
+     * Stores an object in the object database.
      * @param object
      */
-    public void store(Object object);
+    void store(Object object);
 
     /**
      * Queries the database.
      * @param predicate
      * @return a list of objects specified by the predicate
      */
-    public <T> List<T> query(Predicate<T> predicate);
+    <T> List<T> query(Predicate<T> predicate);
 
     /**
      * @return the db4o {@link ObjectContainer} instance
      */
-    public ObjectContainer getObjectContainer();
+    ObjectContainer getObjectContainer();
 
     /**
-     * Rolls back a transaction
+     * Rolls back a transaction.
      */
-    public void rollBack();
+    void rollBack();
 
 }

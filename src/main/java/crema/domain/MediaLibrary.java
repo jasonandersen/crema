@@ -21,7 +21,7 @@ public class MediaLibrary {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -29,7 +29,7 @@ public class MediaLibrary {
         return baseDirectory;
     }
 
-    public void setBaseDirectory(File baseDirectory) {
+    public void setBaseDirectory(final File baseDirectory) {
         this.baseDirectory = baseDirectory;
     }
 

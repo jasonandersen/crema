@@ -13,18 +13,18 @@ import crema.exception.MediaLibraryException;
 public interface MediaLibraryService {
 
     /**
-     * Creates a {@link MediaLibrary} object
+     * Creates a {@link MediaLibrary} object.
      * @param path
      * @param name
      * @return the created MediaLibrary
      * @throws MediaLibraryException 
      */
-    public MediaLibrary createMediaLibrary(File path, String name) throws MediaLibraryException;
+    MediaLibrary createMediaLibrary(File path, String name) throws MediaLibraryException;
 
     /**
      * Reads a media library from persistence.
      * @param libraryName
      * @return an existing {@link MediaLibrary}, will return null null if no media library is found with a matching name
      */
-    public MediaLibrary readMediaLibrary(String libraryName);
+    MediaLibrary readMediaLibrary(String libraryName);
 }

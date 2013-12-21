@@ -26,7 +26,7 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
     /**
      * @see crema.service.MediaLibraryService#createMediaLibrary(java.io.File, java.lang.String)
      */
-    public MediaLibrary createMediaLibrary(File path, String name) throws MediaLibraryException {
+    public MediaLibrary createMediaLibrary(final File path, final String name) throws MediaLibraryException {
         Validate.notNull(path);
         Validate.notNull(name);
 
@@ -42,7 +42,7 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
     /**
      * @see crema.service.MediaLibraryService#readMediaLibrary(java.lang.String)
      */
-    public MediaLibrary readMediaLibrary(String libraryName) {
+    public MediaLibrary readMediaLibrary(final String libraryName) {
         return mediaLibraryDao.read(libraryName);
     }
 
@@ -51,7 +51,7 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
      * @param library
      * @throws InvalidMediaLibraryDirectoryException 
      */
-    private void validateMediaLibrary(MediaLibrary library) throws InvalidMediaLibraryDirectoryException {
+    private void validateMediaLibrary(final MediaLibrary library) throws InvalidMediaLibraryDirectoryException {
         File directory = library.getBaseDirectory();
         if (!directory.exists()) {
             throw new InvalidMediaLibraryDirectoryException(String.format("the directory %s does not exist.",

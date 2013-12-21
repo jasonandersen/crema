@@ -29,7 +29,7 @@ public class CremaDirectoryLocatorImpl implements CremaDirectoryLocator {
     private String defaultCremaDirectoryName;
 
     @Autowired
-    private OSDirectoryLocator osDirLocator;
+    private OSDirectoryLocator osDirectoryLocator;
 
     @Autowired
     private Preferences preferencesService;
@@ -58,8 +58,8 @@ public class CremaDirectoryLocatorImpl implements CremaDirectoryLocator {
      * Setter method to enable testing.
      * @param osDirLocator
      */
-    public void setOSDirectoryService(OSDirectoryLocator osDirLocator) {
-        this.osDirLocator = osDirLocator;
+    public void setOSDirectoryLocator(final OSDirectoryLocator osDirLocator) {
+        this.osDirectoryLocator = osDirLocator;
     }
 
     /**
@@ -72,7 +72,7 @@ public class CremaDirectoryLocatorImpl implements CremaDirectoryLocator {
     }
 
     /**
-     * Creates the crema directory on disk
+     * Creates the crema directory on disk.
      * @throws PreferencesException when the directory could not be created
      */
     private File createCremaDir() throws PreferencesException {
@@ -91,10 +91,10 @@ public class CremaDirectoryLocatorImpl implements CremaDirectoryLocator {
     }
 
     /**
-     * Validates the directory
+     * Validates the directory.
      * @param dir
      */
-    private void validateDirectory(File dir) throws PreferencesException {
+    private void validateDirectory(final File dir) throws PreferencesException {
         log.debug("validating crema directory: {}", dir);
         if (!dir.exists()) {
             throw new PreferencesException(String.format("Crema directory %s does not exist.", dir.getPath()));
@@ -115,7 +115,7 @@ public class CremaDirectoryLocatorImpl implements CremaDirectoryLocator {
      */
     private String buildDefaultCremaDirectoryPath() {
         StringBuffer path = new StringBuffer();
-        String userHomeDir = osDirLocator.getUserHomeDirectoryPath();
+        String userHomeDir = osDirectoryLocator.getUserHomeDirectoryPath();
         path.append(userHomeDir);
         if (!userHomeDir.endsWith(File.separator)) {
             path.append(File.separator);

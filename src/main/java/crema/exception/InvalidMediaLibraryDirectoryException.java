@@ -8,10 +8,10 @@ package crema.exception;
 public class InvalidMediaLibraryDirectoryException extends MediaLibraryException {
 
     /**
-     * Constructor
+     * Constructor.
      * @param message
      */
-    public InvalidMediaLibraryDirectoryException(String message) {
+    public InvalidMediaLibraryDirectoryException(final String message) {
         super(message);
     }
 }

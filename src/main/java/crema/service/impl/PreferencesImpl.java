@@ -16,7 +16,7 @@ public class PreferencesImpl implements crema.service.Preferences {
 
     private static Logger log = LoggerFactory.getLogger(PreferencesImpl.class);
 
-    protected Preferences preferences;
+    private Preferences preferences;
 
     /**
      * Constructor - use this constructor!
@@ -30,7 +30,7 @@ public class PreferencesImpl implements crema.service.Preferences {
      * node to write preferences to so as not to interfere with existing preferences.
      * @param nodeClass
      */
-    protected PreferencesImpl(Class<?> nodeClass) {
+    protected PreferencesImpl(final Class<?> nodeClass) {
         log.info("instantiating user preferences for class {}", getClass());
         preferences = Preferences.userNodeForPackage(getClass());
     }
@@ -38,14 +38,14 @@ public class PreferencesImpl implements crema.service.Preferences {
     /**
      * @see crema.service.Preferences#getString(java.lang.String)
      */
-    public String getString(String key) {
+    public String getString(final String key) {
         return preferences.get(key, null);
     }
 
     /**
      * @see crema.service.Preferences#putString(java.lang.String, java.lang.String)
      */
-    public void putString(String key, String value) {
+    public void putString(final String key, final String value) {
         log.info("putting preference: key {} value {}", key, value);
         preferences.put(key, value);
     }

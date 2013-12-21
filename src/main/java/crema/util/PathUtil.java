@@ -30,7 +30,7 @@ public class PathUtil {
      * @throws IOException
      * @throws IllegalArgumentException when path is null
      */
-    public static InputStream readInputStreamFromClassPath(String path) throws IOException {
+    public static InputStream readInputStreamFromClassPath(final String path) throws IOException {
         Validate.notNull(path, "Path cannot be null.");
         ClassPathResource resource = new ClassPathResource(path);
         return resource.getInputStream();

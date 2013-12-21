@@ -30,7 +30,7 @@ public class MediaLibraryDAOImpl implements MediaLibraryDAO {
      * @throws DuplicateMediaLibraryException 
      * @see crema.dao.MediaLibraryDAO#save(crema.domain.MediaLibrary)
      */
-    public void save(MediaLibrary library) throws DuplicateMediaLibraryException {
+    public void save(final MediaLibrary library) throws DuplicateMediaLibraryException {
         log.debug("saving MediaLibrary: {}", library);
         try {
             containerContext.store(library);

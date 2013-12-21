@@ -50,7 +50,7 @@ public class AddMediaLibraryAction extends Action {
      * @see org.apache.pivot.wtk.Action#perform(org.apache.pivot.wtk.Component)
      */
     @Override
-    public void perform(org.apache.pivot.wtk.Component source) {
+    public void perform(final org.apache.pivot.wtk.Component source) {
         log.debug("perform called");
         Validate.notNull(owner);
         Validate.notNull(fileBrowserSheet);
@@ -61,7 +61,7 @@ public class AddMediaLibraryAction extends Action {
      * Set the window owner for this action.
      * @param owner
      */
-    public void setOwner(Window owner) {
+    public void setOwner(final Window owner) {
         this.owner = owner;
     }
 
@@ -73,15 +73,15 @@ public class AddMediaLibraryAction extends Action {
     }
 
     /**
-     * Protected setter to allow tests to inject a mock
+     * Protected setter to allow tests to inject a mock.
      * @param fileBrowserSheet2
      */
-    protected void setFileBrowserSheet(FileBrowserSheet fileBrowserSheet) {
+    protected void setFileBrowserSheet(final FileBrowserSheet fileBrowserSheet) {
         this.fileBrowserSheet = fileBrowserSheet;
     }
 
     /**
-     * Call the service to create the library
+     * Call the service to create the library.
      * @return the created library
      */
     private void createLibrary() {
@@ -102,7 +102,7 @@ public class AddMediaLibraryAction extends Action {
         /**
          * @see org.apache.pivot.wtk.SheetCloseListener#sheetClosed(org.apache.pivot.wtk.Sheet)
          */
-        public void sheetClosed(Sheet sheet) {
+        public void sheetClosed(final Sheet sheet) {
             log.debug("file browser sheet sheetClosed event");
             if (sheet.getResult()) {
                 Sequence<File> selectedFiles = fileBrowserSheet.getSelectedFiles();

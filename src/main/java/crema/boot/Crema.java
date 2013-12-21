@@ -16,10 +16,17 @@ public class Crema {
     private static Logger log = LoggerFactory.getLogger(Crema.class);
 
     /**
+     * No instantiation for you!
+     */
+    private Crema() {
+        //noop
+    }
+
+    /**
      * Boot strap method. Let's get the party started!
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         log.info("application booting up in desktop application mode");
         DesktopApplicationContext.main(CremaApplication.class, args);
     }

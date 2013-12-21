@@ -29,7 +29,7 @@ public class CremaApplication implements Application {
     private BxmlService bxmlService;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public CremaApplication() {
         log.info("Crema application initializing");
@@ -38,10 +38,10 @@ public class CremaApplication implements Application {
     }
 
     /**
-     * Boot up using BXML
+     * Boot up using BXML.
      * @see org.apache.pivot.wtk.Application#startup(org.apache.pivot.wtk.Display, org.apache.pivot.collections.Map)
      */
-    public void startup(Display display, Map<String, String> properties) throws Exception {
+    public void startup(final Display display, final Map<String, String> properties) throws Exception {
         log.info("startup called");
         window = bxmlService.readWindowFromBxml(Main.class, "main.bxml");
         window.open(display);
@@ -50,7 +50,7 @@ public class CremaApplication implements Application {
     /**
      * @see org.apache.pivot.wtk.Application#shutdown(boolean)
      */
-    public boolean shutdown(boolean optional) throws Exception {
+    public boolean shutdown(final boolean optional) throws Exception {
         log.info("shutdown called");
         if (window != null) {
             window.close();
@@ -73,7 +73,7 @@ public class CremaApplication implements Application {
     }
 
     /**
-     * initialize Spring's application context
+     * Initialize Spring's application context.
      */
     private ApplicationContext initializeApplicationContext() {
         log.info("initializing Spring application context from {}", APP_CONTEXT_PATH);
