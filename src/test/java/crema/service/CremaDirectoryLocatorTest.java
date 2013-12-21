@@ -54,7 +54,8 @@ public class CremaDirectoryLocatorTest extends AbstractIntegrationTest {
 
     @Test
     public void testCorrectDirectory() {
-        String expectedPath = String.format("%s.crema", TEMP_DIR);
+        String separator = TEMP_DIR.endsWith(File.separator) ? "" : File.separator;
+        String expectedPath = String.format("%s%s.crema", TEMP_DIR, separator);
         assertEquals(expectedPath, cremaDir.getPath());
     }
 
