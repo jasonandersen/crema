@@ -24,6 +24,9 @@ public class TestUtil {
      */
     public static File buildTestMediaDirectory(Class<?> callingClass) {
         String path = PathUtil.getJavaTempDirectoryPath();
+        if (!path.endsWith(File.separator)) {
+            path = path + File.separator;
+        }
         String directoryName = String.format("%s-%d", callingClass.getSimpleName(),
                 System.currentTimeMillis());
         File directory = new File(String.format("%s%s", path, directoryName));
