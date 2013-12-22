@@ -12,7 +12,7 @@ import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import crema.util.PathUtil;
+import crema.util.PathUtils;
 
 /**
  * Testing utilities
@@ -56,7 +56,7 @@ public class TestUtils {
      * @return a file object representing an existing directory to use for testing
      */
     public static File buildTestMediaDirectory(Class<?> callingClass) {
-        String path = PathUtil.getJavaTempDirectoryPath();
+        String path = PathUtils.getJavaTempDirectoryPath();
         if (!path.endsWith(File.separator)) {
             path = path + File.separator;
         }

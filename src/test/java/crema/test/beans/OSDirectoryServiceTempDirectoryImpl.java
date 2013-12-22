@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import crema.service.OSDirectoryLocator;
-import crema.util.PathUtil;
+import crema.util.PathUtils;
 
 /**
  * Mock implementation of {@link OSDirectoryLocator}. Will always return the
@@ -24,7 +24,7 @@ public class OSDirectoryServiceTempDirectoryImpl implements OSDirectoryLocator {
      * @see crema.service.OSDirectoryLocator#getUserHomeDirectoryPath()
      */
     public String getUserHomeDirectoryPath() {
-        String path = PathUtil.getJavaTempDirectoryPath();
+        String path = PathUtils.getJavaTempDirectoryPath();
         log.debug("user home directory: {}", path);
         return path;
     }

@@ -1,5 +1,6 @@
 package crema.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -11,9 +12,11 @@ import org.springframework.core.io.ClassPathResource;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class PathUtil {
+public class PathUtils {
 
-    private PathUtil() {
+    private static final String EXT_DELIMITER = ".";
+
+    private PathUtils() {
         //no instantiation for you!
     }
 
@@ -35,4 +38,22 @@ public class PathUtil {
         ClassPathResource resource = new ClassPathResource(path);
         return resource.getInputStream();
     }
+
+    /**
+     * @param file
+     * @return the extension of a file, will return null if the file is null or an
+     *      empty string if the file has no extension
+     */
+    public static String getFileExtension(final File file) {
+        if (file == null) {
+            return null;
+        }
+        String path = file.getPath();
+        int index = path.lastIndexOf(EXT_DELIMITER);
+        if (index < 0) {
+            return "";
+        }
+        return path.substring(index + 1);
+    }
+
 }

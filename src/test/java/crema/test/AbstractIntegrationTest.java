@@ -1,11 +1,12 @@
 package crema.test;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ public abstract class AbstractIntegrationTest {
 
     private static Logger log = LoggerFactory.getLogger(AbstractIntegrationTest.class);
 
-    private static File cremaDir;
+    private File cremaDir;
 
     @Autowired
     private PreferencesServiceInMemoryImpl testPreferencesService;
@@ -46,17 +47,19 @@ public abstract class AbstractIntegrationTest {
     @PostConstruct
     public void setupCremaDirectory() throws PreferencesException {
         cremaDir = cremaDirectory.getCremaDirectory();
-    }
-
-    /**
-     * Wipe out the crema directory
-     */
-    @AfterClass
-    public static void clearOutTempCremaDirectory() {
-        for (File file : cremaDir.listFiles()) {
-            log.debug("deleting temporary directory contents: {}", file);
-            file.delete();
-        }
+        //ensure the crema directory is shutdown after the JVM exits
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                try {
+                    if (cremaDir.exists()) {
+                        FileUtils.deleteDirectory(cremaDir);
+                    }
+                } catch (IOException e) {
+                    log.error("failed to delete crema directory on shutdown hook", e);
+                }
+            }
+        });
     }
 
     /**

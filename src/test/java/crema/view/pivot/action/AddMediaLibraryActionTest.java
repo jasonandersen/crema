@@ -6,6 +6,7 @@ import org.apache.pivot.wtk.Component;
 import org.apache.pivot.wtk.FileBrowserSheet;
 import org.apache.pivot.wtk.Window;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,8 @@ public class AddMediaLibraryActionTest extends AbstractIntegrationTest {
         assertNotNull(action);
     }
 
-    //@Test
+    @Ignore
+    @Test
     public void testRun() {
         action.perform(component);
         triggerFileSheetClosedEvent();

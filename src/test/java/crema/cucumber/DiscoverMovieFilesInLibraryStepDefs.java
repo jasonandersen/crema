@@ -97,8 +97,9 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
 
     @Then("^([^\"]*) is ([^\"]*) to the media library$")
     public void file_avi_is_added_to_the_media_library(final String fileName, final String result) throws Throwable {
-        boolean added = "added".equals(result);
-        assertEquals(added, mediaLibrary.containsFile(fileName));
+        boolean expected = "added".equals(result);
+        boolean actual = mediaLibrary.containsFile(fileName);
+        assertEquals(expected, actual);
     }
 
     @Then("^these files have been added to the media library:$")

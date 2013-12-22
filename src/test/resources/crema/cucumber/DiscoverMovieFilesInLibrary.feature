@@ -62,7 +62,7 @@ Feature:
         And these files have not been added to the media library:
             |file       |
             |file.txt   |
-            |file.mpeg  |
+            |file.xls   |
             
     Scenario: adding files nested several directories deep
         Given I have a directory that contains these files:
