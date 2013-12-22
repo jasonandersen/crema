@@ -1,6 +1,11 @@
 package crema.domain;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import crema.exception.MediaFileException;
 
 /**
  * A library housing media files.
@@ -16,6 +21,54 @@ public class MediaLibrary {
     private File baseDirectory;
 
     private String name;
+
+    /**
+     * Map of movies keyed off of the file's path relative to the base directory
+     * of this media library.
+     */
+    private Map<String, Movie> movies;
+
+    /**
+     * Constructor.
+     */
+    public MediaLibrary() {
+        movies = new HashMap<String, Movie>();
+    }
+
+    /**
+    * @see java.lang.Object#toString()
+    */
+    @Override
+    public String toString() {
+        return String.format("[MediaLibrary]name=%s;baseDirectory=%s", name, baseDirectory);
+    }
+
+    /**
+     * @param fileName
+     * @return true if this file exists within this media library
+     */
+    public boolean containsFile(final String fileName) {
+        for (Movie movie : movies.values()) {
+            MediaFile file = movie.getMediaFile();
+            if (fileName.equals(file.getFileName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds a movie file to this library.
+     * @param file
+     * @throws MediaFileException 
+     */
+    public void addMovieFile(final File file) throws MediaFileException {
+        MediaFile mediaFile = new MediaFile(this, file);
+        Movie movie = new Movie();
+        movie.setMediaFile(mediaFile);
+
+        movies.put(mediaFile.getRelativePath(), movie);
+    }
 
     public String getName() {
         return name;
@@ -34,19 +87,11 @@ public class MediaLibrary {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @return an unmodifiable map of movies within this library keyed off movie file path
+     *      relative to the base directory of this media library.
      */
-    @Override
-    public String toString() {
-        return String.format("[MediaLibrary]name=%s;baseDirectory=%s", name, baseDirectory);
-    }
-
-    /**
-     * @param targetFile
-     * @return true if this file exists within this media library
-     */
-    public boolean containsFile(final String fileName) {
-        return false;
+    public Map<String, Movie> getMovies() {
+        return Collections.unmodifiableMap(movies);
     }
 
 }

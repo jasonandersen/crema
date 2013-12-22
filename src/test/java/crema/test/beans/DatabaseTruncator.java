@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.db4o.ObjectContainer;
 
 import crema.dao.db4o.ObjectContainerContext;
+import crema.domain.MediaFile;
 import crema.domain.MediaLibrary;
+import crema.domain.Movie;
 
 /**
  * A service to truncate data from the database. Used to clear out data between tests.
@@ -31,6 +33,8 @@ public class DatabaseTruncator {
     public void truncate() {
         log.warn("truncating object container!");
         truncateClass(MediaLibrary.class);
+        truncateClass(Movie.class);
+        truncateClass(MediaFile.class);
         getObjectContainer().commit();
     }
 

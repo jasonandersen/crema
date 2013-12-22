@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.domain.MediaLibrary;
 import crema.service.MediaLibraryService;
-import crema.test.TestUtil;
+import crema.test.TestUtils;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -44,7 +44,7 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
 
     @Before
     public void setupDirectory() {
-        directory = TestUtil.buildTestMediaDirectory(getClass());
+        directory = TestUtils.buildTestMediaDirectory(getClass());
         directory.mkdirs();
         log.debug("setup test directory {}", directory);
     }

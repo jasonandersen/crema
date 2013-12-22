@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 
 import crema.dao.MediaLibraryDAO;
 import crema.domain.MediaLibrary;
+import crema.exception.DuplicateMediaLibraryException;
 import crema.exception.InvalidMediaLibraryDirectoryException;
+import crema.exception.MediaFileException;
 import crema.exception.MediaLibraryException;
 import crema.service.MediaLibraryService;
+import crema.service.MovieFileDiscoveryService;
 
 /**
  * Implementation of the {@link MediaLibraryService} service.
@@ -23,6 +26,9 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
     @Autowired
     private MediaLibraryDAO mediaLibraryDao;
 
+    @Autowired
+    private MovieFileDiscoveryService movieFileDiscoverService;
+
     /**
      * @see crema.service.MediaLibraryService#createMediaLibrary(java.io.File, java.lang.String)
      */
@@ -30,11 +36,10 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
         Validate.notNull(path);
         Validate.notNull(name);
 
-        MediaLibrary library = new MediaLibrary();
-        library.setBaseDirectory(path);
-        library.setName(name);
+        MediaLibrary library = buildMediaLibrary(path, name);
         validateMediaLibrary(library);
-        mediaLibraryDao.save(library);
+        discoverMovieFiles(library);
+        saveMediaLibrary(library);
 
         return library;
     }
@@ -44,6 +49,19 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
      */
     public MediaLibrary readMediaLibrary(final String libraryName) {
         return mediaLibraryDao.read(libraryName);
+    }
+
+    /**
+     * Builds out a single media library based on name and directory.
+     * @param path
+     * @param name
+     * @return
+     */
+    private MediaLibrary buildMediaLibrary(final File path, final String name) {
+        MediaLibrary library = new MediaLibrary();
+        library.setBaseDirectory(path);
+        library.setName(name);
+        return library;
     }
 
     /**
@@ -62,4 +80,22 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
                     library.getBaseDirectory()));
         }
     }
+
+    /**
+     * Discover any movie files that exist within the library.
+     * @param library
+     * @throws MediaFileException 
+     */
+    private void discoverMovieFiles(final MediaLibrary library) throws MediaFileException {
+        movieFileDiscoverService.discoverMovies(library);
+    }
+
+    /**
+     * @param library
+     * @throws DuplicateMediaLibraryException 
+     */
+    private void saveMediaLibrary(final MediaLibrary library) throws DuplicateMediaLibraryException {
+        mediaLibraryDao.save(library);
+    }
+
 }

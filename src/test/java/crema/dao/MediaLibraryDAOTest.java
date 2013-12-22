@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import crema.domain.MediaLibrary;
 import crema.exception.DuplicateMediaLibraryException;
 import crema.test.AbstractIntegrationTest;
-import crema.test.TestUtil;
+import crema.test.TestUtils;
 
 /**
  * Testing the {@link MediaLibraryDAO} implementation.
@@ -28,7 +28,7 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
     public void setupLibrary() {
         library = new MediaLibrary();
         library.setName("I like monkeys");
-        library.setBaseDirectory(TestUtil.buildTestMediaDirectory(getClass()));
+        library.setBaseDirectory(TestUtils.buildTestMediaDirectory(getClass()));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
     public void testDuplicateMediaLibraryName() throws DuplicateMediaLibraryException {
         MediaLibrary duplicate = new MediaLibrary();
         duplicate.setName("I like monkeys");
-        duplicate.setBaseDirectory(TestUtil.buildTestMediaDirectory(getClass()));
+        duplicate.setBaseDirectory(TestUtils.buildTestMediaDirectory(getClass()));
         dao.save(library);
         dao.save(duplicate);
     }

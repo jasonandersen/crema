@@ -15,7 +15,7 @@ import crema.domain.MediaLibrary;
 import crema.exception.DuplicateMediaLibraryException;
 import crema.exception.InvalidMediaLibraryDirectoryException;
 import crema.service.MediaLibraryService;
-import crema.test.TestUtil;
+import crema.test.TestUtils;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -71,7 +71,7 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     @Given("^I have a directory$")
     public void I_have_a_directory() throws Throwable {
-        mediaDirectory = TestUtil.buildTestMediaDirectory(getClass());
+        mediaDirectory = TestUtils.buildTestMediaDirectory(getClass());
         assertNotNull(mediaDirectory);
     }
 
@@ -88,7 +88,7 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     @Given("^I have an existing media library named \"([^\"]*)\"$")
     public void I_have_an_existing_media_library_named(String libraryName) throws Throwable {
-        mediaDirectory = TestUtil.buildTestMediaDirectory(getClass());
+        mediaDirectory = TestUtils.buildTestMediaDirectory(getClass());
         mediaLibraryService.createMediaLibrary(mediaDirectory, libraryName);
     }
 
