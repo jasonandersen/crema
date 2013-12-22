@@ -53,9 +53,7 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     @After
     public void tearDownDirectory() throws IOException {
-        if (mediaDirectory != null) {
-            deleteDirectory(mediaDirectory);
-        }
+        deleteDirectory(mediaDirectory);
     }
 
     /**

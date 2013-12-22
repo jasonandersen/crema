@@ -19,7 +19,9 @@ public class TestUtil {
     private static Logger log = LoggerFactory.getLogger(TestUtil.class);
 
     /**
-     * Sets up a directory on the file system to use as a media directory for testing
+     * Sets up a directory on the file system to use as a media directory for testing.
+     * NOTE: this directory will be deleted when the JVM exits. Do not use this for a
+     * directory you'd like to keep around!
      * @return a file object representing an existing directory to use for testing
      */
     public static File buildTestMediaDirectory(Class<?> callingClass) {
@@ -36,6 +38,7 @@ public class TestUtil {
         assertTrue(directory.exists());
         assertTrue(directory.canRead());
         assertTrue(directory.canWrite());
+        directory.deleteOnExit();
         return directory;
     }
 }

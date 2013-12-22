@@ -33,6 +33,9 @@ public abstract class AbstractCucumberStepDefs {
      * @throws IOException 
      */
     protected void deleteDirectory(File directory) throws IOException {
+        if (directory == null) {
+            return;
+        }
         FileUtils.deleteDirectory(directory);
     }
 }
