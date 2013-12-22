@@ -41,4 +41,12 @@ public class MediaLibrary {
         return String.format("[MediaLibrary]name=%s;baseDirectory=%s", name, baseDirectory);
     }
 
+    /**
+     * @param targetFile
+     * @return true if this file exists within this media library
+     */
+    public boolean containsFile(final String fileName) {
+        return false;
+    }
+
 }

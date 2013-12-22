@@ -11,10 +11,11 @@ public abstract class IdentifiableDomainObject {
 
     private UUID uuid;
 
-    /**
-     * @return
-     */
     public UUID getId() {
         return uuid;
+    }
+
+    public void setUuid(final UUID uuid) {
+        this.uuid = uuid;
     }
 }
