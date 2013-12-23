@@ -27,7 +27,7 @@ public class MediaLibraryAddMovieTest {
 
     @Before
     public void setupLibrary() {
-        baseDirectory = TestUtils.buildTestMediaDirectory(getClass());
+        baseDirectory = TestUtils.buildTestDirectory(getClass());
         library = new MediaLibrary();
         library.setName("Media Library 1");
         library.setBaseDirectory(baseDirectory);
@@ -82,7 +82,7 @@ public class MediaLibraryAddMovieTest {
          */
         Thread.sleep(50);
         File invalidFile = TestUtils.buildFileRelativeToDirectory(
-                TestUtils.buildTestMediaDirectory(getClass()),
+                TestUtils.buildTestDirectory(getClass()),
                 "sub-dir1/movie.avi");
         invalidFile.deleteOnExit();
         library.addMovieFile(invalidFile);

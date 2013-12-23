@@ -71,7 +71,7 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     @Given("^I have a directory$")
     public void I_have_a_directory() throws Throwable {
-        mediaDirectory = TestUtils.buildTestMediaDirectory(getClass());
+        mediaDirectory = TestUtils.buildTestDirectory(getClass());
         assertNotNull(mediaDirectory);
     }
 
@@ -88,7 +88,7 @@ public class MediaLibraryStepDefs extends AbstractCucumberStepDefs {
 
     @Given("^I have an existing media library named \"([^\"]*)\"$")
     public void I_have_an_existing_media_library_named(String libraryName) throws Throwable {
-        mediaDirectory = TestUtils.buildTestMediaDirectory(getClass());
+        mediaDirectory = TestUtils.buildTestDirectory(getClass());
         mediaLibraryService.createMediaLibrary(mediaDirectory, libraryName);
     }
 

@@ -34,7 +34,7 @@ public class MediaLibraryContainsFileTest {
                 "subdir1/subdir2/movie.wmv",
                 "subdir1/subdir2/movie.mov"
         };
-        baseDirectory = TestUtils.buildTestMediaDirectory(getClass());
+        baseDirectory = TestUtils.buildTestDirectory(getClass());
         library = new MediaLibrary();
         library.setName("Media Library 1");
         library.setBaseDirectory(baseDirectory);

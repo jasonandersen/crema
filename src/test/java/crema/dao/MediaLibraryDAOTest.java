@@ -1,14 +1,21 @@
 package crema.dao;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+
+import java.io.File;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.domain.MediaLibrary;
+import crema.domain.Movie;
 import crema.exception.DuplicateMediaLibraryException;
+import crema.exception.MediaFileException;
 import crema.test.AbstractIntegrationTest;
 import crema.test.TestUtils;
 
@@ -24,11 +31,14 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
 
     private MediaLibrary library;
 
+    private File directory;
+
     @Before
     public void setupLibrary() {
+        directory = TestUtils.buildTestDirectory(getClass());
         library = new MediaLibrary();
         library.setName("I like monkeys");
-        library.setBaseDirectory(TestUtils.buildTestMediaDirectory(getClass()));
+        library.setBaseDirectory(directory);
     }
 
     @Test
@@ -37,7 +47,7 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
     }
 
     @Test
-    public void testSave() throws DuplicateMediaLibraryException {
+    public void testSaveNoFiles() throws DuplicateMediaLibraryException {
         String name = library.getName();
         dao.save(library);
         MediaLibrary savedLibrary = dao.read(name);
@@ -49,9 +59,24 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
     public void testDuplicateMediaLibraryName() throws DuplicateMediaLibraryException {
         MediaLibrary duplicate = new MediaLibrary();
         duplicate.setName("I like monkeys");
-        duplicate.setBaseDirectory(TestUtils.buildTestMediaDirectory(getClass()));
+        duplicate.setBaseDirectory(TestUtils.buildTestDirectory(getClass()));
         dao.save(library);
         dao.save(duplicate);
+    }
+
+    @Test
+    public void testMovieIsSavedCorrectly() throws IOException, MediaFileException, DuplicateMediaLibraryException {
+        File file = TestUtils.buildFileRelativeToDirectory(directory, "movie.mpg");
+        library.addMovieFile(file);
+        assertFalse(library.getMovies().isEmpty());
+
+        dao.save(library);
+        MediaLibrary savedLibrary = dao.read(library.getName());
+        Movie movie = savedLibrary.getMovies().values().iterator().next();
+
+        assertSame(library, savedLibrary);
+        assertFalse(savedLibrary.getMovies().isEmpty());
+        assertEquals("movie.mpg", movie.getMediaFile().getRelativePath());
     }
 
 }

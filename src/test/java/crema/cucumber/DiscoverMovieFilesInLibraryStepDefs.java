@@ -44,7 +44,7 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
 
     @Before
     public void setupDirectory() {
-        directory = TestUtils.buildTestMediaDirectory(getClass());
+        directory = TestUtils.buildTestDirectory(getClass());
         directory.mkdirs();
         log.debug("setup test directory {}", directory);
     }

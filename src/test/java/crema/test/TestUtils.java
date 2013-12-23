@@ -55,7 +55,7 @@ public class TestUtils {
      * directory you'd like to keep around!
      * @return a file object representing an existing directory to use for testing
      */
-    public static File buildTestMediaDirectory(Class<?> callingClass) {
+    public static File buildTestDirectory(Class<?> callingClass) {
         String path = PathUtils.getJavaTempDirectoryPath();
         if (!path.endsWith(File.separator)) {
             path = path + File.separator;
@@ -83,7 +83,6 @@ public class TestUtils {
      */
     public static File buildFileRelativeToDirectory(final File existingDirectory, final String relativeFilePath)
             throws IOException {
-        log.debug("build a file relative to an existing directory: {}  {}", existingDirectory, relativeFilePath);
 
         Validate.isTrue(existingDirectory.exists(), "directory does not exist!");
         Validate.isTrue(existingDirectory.canWrite(), "directory cannot be written to!");

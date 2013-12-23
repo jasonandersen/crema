@@ -24,7 +24,7 @@ public class PathUtilsTest {
 
     @Before
     public void setup() {
-        directory = TestUtils.buildTestMediaDirectory(getClass());
+        directory = TestUtils.buildTestDirectory(getClass());
     }
 
     @Test

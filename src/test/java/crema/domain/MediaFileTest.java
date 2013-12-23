@@ -37,7 +37,7 @@ public class MediaFileTest {
 
     @Before
     public void setup() throws IOException, MediaFileException {
-        directory = TestUtils.buildTestMediaDirectory(getClass());
+        directory = TestUtils.buildTestDirectory(getClass());
         file = TestUtils.buildFileRelativeToDirectory(directory, RELATIVE_PATH);
         library = new MediaLibrary();
         library.setBaseDirectory(directory);

@@ -1,7 +1,8 @@
 package crema.test;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.PostConstruct;
 
@@ -33,6 +34,10 @@ public abstract class AbstractIntegrationTest {
 
     private static Logger log = LoggerFactory.getLogger(AbstractIntegrationTest.class);
 
+    private static Lock shutdownHookLock = new ReentrantLock();
+
+    private static Boolean shutdownHookRegistered = false;
+
     private File cremaDir;
 
     @Autowired
@@ -48,18 +53,16 @@ public abstract class AbstractIntegrationTest {
     public void setupCremaDirectory() throws PreferencesException {
         cremaDir = cremaDirectory.getCremaDirectory();
         //ensure the crema directory is shutdown after the JVM exits
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                try {
-                    if (cremaDir.exists()) {
-                        FileUtils.deleteDirectory(cremaDir);
-                    }
-                } catch (IOException e) {
-                    log.error("failed to delete crema directory on shutdown hook", e);
-                }
+        shutdownHookLock.lock();
+        try {
+            if (!shutdownHookRegistered) {
+                Runtime.getRuntime().addShutdownHook(new CremaDirectoryCleanupShutdownHook());
+                shutdownHookRegistered = true;
             }
-        });
+        } finally {
+            shutdownHookLock.unlock();
+        }
+
     }
 
     /**
@@ -78,6 +81,16 @@ public abstract class AbstractIntegrationTest {
     @After
     public void truncateDatabase() {
         truncator.truncate();
+    }
+
+    private class CremaDirectoryCleanupShutdownHook extends Thread {
+        @Override
+        public void run() {
+            log.debug("running crema directory cleanup shutdown hook");
+            if (cremaDir.exists()) {
+                FileUtils.deleteQuietly(cremaDir);
+            }
+        }
     }
 
 }
