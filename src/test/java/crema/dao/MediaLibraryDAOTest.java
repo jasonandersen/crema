@@ -68,14 +68,14 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
     public void testMovieIsSavedCorrectly() throws IOException, MediaFileException, DuplicateMediaLibraryException {
         File file = TestUtils.buildFileRelativeToDirectory(directory, "movie.mpg");
         library.addMovieFile(file);
-        assertFalse(library.getMovies().isEmpty());
+        assertFalse(library.getMoviesByFilePath().isEmpty());
 
         dao.save(library);
         MediaLibrary savedLibrary = dao.read(library.getName());
-        Movie movie = savedLibrary.getMovies().values().iterator().next();
+        Movie movie = savedLibrary.getMoviesByFilePath().values().iterator().next();
 
         assertSame(library, savedLibrary);
-        assertFalse(savedLibrary.getMovies().isEmpty());
+        assertFalse(savedLibrary.getMoviesByFilePath().isEmpty());
         assertEquals("movie.mpg", movie.getMediaFile().getRelativePath());
     }
 

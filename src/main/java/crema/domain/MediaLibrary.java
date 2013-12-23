@@ -1,8 +1,10 @@
 package crema.domain;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import crema.exception.MediaFileException;
@@ -70,6 +72,21 @@ public class MediaLibrary {
         movies.put(mediaFile.getRelativePath(), movie);
     }
 
+    /**
+     * @return an unmodifiable list of movies
+     */
+    public List<Movie> getMovies() {
+        return Collections.unmodifiableList(new ArrayList<Movie>(movies.values()));
+    }
+
+    /**
+     * @return an unmodifiable map of movies within this library keyed off movie file path
+     *      relative to the base directory of this media library.
+     */
+    public Map<String, Movie> getMoviesByFilePath() {
+        return Collections.unmodifiableMap(movies);
+    }
+
     public String getName() {
         return name;
     }
@@ -84,14 +101,6 @@ public class MediaLibrary {
 
     public void setBaseDirectory(final File baseDirectory) {
         this.baseDirectory = baseDirectory;
-    }
-
-    /**
-     * @return an unmodifiable map of movies within this library keyed off movie file path
-     *      relative to the base directory of this media library.
-     */
-    public Map<String, Movie> getMovies() {
-        return Collections.unmodifiableMap(movies);
     }
 
 }

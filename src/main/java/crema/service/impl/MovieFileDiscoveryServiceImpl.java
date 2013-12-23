@@ -5,11 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.Validate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import crema.domain.MediaLibrary;
+import crema.domain.Movie;
 import crema.exception.MediaFileException;
 import crema.service.MovieFileDiscoveryService;
+import crema.service.MovieNameService;
 import crema.util.PathUtils;
 
 /**
@@ -35,6 +38,9 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
 
     private List<String> extensions;
 
+    @Autowired
+    private MovieNameService movieNameService;
+
     /**
      * Constructor.
      */
@@ -50,6 +56,17 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
         Validate.notNull(library);
         Validate.notNull(library.getBaseDirectory());
         discover(library, library.getBaseDirectory());
+        injectMovieNames(library);
+    }
+
+    /**
+     * Injects names of the movies into the library.
+     * @param library
+     */
+    private void injectMovieNames(final MediaLibrary library) {
+        for (Movie movie : library.getMovies()) {
+            movieNameService.guessName(movie);
+        }
     }
 
     /**

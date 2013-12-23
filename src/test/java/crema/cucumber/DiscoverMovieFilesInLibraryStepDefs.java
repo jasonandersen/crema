@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.domain.MediaLibrary;
+import crema.domain.Movie;
 import crema.service.MediaLibraryService;
 import crema.test.TestUtils;
 import cucumber.api.java.After;
@@ -96,7 +97,7 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
      */
 
     @Then("^([^\"]*) is ([^\"]*) to the media library$")
-    public void file_avi_is_added_to_the_media_library(final String fileName, final String result) throws Throwable {
+    public void is_added_to_the_media_library(final String fileName, final String result) throws Throwable {
         boolean expected = "added".equals(result);
         boolean actual = mediaLibrary.containsFile(fileName);
         assertEquals(expected, actual);
@@ -114,6 +115,12 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
         for (String fileName : fileNames) {
             assertFalse(mediaLibrary.containsFile(fileName));
         }
+    }
+
+    @Then("^the name of the movie is ([^\"]*)$")
+    public void the_name_of_the_movie_is(final String movieName) throws Throwable {
+        Movie movie = mediaLibrary.getMovies().get(0);
+        assertEquals(movieName, movie.getName());
     }
 
     /**

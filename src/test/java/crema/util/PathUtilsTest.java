@@ -35,7 +35,8 @@ public class PathUtilsTest {
 
     @Test
     public void testNullFile() {
-        assertNull(PathUtils.getFileExtension(null));
+        File nullFile = null;
+        assertNull(PathUtils.getFileExtension(nullFile));
     }
 
     @Test

@@ -48,12 +48,20 @@ public class PathUtils {
         if (file == null) {
             return null;
         }
-        String path = file.getPath();
-        int index = path.lastIndexOf(EXT_DELIMITER);
+        return getFileExtension(file.getPath());
+    }
+
+    /**
+     * @param file
+     * @return the extension of a file, will return null if the file is null or an
+     *      empty string if the file has no extension
+     */
+    public static String getFileExtension(final String fileName) {
+        int index = fileName.lastIndexOf(EXT_DELIMITER);
         if (index < 0) {
             return "";
         }
-        return path.substring(index + 1);
+        return fileName.substring(index + 1);
     }
 
 }

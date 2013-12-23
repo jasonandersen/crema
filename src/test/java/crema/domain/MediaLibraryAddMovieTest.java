@@ -44,7 +44,7 @@ public class MediaLibraryAddMovieTest {
         File testFile = TestUtils.buildFileRelativeToDirectory(baseDirectory, relativePath);
         library.addMovieFile(testFile);
 
-        Movie movie = library.getMovies().get(relativePath);
+        Movie movie = library.getMoviesByFilePath().get(relativePath);
         assertNotNull(movie);
         assertEquals(relativePath, movie.getMediaFile().getRelativePath());
     }
@@ -68,7 +68,7 @@ public class MediaLibraryAddMovieTest {
             library.addMovieFile(testFile);
         }
         for (String relativePath : paths) {
-            Movie movie = library.getMovies().get(relativePath);
+            Movie movie = library.getMoviesByFilePath().get(relativePath);
             assertNotNull(movie);
             assertEquals(relativePath, movie.getMediaFile().getRelativePath());
         }
@@ -99,8 +99,8 @@ public class MediaLibraryAddMovieTest {
         File testFile = TestUtils.buildFileRelativeToDirectory(baseDirectory, relativePath);
         library.addMovieFile(testFile);
 
-        for (String key : library.getMovies().keySet()) {
-            library.getMovies().remove(key);
+        for (String key : library.getMoviesByFilePath().keySet()) {
+            library.getMoviesByFilePath().remove(key);
         }
     }
 }
