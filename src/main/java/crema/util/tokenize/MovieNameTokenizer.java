@@ -15,15 +15,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MovieNameTokenizer {
 
-    /*
-     * common word tokens (. _ - " ")
-     * strip empty tokens
-     * remove year (1993) or [1993]
-     * remove 2008.LIMITED.DVDRip.XviD-DMT kind of crap pattern
-     * remove resolution (HD, 480i, 576i, 480p, 720p, 1080i, 1080p)
-     * trim all the tokens
-     */
-
     private final List<TokenDecorator> decorators;
 
     /**
