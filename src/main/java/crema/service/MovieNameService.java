@@ -13,7 +13,6 @@ public interface MovieNameService {
      * Will make a best guess on the name of a movie based on the name
      * of the file.
      * @param movie
-     * @return a guessed name
      */
-    String guessName(Movie movie);
+    void guessName(Movie movie);
 }

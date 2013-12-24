@@ -20,9 +20,9 @@ Feature:
             |12_MONKEYS.AVI         |12 Monkeys         |
             |a_beautiful.mind.avi   |A Beautiful Mind   |
             |a-beautiful_mind.avi   |A Beautiful Mind   |
-            |bill_and_ted's_adv     |Bill and Ted's Adv |
+            |bill_and_ted's_adv.mpg |Bill And Ted's Adv |
             |falling-down(1993).avi |Falling Down       |
-            |Godzilla 2000.mov      |Godzilla 2000      |
+            |Godzilla 1000.mov      |Godzilla 1000      |
             |2012.m4v               |2012               |
             
     Scenario Outline: guessing movie names for some common file name patterns
@@ -32,8 +32,9 @@ Feature:
         And the name of the movie is <movieName>
         Examples:
             |fileName                                                       |movieName              |
+            |2001.a.space.odyssey.MOV                                       |2001 A Space Odyssey   |
             |Somers.Town.2008.LIMITED.DVDRip.XviD-DMT.avi                   |Somers Town            |
-            |Half.Nelson.LiMiTED.DVDRip.XviD-LMG.avi                        |Half Nelson            |
+            |Half.Nelson.1080p.LiMiTED.DVDRip.XviD-LMG.avi                  |Half Nelson            |
             |I'm.Not.There.[2007].DvDrip[Eng]-aXXo.avi                      |I'm Not There          |
             |Last Chance Harvey[2008]DvDrip[Eng]-FXG.avi                    |Last Chance Harvey     |
             |The.Dark.Knight.Returns.2013.iNTERNAL.BDRi.avi                 |The Dark Knight Returns|

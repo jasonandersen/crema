@@ -50,9 +50,11 @@ public class CommonMovieCrapWordsDecoratorTest extends AbstractTokenDecoratorTes
         p.add(test(in("Ladyhawke", "BRRip"), out("Ladyhawke")));
         p.add(test(in("Ladyhawke", "BRayRip"), out("Ladyhawke")));
         p.add(test(in("Ladyhawke", "BrRiP"), out("Ladyhawke")));
-
+        p.add(test(in("Ladyhawke", "1080p", "The", "Sequel"), out("Ladyhawke", "The", "Sequel")));
+        p.add(test(in("Ladyhawke", "1986", "HD", "DvDRip", "720p", "X264"), out("Ladyhawke")));
         //if the movie's name is a year number, allow
         p.add(test(in("2012"), out("2012")));
+        p.add(test(in("2001", "A", "Space", "Odyssey"), out("2001", "A", "Space", "Odyssey")));
 
         return p;
     }

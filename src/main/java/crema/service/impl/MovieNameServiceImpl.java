@@ -28,13 +28,13 @@ public class MovieNameServiceImpl implements MovieNameService {
     /**
      * @see crema.service.MovieNameService#guessName(crema.domain.Movie)
      */
-    public String guessName(final Movie movie) {
+    public void guessName(final Movie movie) {
         String fileName = movie.getMediaFile().getFileName();
         List<String> tokens = tokenizer.tokenize(fileName);
         correctCase(tokens);
         String movieName = assembleTokens(tokens);
+        movie.setName(movieName);
         log.debug("file name {} movie name {}", fileName, movieName);
-        return movieName;
     }
 
     /**
@@ -42,12 +42,14 @@ public class MovieNameServiceImpl implements MovieNameService {
      * @param tokens
      */
     private void correctCase(final List<String> tokens) {
-        for (String token : tokens) {
+        for (int index = 0; index < tokens.size(); index++) {
+            String token = tokens.get(index);
             if (tokens.isEmpty()) {
                 continue;
             }
             token = token.toLowerCase();
             token = StringUtils.capitalize(token);
+            tokens.set(index, token);
         }
     }
 

@@ -23,9 +23,10 @@ public class MovieNameTokenizer {
     public MovieNameTokenizer() {
         decorators = new LinkedList<TokenDecorator>();
         decorators.add(new RemoveFileExtensionDecorator());
-        decorators.add(new TorrentFilePatternDecorator());
-        decorators.add(new CommonWordSeparatorDecorator());
+        decorators.add(new CamelCaseDecorator());
+        decorators.add(new CommonWordBoundaryDecorator());
         decorators.add(new WhitespaceCleanerDecorator());
+        decorators.add(new TorrentFilePatternDecorator());
         decorators.add(new CommonMovieCrapWordsDecorator());
     }
 

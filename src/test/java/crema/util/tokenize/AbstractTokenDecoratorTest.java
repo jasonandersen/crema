@@ -20,6 +20,44 @@ import org.slf4j.LoggerFactory;
 @RunWith(Parameterized.class)
 public abstract class AbstractTokenDecoratorTest {
 
+    /*
+    @Parameters
+    public static Collection<Object[]> buildTestParameters() {
+        Collection<Object[]> p = new ArrayList<Object[]>();
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+        p.add(test(in(""), out("")));
+
+        return p;
+    }
+     */
+
     private static Logger log = LoggerFactory.getLogger(AbstractTokenDecoratorTest.class);
 
     /**
@@ -73,7 +111,7 @@ public abstract class AbstractTokenDecoratorTest {
     }
 
     @Test
-    public void test() {
+    public void testTokenDecorator() {
         log.debug("preTokens={};postTokens={};", inputTokens, expectedTokens);
         decorator.decorate(inputTokens);
         assertEquals(expectedTokens, inputTokens);

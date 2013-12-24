@@ -1,7 +1,5 @@
 package crema.util.tokenize;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -13,39 +11,8 @@ import java.util.regex.Pattern;
  */
 public class CommonMovieCrapWordsDecorator implements TokenDecorator {
 
-    private static final String[] CRAP_PATTERNS = new String[] {
-            "dvdrip",
-            "brayrip",
-            "brrip",
-            "\\((19|20)\\d\\d\\)", /* year */
-            "\\[(19|20)\\d\\d\\]", /* year */
-            "x264",
-            "sd",
-            "hd",
-            "480i",
-            "576i",
-            "480p",
-            "720p",
-            "1080i",
-            "1080p",
-            "\\[.*\\]"
-    };
-
-    private static final Collection<Pattern> PATTERNS;
-
     private static final Pattern UNBOUNDED_YEAR_PATTERN =
             Pattern.compile("^(19|20)\\d\\d$", Pattern.CASE_INSENSITIVE);
-
-    /**
-     * Compile all the regex patterns
-     */
-    static {
-        PATTERNS = new HashSet<Pattern>();
-        for (String crapPattern : CRAP_PATTERNS) {
-            String regex = String.format("^%s$", crapPattern);
-            PATTERNS.add(Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
-        }
-    }
 
     /**
      * @see crema.util.tokenize.TokenDecorator#decorate(java.util.List, java.lang.String)
@@ -71,15 +38,27 @@ public class CommonMovieCrapWordsDecorator implements TokenDecorator {
      * @return true if a match was found
      */
     private boolean shouldRemoveToken(final String token, final int index) {
-        for (Pattern pattern : PATTERNS) {
-            if (pattern.matcher(token).matches()) {
-                return true;
-            }
+        if (isUnboundedYearAsFirstToken(token, index)) {
+            return false;
+        }
+        if (CommonMovieCrapWords.isCrapWord(token)) {
+            return true;
         }
         if (isUnboundedYear(token, index)) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * If an unbounded year (i.e. not surrounded by brackets, parens or braces) in the first token,
+     * we don't want to replace it.
+     * @param token
+     * @param index
+     * @return
+     */
+    private boolean isUnboundedYearAsFirstToken(final String token, final int index) {
+        return index == 0 && UNBOUNDED_YEAR_PATTERN.matcher(token).matches();
     }
 
     /**
