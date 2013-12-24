@@ -5,17 +5,30 @@ import java.util.HashSet;
 import java.util.regex.Pattern;
 
 /**
- * List of crap words that often appear in movie file names.
+ * List of crap words that often appear in movie file names that aren't
+ * part of the title itself.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 public class CommonMovieCrapWords {
 
+    /**
+     * List of commonly found crap words in movie file names.
+     */
     private static final String[] CRAP_PATTERNS = new String[] {
             "dvdrip",
             "brayrip",
             "brrip",
-            "(19|20)\\d\\d",
+            "bray",
+            "blueray",
+            "bluray",
+            "br",
+            "bdrip",
+            "AC3",
+            "AAC",
+            "xvid",
+            "\\d\\dfps", /* frames per second */
+            "(19|20)\\d\\d", /* year */
             "\\((19|20)\\d\\d\\)", /* year */
             "\\[(19|20)\\d\\d\\]", /* year */
             "x264",
@@ -27,7 +40,7 @@ public class CommonMovieCrapWords {
             "720p",
             "1080i",
             "1080p",
-            "\\[.*\\]"
+            "\\[.*\\]" /* anything surrounded in brackets is suspect */
     };
 
     private static final Collection<Pattern> PATTERNS;

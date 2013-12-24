@@ -34,7 +34,7 @@ public class MovieNameServiceImpl implements MovieNameService {
         correctCase(tokens);
         String movieName = assembleTokens(tokens);
         movie.setName(movieName);
-        log.debug("file name {} movie name {}", fileName, movieName);
+        log.debug("file: {} movie: {}", fileName, movieName);
     }
 
     /**

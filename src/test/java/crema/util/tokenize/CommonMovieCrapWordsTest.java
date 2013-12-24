@@ -22,11 +22,19 @@ public class CommonMovieCrapWordsTest {
         return Arrays.asList(new Object[][] {
                 { "2008", true },
                 { "dvdrip", true },
+                { "bluray", true },
+                { "blueray", true },
+                { "BR", true },
+                { "AC3", true },
+                { "AAC", true },
                 { "DVDRip", true },
                 { "DvDrIp", true },
                 { "DVDRIP", true },
                 { "BRRip", true },
+                { "bdrip", true },
+                { "60fps", true },
                 { "brayrip", true },
+                { "xvid", true },
                 { "monkey", false }
         });
     }

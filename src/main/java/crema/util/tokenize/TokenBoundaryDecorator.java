@@ -4,17 +4,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * Uses common word separators define word boundaries within a string.
+ * Uses common word separators to define token boundaries within a string.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class CommonWordBoundaryDecorator implements TokenDecorator {
-
-    private static Logger log = LoggerFactory.getLogger(CommonWordBoundaryDecorator.class);
+public class TokenBoundaryDecorator implements TokenDecorator {
 
     /**
      * @see crema.util.tokenize.TokenDecorator#decorate(java.util.List, java.lang.String)
@@ -25,8 +20,6 @@ public class CommonWordBoundaryDecorator implements TokenDecorator {
             String[] splitResult = token.split("(\\(|\\)|\\[|\\]|\\s|\\.|-|_|\\+|\\|)");
             newTokens.addAll(Arrays.asList(splitResult));
         }
-        log.debug("original tokens {}", tokens);
-        log.debug("new tokens {}", newTokens);
         tokens.clear();
         tokens.addAll(newTokens);
     }

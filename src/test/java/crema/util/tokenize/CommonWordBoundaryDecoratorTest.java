@@ -8,7 +8,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
- * Tests the {@link CommonWordBoundaryDecorator} class.
+ * Tests the {@link TokenBoundaryDecorator} class.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
@@ -44,6 +44,6 @@ public class CommonWordBoundaryDecoratorTest extends AbstractTokenDecoratorTest 
      */
     @Override
     protected TokenDecorator getDecorator() {
-        return new CommonWordBoundaryDecorator();
+        return new TokenBoundaryDecorator();
     }
 }

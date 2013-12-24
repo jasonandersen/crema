@@ -1,6 +1,7 @@
 Feature:
-    I want to have the names of the media files guessed automatically
-    So that I don't have to type the name of each media file
+    I want to have the names of the movie files guessed automatically
+    So that I don't have to type the name of each movie file
+    And when I call an external service to get more information about the movie the web service search will be more accurate
     
     Scenario Outline: guessing the names of the movies based on their file names
         Given I have a directory that contains a file named <fileName>
@@ -45,4 +46,5 @@ Feature:
             |Snatch (2000) - IPOD CLASSIC by empetrojki.avi                 |Snatch                 |
             |Mystery.Men.1999.BDRip.576P.X264.AC3-FaNGDiNG0.avi             |Mystery Men            |
             |Mystery Men (1999) [HDDVDMux720p.Ita-Eng-Spa][Nautilus-BT].avi |Mystery Men            |
+            |Snatch.60fps.AC3(Dolby).5.1ch.Blu-ray.PS3-TEAM.avi             |Snatch                 |
             

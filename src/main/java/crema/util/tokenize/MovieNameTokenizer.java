@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * Takes a movie file name and tokenizes it down into single words. Will also
@@ -12,8 +14,10 @@ import org.springframework.stereotype.Component;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-@Component
+@Service
 public class MovieNameTokenizer {
+
+    private static Logger log = LoggerFactory.getLogger(MovieNameTokenizer.class);
 
     private final List<TokenDecorator> decorators;
 
@@ -24,7 +28,7 @@ public class MovieNameTokenizer {
         decorators = new LinkedList<TokenDecorator>();
         decorators.add(new RemoveFileExtensionDecorator());
         decorators.add(new CamelCaseDecorator());
-        decorators.add(new CommonWordBoundaryDecorator());
+        decorators.add(new TokenBoundaryDecorator());
         decorators.add(new WhitespaceCleanerDecorator());
         decorators.add(new TorrentFilePatternDecorator());
         decorators.add(new CommonMovieCrapWordsDecorator());
@@ -40,6 +44,7 @@ public class MovieNameTokenizer {
         for (TokenDecorator decorator : decorators) {
             decorator.decorate(tokens);
         }
+        log.debug("file name: {} tokens: {}", fileName, tokens);
         return tokens;
     }
 
