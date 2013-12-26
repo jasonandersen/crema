@@ -78,6 +78,10 @@ public class DatabaseFileLocator {
             return;
         }
         log.info("creating database file: {}", file);
+        if (!file.getParentFile().exists()) {
+            log.warn("parent directory for db file does not exist, creating now");
+            file.getParentFile().mkdirs();
+        }
         file.createNewFile();
     }
 
