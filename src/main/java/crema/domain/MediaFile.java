@@ -13,6 +13,8 @@ import crema.exception.MediaFileException;
  */
 public class MediaFile {
 
+    private static final String EXT_MARKER = ".";
+
     private static final String TO_STRING = "[%s]baseDirectory=%s;relativePath=%s;";
 
     private String relativePath;
@@ -48,6 +50,18 @@ public class MediaFile {
     }
 
     /**
+     * @return the name of the actual media file with the extension removed
+     */
+    public String getFileNameWithoutExtension() {
+        String fileName = getFileName();
+        int position = fileName.lastIndexOf(EXT_MARKER);
+        if (position <= 0) {
+            return fileName;
+        }
+        return fileName.substring(0, position);
+    }
+
+    /**
      * @see java.lang.Object#toString()
      */
     @Override
@@ -78,6 +92,9 @@ public class MediaFile {
         return relative;
     }
 
+    /**
+     * @return the parent {@MediaLibrary} that this file resides in
+     */
     public MediaLibrary getLibrary() {
         return library;
     }
@@ -86,6 +103,9 @@ public class MediaFile {
         this.library = library;
     }
 
+    /**
+     * @return the path to this file relative to the path of the parent {@link MediaLibrary}'s path
+     */
     public String getRelativePath() {
         return relativePath;
     }

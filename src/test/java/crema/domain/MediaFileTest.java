@@ -62,6 +62,11 @@ public class MediaFileTest {
     }
 
     @Test
+    public void testFileNameWithoutExtension() {
+        assertEquals("movie", mediaFile.getFileNameWithoutExtension());
+    }
+
+    @Test
     public void testToString() {
         log.info(mediaFile.toString());
     }

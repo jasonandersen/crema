@@ -26,7 +26,6 @@ public class MovieNameTokenizer {
      */
     public MovieNameTokenizer() {
         decorators = new LinkedList<TokenDecorator>();
-        decorators.add(new RemoveFileExtensionDecorator());
         decorators.add(new CamelCaseDecorator());
         decorators.add(new TokenBoundaryDecorator());
         decorators.add(new WhitespaceCleanerDecorator());
