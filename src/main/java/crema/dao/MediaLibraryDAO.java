@@ -1,5 +1,7 @@
 package crema.dao;
 
+import java.util.List;
+
 import crema.domain.MediaLibrary;
 import crema.exception.DuplicateMediaLibraryException;
 
@@ -23,5 +25,10 @@ public interface MediaLibraryDAO {
      * @return the instance of the library with the specified name, will return null if the name is not found
      */
     MediaLibrary read(String name);
+
+    /**
+     * @return all media libraries that have been persisted
+     */
+    List<MediaLibrary> readAll();
 
 }

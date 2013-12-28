@@ -55,4 +55,12 @@ public class MediaLibraryDAOImpl implements MediaLibraryDAO {
         log.debug("{} results found for MediaLibrary named {}", results.size(), name);
         return results.isEmpty() ? null : results.get(0);
     }
+
+    /**
+     * @see crema.dao.MediaLibraryDAO#readAll()
+     */
+    public List<MediaLibrary> readAll() {
+        log.debug("reading all MediaLibrary objects");
+        return containerContext.getObjectContainer().queryByExample(MediaLibrary.class);
+    }
 }

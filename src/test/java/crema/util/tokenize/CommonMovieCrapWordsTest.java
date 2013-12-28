@@ -21,6 +21,9 @@ public class CommonMovieCrapWordsTest {
     public static Collection<Object[]> buildTestParameters() {
         return Arrays.asList(new Object[][] {
                 { "2008", true },
+                { "{2008}", true },
+                { "[2008]", true },
+                { "(2008)", true },
                 { "dvdrip", true },
                 { "bluray", true },
                 { "blueray", true },
@@ -30,6 +33,7 @@ public class CommonMovieCrapWordsTest {
                 { "DVDRip", true },
                 { "DvDrIp", true },
                 { "DVDRIP", true },
+                { "DVDSCR", true },
                 { "BRRip", true },
                 { "bdrip", true },
                 { "60fps", true },

@@ -17,6 +17,8 @@ public class CommonMovieCrapWords {
      */
     private static final String[] CRAP_PATTERNS = new String[] {
             "dvdrip",
+            "dvd",
+            "dvdscr",
             "brayrip",
             "brrip",
             "bray",
@@ -31,6 +33,7 @@ public class CommonMovieCrapWords {
             "(19|20)\\d\\d", /* year */
             "\\((19|20)\\d\\d\\)", /* year */
             "\\[(19|20)\\d\\d\\]", /* year */
+            "\\{(19|20)\\d\\d\\}", /* year */
             "x264",
             "sd",
             "hd",

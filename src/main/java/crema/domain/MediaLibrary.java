@@ -42,7 +42,7 @@ public class MediaLibrary {
     */
     @Override
     public String toString() {
-        return String.format("[MediaLibrary]name=%s;baseDirectory=%s", name, baseDirectory);
+        return name;
     }
 
     /**

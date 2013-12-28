@@ -32,19 +32,20 @@ Feature:
         Then <fileName> is added to the media library
         And the name of the movie is <movieName>
         Examples:
-            |fileName                                                       |movieName              |
-            |2001.a.space.odyssey.MOV                                       |2001 A Space Odyssey   |
-            |Somers.Town.2008.LIMITED.DVDRip.XviD-DMT.avi                   |Somers Town            |
-            |Half.Nelson.1080p.LiMiTED.DVDRip.XviD-LMG.avi                  |Half Nelson            |
-            |I'm.Not.There.[2007].DvDrip[Eng]-aXXo.avi                      |I'm Not There          |
-            |Last Chance Harvey[2008]DvDrip[Eng]-FXG.avi                    |Last Chance Harvey     |
-            |The.Dark.Knight.Returns.2013.iNTERNAL.BDRi.avi                 |The Dark Knight Returns|
-            |Batman Begins (2008) 1080p.avi                                 |Batman Begins          |
-            |Batman Begins (2008) 720p.avi                                  |Batman Begins          |
-            |Snatch (2000) 720p BrRip x264 - DagarX.avi                     |Snatch                 |
-            |Snatch.2000.1080p.AC3(Dolby).5.1ch.Blu-ray.PS3-TEAM.avi        |Snatch                 |
-            |Snatch (2000) - IPOD CLASSIC by empetrojki.avi                 |Snatch                 |
-            |Mystery.Men.1999.BDRip.576P.X264.AC3-FaNGDiNG0.avi             |Mystery Men            |
-            |Mystery Men (1999) [HDDVDMux720p.Ita-Eng-Spa][Nautilus-BT].avi |Mystery Men            |
-            |Snatch.60fps.AC3(Dolby).5.1ch.Blu-ray.PS3-TEAM.avi             |Snatch                 |
+            |fileName                                                       |movieName                                      |
+            |The Simpsons - s16e01 - Treehouse Of Horror XV .lol.avi        |The Simpsons S16e01 Treehouse Of Horror Xv Lol |
+            |2001.a.space.odyssey.MOV                                       |2001 A Space Odyssey                           |
+            |Somers.Town.2008.LIMITED.DVDRip.XviD-DMT.avi                   |Somers Town                                    |
+            |Half.Nelson.1080p.LiMiTED.DVDRip.XviD-LMG.avi                  |Half Nelson                                    |
+            |I'm.Not.There.[2007].DvDrip[Eng]-aXXo.avi                      |I'm Not There                                  |
+            |Last Chance Harvey[2008]DvDrip[Eng]-FXG.avi                    |Last Chance Harvey                             |
+            |The.Dark.Knight.Returns.2013.iNTERNAL.BDRi.avi                 |The Dark Knight Returns                        |
+            |Batman Begins (2008) 1080p.avi                                 |Batman Begins                                  |
+            |Batman Begins (2008) 720p.avi                                  |Batman Begins                                  |
+            |Snatch (2000) 720p BrRip x264 - DagarX.avi                     |Snatch                                         |
+            |Snatch.2000.1080p.AC3(Dolby).5.1ch.Blu-ray.PS3-TEAM.avi        |Snatch                                         |
+            |Snatch (2000) - IPOD CLASSIC by empetrojki.avi                 |Snatch                                         |
+            |Mystery.Men.1999.BDRip.576P.X264.AC3-FaNGDiNG0.avi             |Mystery Men                                    |
+            |Mystery Men (1999) [HDDVDMux720p.Ita-Eng-Spa][Nautilus-BT].avi |Mystery Men                                    |
+            |Snatch.60fps.AC3(Dolby).5.1ch.Blu-ray.PS3-TEAM.avi             |Snatch                                         |
             

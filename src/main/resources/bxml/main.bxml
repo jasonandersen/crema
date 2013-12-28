@@ -1,13 +1,36 @@
-<crema:Main title="Hello BXML!" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:crema="crema.view.pivot.window"
-    xmlns="org.apache.pivot.wtk">
+<crema:MainWindow title="Hello BXML!" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:crema="crema.view.pivot.window" xmlns="org.apache.pivot.wtk">
 
     <Border styles="{padding:4}">
         <BoxPane orientation="vertical" styles="{fill:true}">
-            <FlowPane bxml:id="flowPane" styles="{padding:2}">
+            <FlowPane styles="{padding:2}">
+                <Label text="Media Library:" />
+                <ListButton bxml:id="chooseLibraryListButton" />
                 <PushButton bxml:id="addMediaLibraryButton" buttonData="Add Media Library" />
-                <Label bxml:id="libraryPathLabel" text="" />
             </FlowPane>
+            <FlowPane>
+                <Label text="Name:" />
+                <TextInput bxml:id="mediaLibraryNameTextInput" preferredWidth="200" />
+                <PushButton bxml:id="updateMediaLibraryButton" buttonData="Update" />
+            </FlowPane>
+            <FlowPane>
+                <Label text="Path:" />
+                <Label bxml:id="mediaLibraryPathLabel" text="" />
+            </FlowPane>
+            <Border>
+                <ScrollPane horizontalScrollBarPolicy="fill" preferredHeight="1000">
+                    <TableView bxml:id="moviesTableView">
+                        <columns>
+                            <TableView.Column name="name" width="1*" headerData="Movie Name" />
+                            <TableView.Column name="relativeFilePath" width="4*" headerData="Relative File Path" />
+                        </columns>
+                    </TableView>
+                    <columnHeader>
+                        <TableViewHeader tableView="$moviesTableView" />
+                    </columnHeader>
+                </ScrollPane>
+            </Border>
         </BoxPane>
     </Border>
 
-</crema:Main>
+</crema:MainWindow>

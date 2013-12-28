@@ -1,6 +1,7 @@
 package crema.service.impl;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.commons.lang.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +46,25 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
     }
 
     /**
+     * @see crema.service.MediaLibraryService#getAllMediaLibraries()
+     */
+    public List<MediaLibrary> getAllMediaLibraries() {
+        return mediaLibraryDao.readAll();
+    }
+
+    /**
      * @see crema.service.MediaLibraryService#readMediaLibrary(java.lang.String)
      */
     public MediaLibrary readMediaLibrary(final String libraryName) {
         return mediaLibraryDao.read(libraryName);
+    }
+
+    /**
+     * @throws DuplicateMediaLibraryException 
+     * @see crema.service.MediaLibraryService#updateMediaLibrary(crema.domain.MediaLibrary)
+     */
+    public void updateMediaLibrary(final MediaLibrary library) throws DuplicateMediaLibraryException {
+        saveMediaLibrary(library);
     }
 
     /**
@@ -97,5 +113,4 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
     private void saveMediaLibrary(final MediaLibrary library) throws DuplicateMediaLibraryException {
         mediaLibraryDao.save(library);
     }
-
 }

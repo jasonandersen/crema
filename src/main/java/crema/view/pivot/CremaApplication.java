@@ -11,7 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import crema.util.BeanContext;
-import crema.view.pivot.window.Main;
+import crema.view.pivot.window.MainWindow;
 
 /**
  * The primary class for the Crema Apache Pivot-based UI.
@@ -43,7 +43,7 @@ public class CremaApplication implements Application {
      */
     public void startup(final Display display, final Map<String, String> properties) throws Exception {
         log.info("startup called");
-        window = bxmlService.readWindowFromBxml(Main.class, "main.bxml");
+        window = bxmlService.readWindowFromBxml(MainWindow.class, "main.bxml");
         window.open(display);
     }
 

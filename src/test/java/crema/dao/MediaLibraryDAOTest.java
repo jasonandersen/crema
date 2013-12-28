@@ -7,6 +7,7 @@ import static org.junit.Assert.assertSame;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -77,6 +78,18 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
         assertSame(library, savedLibrary);
         assertFalse(savedLibrary.getMoviesByFilePath().isEmpty());
         assertEquals("movie.mpg", movie.getMediaFile().getRelativePath());
+    }
+
+    @Test
+    public void testReadAll() throws DuplicateMediaLibraryException {
+        dao.save(library);
+        library = null;
+        setupLibrary();
+        library.setName("Here is a new name");
+        dao.save(library);
+
+        Collection<MediaLibrary> libraries = dao.readAll();
+        assertEquals(2, libraries.size());
     }
 
 }

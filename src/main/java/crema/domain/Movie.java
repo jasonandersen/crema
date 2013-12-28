@@ -11,6 +11,14 @@ public class Movie {
 
     private String name;
 
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public String getName() {
         return name;
     }
