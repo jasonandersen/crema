@@ -2,10 +2,14 @@ package crema.domain;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.Validate;
 
 import crema.exception.MediaFileException;
 
@@ -51,9 +55,10 @@ public class MediaLibrary {
      */
     public boolean containsFile(final String fileName) {
         for (Movie movie : movies.values()) {
-            MediaFile file = movie.getMediaFile();
-            if (fileName.equals(file.getFileName())) {
-                return true;
+            for (MediaFile file : movie.getMediaFiles()) {
+                if (fileName.equals(file.getFileName())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -64,12 +69,15 @@ public class MediaLibrary {
      * @param file
      * @throws MediaFileException 
      */
-    public void addMovieFile(final File file) throws MediaFileException {
-        MediaFile mediaFile = new MediaFile(this, file);
+    public void addMovieFile(final File... files) throws MediaFileException {
+        Validate.notNull(files);
         Movie movie = new Movie();
-        movie.setMediaFile(mediaFile);
+        for (File file : files) {
+            MediaFile mediaFile = new MediaFile(this, file);
+            movie.addFile(mediaFile);
+        }
 
-        movies.put(mediaFile.getRelativePath(), movie);
+        movies.put(movie.getRelativeFilePath(), movie);
     }
 
     /**
@@ -85,6 +93,29 @@ public class MediaLibrary {
      */
     public Map<String, Movie> getMoviesByFilePath() {
         return Collections.unmodifiableMap(movies);
+    }
+
+    /**
+     * @param string
+     * @return a collection of movies that match the name of the movie - will never return null
+     *      but will return an empty collection if no movies are found.
+     */
+    public Collection<Movie> getMovies(final String movieName) {
+        Collection<Movie> result = new HashSet<Movie>();
+        for (Movie movie : movies.values()) {
+            if (movie.getName().equals(movieName)) {
+                result.add(movie);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Testing method to set the movies map to facilitate easier testing.
+     * @param movies
+     */
+    protected void setMovies(final Map<String, Movie> movies) {
+        this.movies = movies;
     }
 
     public String getName() {

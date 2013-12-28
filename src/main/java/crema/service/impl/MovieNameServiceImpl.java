@@ -29,7 +29,7 @@ public class MovieNameServiceImpl implements MovieNameService {
      * @see crema.service.MovieNameService#guessName(crema.domain.Movie)
      */
     public void guessName(final Movie movie) {
-        String fileName = movie.getMediaFile().getFileNameWithoutExtension();
+        String fileName = movie.getFirstMediaFile().getFileNameWithoutExtension();
         List<String> tokens = tokenizer.tokenize(fileName);
         correctCase(tokens);
         String movieName = assembleTokens(tokens);

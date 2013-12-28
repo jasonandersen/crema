@@ -18,6 +18,8 @@ public class CamelCaseDecoratorTest extends AbstractTokenDecoratorTest {
         p.add(test(in("CamelCaseIsFun"), out("Camel", "Case", "Is", "Fun")));
         p.add(test(in("camelCaseIsFun"), out("camel", "Case", "Is", "Fun")));
         p.add(test(in("MONKEY"), out("MONKEY")));
+        //make sure crap words don't get split on camel case
+        p.add(test(in("DvDrip"), out("DvDrip")));
         return p;
     }
 

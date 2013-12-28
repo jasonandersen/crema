@@ -32,8 +32,8 @@ public class MovieView {
     /**
      * @return path of the movie file relative to the MediaLibrary
      */
-    public String getRelativeFilePath() {
-        return movie.getMediaFile().getRelativePath();
+    public String getFirstFileRelativePath() {
+        return movie.getFirstMediaFile().getRelativePath();
     }
 
     /**

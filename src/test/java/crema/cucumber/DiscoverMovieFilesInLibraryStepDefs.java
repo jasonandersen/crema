@@ -3,9 +3,11 @@ package crema.cucumber;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -121,6 +123,35 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
     public void the_name_of_the_movie_is(final String movieName) throws Throwable {
         Movie movie = mediaLibrary.getMovies().get(0);
         assertEquals(movieName, movie.getName());
+    }
+
+    @Then("^these multi-file movies are added once to the media library:$")
+    public void these_multi_file_movies_are_added_once_to_the_media_library(List<String> movieNames) throws Throwable {
+        for (String movieName : movieNames) {
+            assertEquals(1, numMoviesInLibraryByName(movieName));
+            assertTrue(hasMultipleMediaFiles(movieName));
+        }
+    }
+
+    /**
+     * @param movieName
+     * @return the number of movies in the MediaLibrary that match this movie name
+     */
+    private int numMoviesInLibraryByName(String movieName) {
+        return mediaLibrary.getMovies(movieName).size();
+    }
+
+    /**
+     * @param movieName
+     * @return
+     */
+    private boolean hasMultipleMediaFiles(String movieName) {
+        Collection<Movie> movies = mediaLibrary.getMovies(movieName);
+        if (movies.isEmpty() || movies.size() > 1) {
+            fail("expected only one movie named: " + movieName + ", found: " + movies.size());
+        }
+
+        return false;
     }
 
     /**

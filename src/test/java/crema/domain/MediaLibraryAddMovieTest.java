@@ -46,7 +46,7 @@ public class MediaLibraryAddMovieTest {
 
         Movie movie = library.getMoviesByFilePath().get(relativePath);
         assertNotNull(movie);
-        assertEquals(relativePath, movie.getMediaFile().getRelativePath());
+        assertEquals(relativePath, movie.getFirstMediaFile().getRelativePath());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class MediaLibraryAddMovieTest {
         for (String relativePath : paths) {
             Movie movie = library.getMoviesByFilePath().get(relativePath);
             assertNotNull(movie);
-            assertEquals(relativePath, movie.getMediaFile().getRelativePath());
+            assertEquals(relativePath, movie.getFirstMediaFile().getRelativePath());
         }
     }
 
@@ -90,7 +90,8 @@ public class MediaLibraryAddMovieTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNullFile() throws MediaFileException {
-        library.addMovieFile(null);
+        File[] nullArg = null;
+        library.addMovieFile(nullArg);
     }
 
     @Test(expected = UnsupportedOperationException.class)

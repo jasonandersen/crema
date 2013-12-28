@@ -1,5 +1,9 @@
 package crema.domain;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * A video-based media file.
  * 
@@ -7,9 +11,13 @@ package crema.domain;
  */
 public class Movie {
 
-    private MediaFile mediaFile;
+    private List<MediaFile> mediaFiles;
 
     private String name;
+
+    public Movie() {
+        mediaFiles = new LinkedList<MediaFile>();
+    }
 
     /**
      * @see java.lang.Object#toString()
@@ -27,12 +35,39 @@ public class Movie {
         this.name = name;
     }
 
-    public MediaFile getMediaFile() {
-        return mediaFile;
+    /**
+     * Adds a single media file to this movie.
+     * @param file
+     */
+    public void addFile(final MediaFile file) {
+        mediaFiles.add(file);
     }
 
-    public void setMediaFile(final MediaFile mediaFile) {
-        this.mediaFile = mediaFile;
+    /**
+     * @return an unmodifiable list of media files associated with this movie
+     */
+    public List<MediaFile> getMediaFiles() {
+        return Collections.unmodifiableList(mediaFiles);
+    }
+
+    /**
+     * @return the first media file for this movie
+     * @throws IllegalStateException when there are no media files
+     */
+    public MediaFile getFirstMediaFile() {
+        if (mediaFiles.isEmpty()) {
+            throw new IllegalStateException("mediaFiles cannot be empty");
+        }
+        return mediaFiles.get(0);
+    }
+
+    /**
+     * @return the file path of the _first_ media file for this movie
+     * @throws IllegalStateException when there are no media files
+     */
+    public String getRelativeFilePath() {
+        MediaFile firstFile = getFirstMediaFile();
+        return firstFile.getRelativePath();
     }
 
 }

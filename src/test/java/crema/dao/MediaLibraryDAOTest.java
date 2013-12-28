@@ -77,7 +77,7 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
 
         assertSame(library, savedLibrary);
         assertFalse(savedLibrary.getMoviesByFilePath().isEmpty());
-        assertEquals("movie.mpg", movie.getMediaFile().getRelativePath());
+        assertEquals("movie.mpg", movie.getFirstMediaFile().getRelativePath());
     }
 
     @Test
