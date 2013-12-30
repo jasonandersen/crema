@@ -1,4 +1,4 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import crema.util.text.CommonMovieCrapWords;
 
 /**
  * 

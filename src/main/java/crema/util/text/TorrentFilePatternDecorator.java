@@ -1,4 +1,4 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class TorrentFilePatternDecorator implements TokenDecorator {
      */
 
     /**
-     * @see crema.util.tokenize.TokenDecorator#decorate(java.util.List, java.lang.String)
+     * @see crema.util.text.TokenDecorator#decorate(java.util.List, java.lang.String)
      */
     public void decorate(final List<String> tokens) {
         int firstCrapTokenIndex = findFirstCrapToken(tokens);

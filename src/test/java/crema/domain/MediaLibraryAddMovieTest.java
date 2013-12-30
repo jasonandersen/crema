@@ -42,7 +42,7 @@ public class MediaLibraryAddMovieTest {
     public void testSingleFile() throws IOException, MediaFileException {
         String relativePath = "sub-dir1/sub-dir1a/movie1.avi";
         File testFile = TestUtils.buildFileRelativeToDirectory(baseDirectory, relativePath);
-        library.addMovieFile(testFile);
+        library.addMovie(testFile);
 
         Movie movie = library.getMoviesByFilePath().get(relativePath);
         assertNotNull(movie);
@@ -65,7 +65,7 @@ public class MediaLibraryAddMovieTest {
         for (String relativePath : paths) {
             File testFile = TestUtils.buildFileRelativeToDirectory(baseDirectory, relativePath);
             testFile.deleteOnExit();
-            library.addMovieFile(testFile);
+            library.addMovie(testFile);
         }
         for (String relativePath : paths) {
             Movie movie = library.getMoviesByFilePath().get(relativePath);
@@ -85,20 +85,20 @@ public class MediaLibraryAddMovieTest {
                 TestUtils.buildTestDirectory(getClass()),
                 "sub-dir1/movie.avi");
         invalidFile.deleteOnExit();
-        library.addMovieFile(invalidFile);
+        library.addMovie(invalidFile);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testNullFile() throws MediaFileException {
-        File[] nullArg = null;
-        library.addMovieFile(nullArg);
+        File nullArg = null;
+        library.addMovie(nullArg);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void testDeletingAMovie() throws IOException, MediaFileException {
         String relativePath = "sub-dir1/sub-dir1a/movie1.avi";
         File testFile = TestUtils.buildFileRelativeToDirectory(baseDirectory, relativePath);
-        library.addMovieFile(testFile);
+        library.addMovie(testFile);
 
         for (String key : library.getMoviesByFilePath().keySet()) {
             library.getMoviesByFilePath().remove(key);

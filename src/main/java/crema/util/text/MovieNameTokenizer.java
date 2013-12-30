@@ -1,4 +1,4 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import crema.util.text.TokenDecorator;
 
 /**
  * Base class to extend in order to test individual {@link TokenDecorator} classes.

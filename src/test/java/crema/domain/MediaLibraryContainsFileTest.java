@@ -41,7 +41,7 @@ public class MediaLibraryContainsFileTest {
 
         for (String path : paths) {
             File file = TestUtils.buildFileRelativeToDirectory(baseDirectory, path);
-            library.addMovieFile(file);
+            library.addMovie(file);
             files.add(file);
         }
     }

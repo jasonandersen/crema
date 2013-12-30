@@ -1,4 +1,4 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class CommonMovieCrapWordsDecorator implements TokenDecorator {
             Pattern.compile("^(19|20)\\d\\d$", Pattern.CASE_INSENSITIVE);
 
     /**
-     * @see crema.util.tokenize.TokenDecorator#decorate(java.util.List, java.lang.String)
+     * @see crema.util.text.TokenDecorator#decorate(java.util.List, java.lang.String)
      */
     public void decorate(final List<String> tokens) {
         List<String> tokensToRemove = new LinkedList<String>();

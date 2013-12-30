@@ -1,9 +1,12 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
+
+import crema.util.text.TokenDecorator;
+import crema.util.text.TorrentFilePatternDecorator;
 
 /**
  * Testing the {@link TorrentFilePatternDecorator} class.
@@ -41,7 +44,7 @@ public class TorrentFilePatternDecoratorTest extends AbstractTokenDecoratorTest 
     }
 
     /**
-     * @see crema.util.tokenize.AbstractTokenDecoratorTest#getDecorator()
+     * @see crema.util.text.AbstractTokenDecoratorTest#getDecorator()
      */
     @Override
     protected TokenDecorator getDecorator() {

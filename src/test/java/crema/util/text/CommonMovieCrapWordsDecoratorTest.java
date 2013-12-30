@@ -1,4 +1,4 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,6 +6,9 @@ import java.util.Collection;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import crema.util.text.CommonMovieCrapWordsDecorator;
+import crema.util.text.TokenDecorator;
 
 /**
  * Testing the {@link CommonMovieCrapWorksDecorator} class.
@@ -68,7 +71,7 @@ public class CommonMovieCrapWordsDecoratorTest extends AbstractTokenDecoratorTes
     }
 
     /**
-     * @see crema.util.tokenize.AbstractTokenDecoratorTest#getDecorator()
+     * @see crema.util.text.AbstractTokenDecoratorTest#getDecorator()
      */
     @Override
     protected TokenDecorator getDecorator() {

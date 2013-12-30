@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import crema.domain.Movie;
 import crema.service.MovieNameService;
-import crema.util.tokenize.MovieNameTokenizer;
+import crema.util.text.MovieNameTokenizer;
 
 /**
  * Implementation of {@link MovieNameService}.

@@ -1,4 +1,4 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class WhitespaceCleanerDecorator implements TokenDecorator {
     private static Logger log = LoggerFactory.getLogger(WhitespaceCleanerDecorator.class);
 
     /**
-     * @see crema.util.tokenize.TokenDecorator#decorate(java.util.List, java.lang.String)
+     * @see crema.util.text.TokenDecorator#decorate(java.util.List, java.lang.String)
      */
     public void decorate(final List<String> tokens) {
         log.debug("tokens: {}", tokens);

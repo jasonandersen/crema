@@ -1,4 +1,4 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -12,7 +12,7 @@ import java.util.List;
 public class CamelCaseDecorator implements TokenDecorator {
 
     /**
-     * @see crema.util.tokenize.TokenDecorator#decorate(java.util.List)
+     * @see crema.util.text.TokenDecorator#decorate(java.util.List)
      */
     public void decorate(final List<String> tokens) {
         List<String> newTokens = new LinkedList<String>();

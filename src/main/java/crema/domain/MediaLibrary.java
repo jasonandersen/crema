@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -65,11 +66,22 @@ public class MediaLibrary {
     }
 
     /**
+     * Overloaded method to allow a movie to be added by one file.
+     * @param file
+     * @throws MediaFileException 
+     */
+    public void addMovie(final File file) throws MediaFileException {
+        List<File> fileList = new LinkedList<File>();
+        fileList.add(file);
+        addMovie(fileList);
+    }
+
+    /**
      * Adds a movie file to this library.
      * @param file
      * @throws MediaFileException 
      */
-    public void addMovieFile(final File... files) throws MediaFileException {
+    public void addMovie(final List<File> files) throws MediaFileException {
         Validate.notNull(files);
         Movie movie = new Movie();
         for (File file : files) {

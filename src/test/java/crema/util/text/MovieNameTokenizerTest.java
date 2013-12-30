@@ -1,4 +1,4 @@
-package crema.util.tokenize;
+package crema.util.text;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+
+import crema.util.text.MovieNameTokenizer;
 
 /**
  * Testing specific defects in the {@link MovieNameTokenizer} class.

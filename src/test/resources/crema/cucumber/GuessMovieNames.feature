@@ -17,6 +17,9 @@ Feature:
             |Young Guns.avi         |Young Guns         |
             |young_guns.avi         |Young Guns         |
             |young.guns.avi         |Young Guns         |
+            |YoungGuns-part1.avi    |Young Guns         |
+            |YoungGuns-cd1.avi      |Young Guns         |
+            |YoungGuns-disc1.avi    |Young Guns         |
             |a-beautiful-mind.avi   |A Beautiful Mind   |
             |12_MONKEYS.AVI         |12 Monkeys         |
             |a_beautiful.mind.avi   |A Beautiful Mind   |
