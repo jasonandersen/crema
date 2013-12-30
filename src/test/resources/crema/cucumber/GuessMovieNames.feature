@@ -36,7 +36,7 @@ Feature:
         And the name of the movie is <movieName>
         Examples:
             |fileName                                                       |movieName                                      |
-            |The Simpsons - s16e01 - Treehouse Of Horror XV .lol.avi        |The Simpsons S16e01 Treehouse Of Horror Xv Lol |
+            |The Simpsons - s16e01 - Treehouse Of Horror XV .lol.avi        |The Simpsons S16e01 Treehouse Of Horror XV Lol |
             |2001.a.space.odyssey.MOV                                       |2001 A Space Odyssey                           |
             |Somers.Town.2008.LIMITED.DVDRip.XviD-DMT.avi                   |Somers Town                                    |
             |Half.Nelson.1080p.LiMiTED.DVDRip.XviD-LMG.avi                  |Half Nelson                                    |
@@ -51,4 +51,5 @@ Feature:
             |Mystery.Men.1999.BDRip.576P.X264.AC3-FaNGDiNG0.avi             |Mystery Men                                    |
             |Mystery Men (1999) [HDDVDMux720p.Ita-Eng-Spa][Nautilus-BT].avi |Mystery Men                                    |
             |Snatch.60fps.AC3(Dolby).5.1ch.Blu-ray.PS3-TEAM.avi             |Snatch                                         |
+            |Godfather part II.avi                                          |Godfather Part II                              |
             

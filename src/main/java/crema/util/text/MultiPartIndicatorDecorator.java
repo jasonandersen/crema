@@ -11,13 +11,25 @@ import java.util.regex.Pattern;
  */
 public class MultiPartIndicatorDecorator implements TokenDecorator {
 
+    /**
+     * Indicates a token that represents both the part indicator and number, like so:
+     *      "part01".
+     */
     private static final Pattern PART_INDICATOR_NUMBER = Pattern.compile(
-            "^(" + MultiPartFileDetector.getPartIndicatorRegEx() + ")0{0,1}\\d$", Pattern.CASE_INSENSITIVE);
+            "^(" + MultiPartFileDetector.getPartIndicatorRegEx() + ")0?\\d$", Pattern.CASE_INSENSITIVE);
 
+    /**
+     * Indicates a token that represents just the part indicator, like so:
+     *      "part".
+     */
     private static final Pattern PART_INDICATOR = Pattern.compile(
             "^" + MultiPartFileDetector.getPartIndicatorRegEx() + "$", Pattern.CASE_INSENSITIVE);
 
-    private static final Pattern PART_NUMBER = Pattern.compile("^0{0,1}\\d$");
+    /**
+     * Indicates a token that represents just the part number indicator, like so:
+     *      "01".
+     */
+    private static final Pattern PART_NUMBER = Pattern.compile("^0?\\d$");
 
     /**
      * @see crema.util.text.TokenDecorator#decorate(java.util.List)

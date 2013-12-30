@@ -2,7 +2,6 @@ package crema.service.impl;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,26 +30,9 @@ public class MovieNameServiceImpl implements MovieNameService {
     public void guessName(final Movie movie) {
         String fileName = movie.getFirstMediaFile().getFileNameWithoutExtension();
         List<String> tokens = tokenizer.tokenize(fileName);
-        correctCase(tokens);
         String movieName = assembleTokens(tokens);
         movie.setName(movieName);
         log.debug("file: {} movie: {}", fileName, movieName);
-    }
-
-    /**
-     * Changes the case on all the tokens to capitalized.
-     * @param tokens
-     */
-    private void correctCase(final List<String> tokens) {
-        for (int index = 0; index < tokens.size(); index++) {
-            String token = tokens.get(index);
-            if (tokens.isEmpty()) {
-                continue;
-            }
-            token = token.toLowerCase();
-            token = StringUtils.capitalize(token);
-            tokens.set(index, token);
-        }
     }
 
     /**

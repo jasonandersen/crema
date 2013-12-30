@@ -32,6 +32,7 @@ public class MovieNameTokenizer {
         decorators.add(new TorrentFilePatternDecorator());
         decorators.add(new CommonMovieCrapWordsDecorator());
         decorators.add(new MultiPartIndicatorDecorator());
+        decorators.add(new CaseCorrectionDecorator());
     }
 
     /**
