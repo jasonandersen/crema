@@ -33,7 +33,12 @@ public class MovieView {
      * @return path of the movie file relative to the MediaLibrary
      */
     public String getFirstFileRelativePath() {
-        return movie.getFirstMediaFile().getRelativePath();
+        String path = movie.getFirstMediaFile().getRelativePath();
+        String numFiles = "";
+        if (movie.hasMultipleParts()) {
+            numFiles = String.format(" (1st of %d files)", movie.getMediaFiles().size());
+        }
+        return String.format("%s%s", path, numFiles);
     }
 
     /**

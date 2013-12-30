@@ -70,4 +70,11 @@ public class Movie {
         return firstFile.getRelativePath();
     }
 
+    /**
+     * @return true if this movie is split into multiple files
+     */
+    public boolean hasMultipleParts() {
+        return mediaFiles.size() > 1;
+    }
+
 }

@@ -58,7 +58,12 @@ public class MultiPartFileDetectorTest {
                 { "src/test/file-part1.avi", "src/test/file-part9.avi", true },
 
                 //double digit
-                { "src/test/file-cd01.avi", "src/test/file-cd02.avi", true }
+                { "src/test/file-cd01.avi", "src/test/file-cd02.avi", true },
+
+                //the Back To The Future trilogy defect
+                { "Back to the Future CD2.avi", "Back to the Future Part II CD1.avi", false },
+                { "Back to the Future CD2.avi", "Back to the Future Part III CD1.avi", false },
+                { "Back to the Future Part III CD1.avi", "Back to the Future Part II1 CD2.avi", false }
 
         });
     }

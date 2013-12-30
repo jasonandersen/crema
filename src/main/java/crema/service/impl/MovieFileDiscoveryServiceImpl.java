@@ -137,6 +137,9 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
         if (siblingFile == null) {
             return false;
         }
+        if (!isMovie(siblingFile)) {
+            return false;
+        }
         String originalFilePath = originalFile.getPath();
         String siblingFilePath = siblingFile.getPath();
         return multiPartDetector.isMultiPartFile(originalFilePath, siblingFilePath);

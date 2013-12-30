@@ -85,7 +85,8 @@ public class MultiPartFileDetector {
         }
 
         String originalFileStub = origMatcher.group(STUB_GROUP_IDX);
-        if (!siblingFilePath.startsWith(originalFileStub)) {
+        String siblingFileStub = siblingMatcher.group(STUB_GROUP_IDX);
+        if (!originalFileStub.equals(siblingFileStub)) {
             return false;
         }
 
