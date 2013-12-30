@@ -27,6 +27,9 @@ public class MultiPartIndicatorDecoratorTest extends AbstractTokenDecoratorTest 
         p.add(test(in("Snatch", "disc", "1"), out("Snatch")));
         p.add(test(in("Snatch", "DISC", "1"), out("Snatch")));
 
+        p.add(test(in("Snatch", "part1"), out("Snatch")));
+        p.add(test(in("Snatch", "cd01"), out("Snatch")));
+
         return p;
     }
 

@@ -34,7 +34,7 @@ public class MultiPartFileDetector {
      *  4. The part number: "2"
      */
     private static final Pattern PATTERN = Pattern.compile(
-            "^(.+)\\b(" + getPartIndicatorRegEx() + ")(\\s|-){0,1}(\\d)\\b.+$", Pattern.CASE_INSENSITIVE);
+            "^(.+)\\b(" + getPartIndicatorRegEx() + ")(\\s|-){0,1}0{0,1}(\\d)\\b.+$", Pattern.CASE_INSENSITIVE);
 
     /**
      * Regex group index to find the file name stub.

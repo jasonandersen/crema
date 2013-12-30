@@ -57,6 +57,9 @@ public class MultiPartFileDetectorTest {
                 { "src/test/file-part1.avi", "src/test/file-part7.avi", true },
                 { "src/test/file-part1.avi", "src/test/file-part9.avi", true },
 
+                //double digit
+                { "src/test/file-cd01.avi", "src/test/file-cd02.avi", true }
+
         });
     }
 

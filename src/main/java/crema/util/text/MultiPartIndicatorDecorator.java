@@ -5,18 +5,19 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * Strips out the multi part indicators from the movie name tokens.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 public class MultiPartIndicatorDecorator implements TokenDecorator {
 
     private static final Pattern PART_INDICATOR_NUMBER = Pattern.compile(
-            "^(" + MultiPartFileDetector.getPartIndicatorRegEx() + ")\\d$", Pattern.CASE_INSENSITIVE);
+            "^(" + MultiPartFileDetector.getPartIndicatorRegEx() + ")0{0,1}\\d$", Pattern.CASE_INSENSITIVE);
 
     private static final Pattern PART_INDICATOR = Pattern.compile(
             "^" + MultiPartFileDetector.getPartIndicatorRegEx() + "$", Pattern.CASE_INSENSITIVE);
 
-    private static final Pattern PART_NUMBER = Pattern.compile("^\\d$");
+    private static final Pattern PART_NUMBER = Pattern.compile("^0{0,1}\\d$");
 
     /**
      * @see crema.util.text.TokenDecorator#decorate(java.util.List)
