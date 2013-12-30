@@ -5,9 +5,6 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
-import crema.util.text.CamelCaseDecorator;
-import crema.util.text.TokenDecorator;
-
 /**
  * Testing the {@link CamelCaseDecorator} class.
  * 

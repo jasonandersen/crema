@@ -14,6 +14,15 @@ import org.springframework.stereotype.Component;
 public class MultiPartFileDetector {
 
     /**
+     * Words that indicate a file is part of multiple files.
+     */
+    private static final String[] PART_INDICATORS = {
+            "part",
+            "cd",
+            "disc"
+    };
+
+    /**
      * Regular expression to find multi-part files in the following format:
      *  Tron-(2007)-part1.avi
      *  Tron-(2007)-part2.avi
@@ -25,7 +34,7 @@ public class MultiPartFileDetector {
      *  4. The part number: "2"
      */
     private static final Pattern PATTERN = Pattern.compile(
-            "^(.+)\\b(part|cd|disc)(\\s|-){0,1}(\\d)\\b.+$", Pattern.CASE_INSENSITIVE);
+            "^(.+)\\b(" + getPartIndicatorRegEx() + ")(\\s|-){0,1}(\\d)\\b.+$", Pattern.CASE_INSENSITIVE);
 
     /**
      * Regex group index to find the file name stub.
@@ -36,6 +45,20 @@ public class MultiPartFileDetector {
      * Regex group index to find the part indicator.
      */
     private static final int PART_INDICATOR_GROUP_IDX = 2;
+
+    /**
+     * @return a regex alternation pattern identifying words that indicate a multipart file
+     */
+    public static String getPartIndicatorRegEx() {
+        StringBuilder regex = new StringBuilder();
+        for (int index = 0; index < PART_INDICATORS.length; index++) {
+            regex.append(PART_INDICATORS[index]);
+            if (index < PART_INDICATORS.length - 1) {
+                regex.append("|");
+            }
+        }
+        return regex.toString();
+    }
 
     /**
      * @param originalFilePath

@@ -150,8 +150,8 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
         if (movies.isEmpty() || movies.size() > 1) {
             fail("expected only one movie named: " + movieName + ", found: " + movies.size());
         }
-
-        return false;
+        Movie movie = movies.iterator().next();
+        return movie.getMediaFiles().size() > 1;
     }
 
     /**
