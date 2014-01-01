@@ -12,6 +12,18 @@ import java.util.List;
 public class TokenBoundaryDecorator implements TokenDecorator {
 
     /**
+     * Regular expression to define common word boundaries.
+     */
+    private static final String REGEX_COMMON_BOUNDARIES = "(\\(|\\)|\\[|\\]|\\s|\\.|-|_|\\+|\\|)";
+
+    /**
+     * Regular expression to split tokens on camel case notation.
+     * For what it's worth, I didn't write this regex. I copied it from here:
+     * http://stackoverflow.com/questions/7593969/regex-to-split-camelcase-or-titlecase-advanced
+     */
+    private static final String REGEX_CAMEL_CASE = "(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])";
+
+    /**
      * @see crema.util.text.TokenDecorator#decorate(java.util.List, java.lang.String)
      */
     public void decorate(final List<String> tokens) {
@@ -24,21 +36,21 @@ public class TokenBoundaryDecorator implements TokenDecorator {
     /**
      * Split on common word boundaries like spaces, dashes and underscores.
      * @param tokens
-     * @return
+     * @return a new set of tokens split up
      */
     private List<String> splitOnWordBoundaries(final List<String> tokens) {
         List<String> newTokens = new LinkedList<String>();
         for (String token : tokens) {
-            String[] splitResult = token.split("(\\(|\\)|\\[|\\]|\\s|\\.|-|_|\\+|\\|)");
+            String[] splitResult = token.split(REGEX_COMMON_BOUNDARIES);
             newTokens.addAll(Arrays.asList(splitResult));
         }
         return newTokens;
     }
 
     /**
-     * Split on camel base.
+     * Split on camel case.
      * @param tokens
-     * @return
+     * @return a new set of tokens split up
      */
     private List<String> splitOnCamelCase(final List<String> tokens) {
         List<String> newTokens = new LinkedList<String>();
@@ -49,11 +61,7 @@ public class TokenBoundaryDecorator implements TokenDecorator {
                  */
                 newTokens.add(token);
             } else {
-                /*
-                 * For what it's worth, I didn't write this regex. I copied it from here:
-                 * http://stackoverflow.com/questions/7593969/regex-to-split-camelcase-or-titlecase-advanced
-                 */
-                String[] subTokens = token.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+                String[] subTokens = token.split(REGEX_CAMEL_CASE);
                 newTokens.addAll(Arrays.asList(subTokens));
             }
         }

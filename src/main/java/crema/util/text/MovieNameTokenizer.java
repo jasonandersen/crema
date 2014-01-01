@@ -26,11 +26,23 @@ public class MovieNameTokenizer {
      */
     public MovieNameTokenizer() {
         decorators = new LinkedList<TokenDecorator>();
+        /*
+         * split the file name up into word tokens
+         */
         decorators.add(new TokenBoundaryDecorator());
+        /*
+         * clean up the whitespace in the tokens
+         */
         decorators.add(new WhitespaceCleanerDecorator());
+        /*
+         * clean out the tokens that aren't part of the movie name
+         */
         decorators.add(new TorrentFilePatternDecorator());
         decorators.add(new CommonMovieCrapWordsDecorator());
         decorators.add(new MultiPartIndicatorDecorator());
+        /*
+         * correct the case of the tokens
+         */
         decorators.add(new CaseCorrectionDecorator());
     }
 
