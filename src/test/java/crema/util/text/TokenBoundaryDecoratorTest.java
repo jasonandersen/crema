@@ -7,16 +7,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import crema.util.text.TokenBoundaryDecorator;
-import crema.util.text.TokenDecorator;
-
 /**
  * Tests the {@link TokenBoundaryDecorator} class.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @RunWith(Parameterized.class)
-public class CommonWordBoundaryDecoratorTest extends AbstractTokenDecoratorTest {
+public class TokenBoundaryDecoratorTest extends AbstractTokenDecoratorTest {
 
     @Parameters
     public static Collection<Object[]> buildTestParameters() {
@@ -31,6 +28,14 @@ public class CommonWordBoundaryDecoratorTest extends AbstractTokenDecoratorTest 
         p.add(test(in("in+my+country"), out("in", "my", "country")));
         p.add(test(in("in my-country"), out("in", "my", "country")));
 
+        //camel case
+        p.add(test(in("CamelCaseIsFun"), out("Camel", "Case", "Is", "Fun")));
+        p.add(test(in("camelCaseIsFun"), out("camel", "Case", "Is", "Fun")));
+        p.add(test(in("MONKEY"), out("MONKEY")));
+
+        //make sure crap words don't get split on camel case
+        p.add(test(in("DvDrip"), out("DvDrip")));
+
         return p;
     }
 
@@ -38,7 +43,7 @@ public class CommonWordBoundaryDecoratorTest extends AbstractTokenDecoratorTest 
      * @param inputTokens
      * @param expectedTokens
      */
-    public CommonWordBoundaryDecoratorTest(String[] inputTokens, String[] expectedTokens) {
+    public TokenBoundaryDecoratorTest(String[] inputTokens, String[] expectedTokens) {
         super(inputTokens, expectedTokens);
     }
 

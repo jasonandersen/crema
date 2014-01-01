@@ -12,7 +12,7 @@ public class FileSize {
     /**
      * Unit of measure for file size.
      */
-    public enum Unit {
+    private enum Unit {
         KB(1024, 0, 900000, "%.0f%s"),
         MB(1000 * 1024, 900001, 900000000, "%.0f%s"),
         GB(1000 * 1000 * 1024, 900000001, Long.MAX_VALUE, "%#.1f%s");
@@ -37,28 +37,11 @@ public class FileSize {
         }
 
         /**
-         * @return the number of bytes in a single unit
+         * @param sizeInBytes
+         * @return true if the size in bytes is within the threshold for this unit
          */
-        public long getBytes() {
-            return bytesPerUnit;
-        }
-
         public boolean isWithinThreshold(final long sizeInBytes) {
             return sizeInBytes >= minimumThreshold && sizeInBytes <= maximumThreshold;
-        }
-
-        /**
-         * @return the minimum threshold to use this unit of measure for displaying
-         */
-        public long getMinimumThreshold() {
-            return minimumThreshold;
-        }
-
-        /**
-         * @return the maximum threshold for using this unit of measure for displaying
-         */
-        public long getMaximumThreshold() {
-            return maximumThreshold;
         }
 
         /**
@@ -84,7 +67,7 @@ public class FileSize {
      * Constructor.
      */
     public FileSize(final long fileSize) {
-        Validate.isTrue(fileSize >= 0, "file size cannot be negaitve");
+        Validate.isTrue(fileSize >= 0, "file size cannot be negative");
         this.fileSize = fileSize;
     }
 
