@@ -8,7 +8,7 @@ import org.apache.pivot.collections.List;
 
 import crema.domain.MediaLibrary;
 import crema.domain.Movie;
-import crema.domain.MovieNameComparator;
+import crema.domain.HasNameComparator;
 
 /**
  * A view wrapper around {@link MediaLibrary} objects.
@@ -47,7 +47,7 @@ public class MediaLibraryView {
      */
     public List<MovieView> getMovies() {
         java.util.List<Movie> moviesList = new java.util.LinkedList<Movie>(library.getMovies());
-        Collections.sort(moviesList, new MovieNameComparator());
+        Collections.sort(moviesList, new HasNameComparator());
         LinkedList<MovieView> out = new LinkedList<MovieView>();
         for (Movie movie : moviesList) {
             out.add(new MovieView(movie));

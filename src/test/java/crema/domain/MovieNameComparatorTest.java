@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * Testing the {@link MovieNameComparator} class.
+ * Testing the {@link HasNameComparator} class.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
@@ -16,7 +16,7 @@ public class MovieNameComparatorTest {
 
     private Movie movie2 = null;
 
-    private MovieNameComparator comparator = new MovieNameComparator();
+    private HasNameComparator comparator = new HasNameComparator();
 
     @Test
     public void testBothNull() {

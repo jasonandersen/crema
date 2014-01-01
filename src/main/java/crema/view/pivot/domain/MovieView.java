@@ -2,6 +2,8 @@ package crema.view.pivot.domain;
 
 import org.apache.commons.lang.Validate;
 
+import crema.domain.HasName;
+import crema.domain.MediaLibrary;
 import crema.domain.Movie;
 import crema.util.text.FileSize;
 
@@ -10,7 +12,7 @@ import crema.util.text.FileSize;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class MovieView {
+public class MovieView implements HasName {
 
     private final Movie movie;
 
@@ -40,6 +42,14 @@ public class MovieView {
             numFiles = String.format(" (1st of %d files)", movie.getMediaFiles().size());
         }
         return String.format("%s%s", path, numFiles);
+    }
+
+    /**
+     * @return the name of the library this movie belongs to
+     */
+    public String getMediaLibraryName() {
+        MediaLibrary library = movie.getMediaLibrary();
+        return library.getName();
     }
 
     /**

@@ -58,11 +58,7 @@ public class MainWindow extends Window implements Bindable {
             action.setOwner(this);
             addMediaLibraryButton.setAction(action);
         }
-        if (chooseLibraryListButton != null) {
-            chooseLibraryListButton.setListData(controller.getAllMediaLibraries());
-            chooseLibraryListButton.getListButtonSelectionListeners().add(
-                    new ChooseLibraryListButtonSelectionListener());
-        }
+        moviesTableView.setTableData(getAllMovies());
         if (updateMediaLibraryButton != null) {
             updateMediaLibraryButton.getButtonPressListeners().add(new UpdateMediaLibraryButtonPressListener());
         }
@@ -80,6 +76,13 @@ public class MainWindow extends Window implements Bindable {
      */
     private List<MovieView> getSelectedLibraryMovies() {
         return getSelectedLibrary().getMovies();
+    }
+
+    /**
+     * @return all movies in all libraries
+     */
+    private List<MovieView> getAllMovies() {
+        return controller.getAllMovies();
     }
 
     /**

@@ -1,15 +1,20 @@
 package crema.view.pivot.controller;
 
+import java.util.Collections;
+
 import org.apache.commons.lang.Validate;
 import org.apache.pivot.collections.LinkedList;
 import org.apache.pivot.collections.List;
+import org.apache.pivot.collections.adapter.ListAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import crema.domain.HasNameComparator;
 import crema.domain.MediaLibrary;
 import crema.exception.DuplicateMediaLibraryException;
 import crema.service.MediaLibraryService;
 import crema.view.pivot.domain.MediaLibraryView;
+import crema.view.pivot.domain.MovieView;
 
 /**
  * PUT COMMENTS HERE WHEN I FIGURE OUT WHAT THIS THING IS GOING TO BE!
@@ -35,14 +40,17 @@ public class MainController {
     }
 
     /**
-     * @return lazy-loaded collection of media libraries
+     * @return a collection of all the movies
      */
-    private List<MediaLibraryView> loadMediaLibraries() {
-        List<MediaLibraryView> libraries = new LinkedList<MediaLibraryView>();
-        for (MediaLibrary library : mediaLibraryService.getAllMediaLibraries()) {
-            libraries.add(new MediaLibraryView(library));
+    public List<MovieView> getAllMovies() {
+        java.util.List<MovieView> movies = new java.util.LinkedList<MovieView>();
+        for (MediaLibraryView library : getAllMediaLibraries()) {
+            for (MovieView movie : library.getMovies()) {
+                movies.add(movie);
+            }
         }
-        return libraries;
+        Collections.sort(movies, new HasNameComparator());
+        return new ListAdapter<MovieView>(movies);
     }
 
     /**
@@ -55,4 +63,16 @@ public class MainController {
         MediaLibrary library = libraryView.getMediaLibrary();
         mediaLibraryService.updateMediaLibrary(library);
     }
+
+    /**
+     * @return lazy-loaded collection of media libraries
+     */
+    private List<MediaLibraryView> loadMediaLibraries() {
+        List<MediaLibraryView> libraries = new LinkedList<MediaLibraryView>();
+        for (MediaLibrary library : mediaLibraryService.getAllMediaLibraries()) {
+            libraries.add(new MediaLibraryView(library));
+        }
+        return libraries;
+    }
+
 }

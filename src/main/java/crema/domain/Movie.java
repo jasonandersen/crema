@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class Movie {
+public class Movie implements HasName {
 
     private List<MediaFile> mediaFiles;
 
@@ -41,6 +41,13 @@ public class Movie {
      */
     public void addFile(final MediaFile file) {
         mediaFiles.add(file);
+    }
+
+    /**
+     * @return parent media library this movie belongs to
+     */
+    public MediaLibrary getMediaLibrary() {
+        return getFirstMediaFile().getLibrary();
     }
 
     /**
