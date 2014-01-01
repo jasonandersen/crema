@@ -3,6 +3,7 @@ package crema.view.pivot.domain;
 import org.apache.commons.lang.Validate;
 
 import crema.domain.Movie;
+import crema.util.text.FileSize;
 
 /**
  * A view wrapper around a {@link Movie} object.
@@ -47,5 +48,12 @@ public class MovieView {
     @Override
     public String toString() {
         return movie.getName();
+    }
+
+    /**
+     * @return the size of all media files for this movie in a displayable format
+     */
+    public String getFileSize() {
+        return new FileSize(movie.getTotalSize()).toString();
     }
 }

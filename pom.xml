@@ -18,6 +18,11 @@
             <artifactId>spring-test</artifactId>
             <version>3.2.5.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>3.2.5.RELEASE</version>
+        </dependency>
 
 		<!-- Cucumber -->
         <dependency>
@@ -87,6 +92,13 @@
             <groupId>com.db4o</groupId>
             <artifactId>db4o-core-java5</artifactId>
             <version>8.1-SNAPSHOT</version>
+        </dependency>
+        
+        <!-- Jackson JSON mapping -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.9</version>
         </dependency>
         
         <!-- logging -->

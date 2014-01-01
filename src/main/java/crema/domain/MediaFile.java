@@ -19,6 +19,8 @@ public class MediaFile {
 
     private String relativePath;
 
+    private long size;
+
     private MediaLibrary library;
 
     /**
@@ -30,8 +32,11 @@ public class MediaFile {
     public MediaFile(final MediaLibrary mediaLibrary, final File file) throws MediaFileException {
         Validate.notNull(mediaLibrary, "Media library cannot be null.");
         Validate.notNull(file, "File cannot be null.");
+        Validate.isTrue(file.exists(), "File must exist.");
+        Validate.isTrue(file.canRead(), "File must be readable.");
         library = mediaLibrary;
         relativePath = parseRelativePath(library.getBaseDirectory(), file);
+        size = file.length();
     }
 
     /**
@@ -112,6 +117,13 @@ public class MediaFile {
 
     public void setRelativePath(final String relativePath) {
         this.relativePath = relativePath;
+    }
+
+    /**
+     * @return the size of the media file in bytes
+     */
+    public long getSize() {
+        return size;
     }
 
 }

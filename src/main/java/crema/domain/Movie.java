@@ -77,4 +77,15 @@ public class Movie {
         return mediaFiles.size() > 1;
     }
 
+    /**
+     * @return the total size in bytes of all the media files this movie is comprised of
+     */
+    public long getTotalSize() {
+        long size = 0;
+        for (MediaFile file : mediaFiles) {
+            size += file.getSize();
+        }
+        return size;
+    }
+
 }

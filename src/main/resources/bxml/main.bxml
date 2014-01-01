@@ -21,8 +21,9 @@
                 <ScrollPane horizontalScrollBarPolicy="fill" preferredHeight="1000">
                     <TableView bxml:id="moviesTableView">
                         <columns>
-                            <TableView.Column name="name" width="1*" headerData="Movie Name" />
-                            <TableView.Column name="firstFileRelativePath" width="4*" headerData="Relative File Path" />
+                            <TableView.Column name="name" width="4*" headerData="Movie Name" />
+                            <TableView.Column name="fileSize" width="1*" headerData="File Size" />
+                            <TableView.Column name="firstFileRelativePath" width="16*" headerData="Relative File Path" />
                         </columns>
                     </TableView>
                     <columnHeader>
