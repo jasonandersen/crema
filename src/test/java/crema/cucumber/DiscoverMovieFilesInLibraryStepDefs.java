@@ -133,6 +133,24 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
         }
     }
 
+    @Then("^the year of the movie is \"([^\"]*)\"$")
+    public void the_year_of_the_movie_is(String year) throws Throwable {
+        Movie movie = mediaLibrary.getMovies().get(0);
+        assertEquals(year, movie.getReleaseYear());
+    }
+
+    @Then("^the resolution of the movie is \"([^\"]*)\"$")
+    public void the_resolution_of_the_movie_is(String resolution) throws Throwable {
+        Movie movie = mediaLibrary.getMovies().get(0);
+        assertEquals(resolution, movie.getResolution());
+    }
+
+    @Then("^the source of the movie is \"([^\"]*)\"$")
+    public void the_source_of_the_movie_is(String source) throws Throwable {
+        Movie movie = mediaLibrary.getMovies().get(0);
+        assertEquals(source, movie.getSource());
+    }
+
     /**
      * @param movieName
      * @return the number of movies in the MediaLibrary that match this movie name

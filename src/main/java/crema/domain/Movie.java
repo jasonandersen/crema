@@ -115,4 +115,27 @@ public class Movie implements HasName {
         return size;
     }
 
+    /**
+     * @return the year this movie was released - will never return null but can return an
+     *      empty string if no release year has been set for this movie
+     */
+    public String getReleaseYear() {
+        return "";
+    }
+
+    /**
+     * @return the resolution of this movie file - will never return null but can return an
+     *      empty string if no resolution has been set for this movie
+     */
+    public String getResolution() {
+        return "";
+    }
+
+    /**
+     * @return the source of this movie file - will never return null but can return an
+     *      empty string if no resolution has been set for this movie
+     */
+    public String getSource() {
+        return "";
+    }
 }
