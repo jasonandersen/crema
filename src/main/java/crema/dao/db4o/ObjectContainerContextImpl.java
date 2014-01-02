@@ -17,6 +17,7 @@ import com.db4o.constraints.UniqueFieldValueConstraint;
 import com.db4o.query.Predicate;
 
 import crema.domain.MediaLibrary;
+import crema.domain.Movie;
 
 /**
  * Manages the db4o {@link ObjectContainer} life cycle.
@@ -103,9 +104,17 @@ public class ObjectContainerContextImpl implements ObjectContainerContext {
     private EmbeddedConfiguration configureContainer() {
         log.info("configure db4o");
         EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
+
         //MediaLibrary indexing
+        log.debug("indexing MediaLibrary objects");
         config.common().objectClass(MediaLibrary.class).objectField(MediaLibrary.FIELD_NAME).indexed(true);
         config.common().add(new UniqueFieldValueConstraint(MediaLibrary.class, MediaLibrary.FIELD_NAME));
+
+        //Movie indexing
+        //TODO - should this be done automatically by db4o on UUIDs?
+        log.debug("indexing Movie objects");
+        config.common().objectClass(Movie.class).objectField(Movie.FIELD_ID).indexed(true);
+        config.common().add(new UniqueFieldValueConstraint(Movie.class, Movie.FIELD_ID));
 
         return config;
     }

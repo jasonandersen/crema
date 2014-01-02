@@ -3,6 +3,7 @@ package crema.domain;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * A video-based media file.
@@ -11,11 +12,19 @@ import java.util.List;
  */
 public class Movie implements HasName {
 
+    public static final String FIELD_ID = "id";
+
     private List<MediaFile> mediaFiles;
+
+    private UUID id;
 
     private String name;
 
+    /**
+     * Constructor.
+     */
     public Movie() {
+        id = UUID.randomUUID();
         mediaFiles = new LinkedList<MediaFile>();
     }
 
@@ -24,7 +33,7 @@ public class Movie implements HasName {
      */
     @Override
     public String toString() {
-        return name;
+        return String.format("%s [%s]", name, id);
     }
 
     public String getName() {
@@ -33,6 +42,17 @@ public class Movie implements HasName {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    /**
+     * @return unique identifier for this movie object
+     */
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(final UUID id) {
+        this.id = id;
     }
 
     /**
