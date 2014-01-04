@@ -1,5 +1,6 @@
 package crema.service;
 
+import crema.domain.MediaLibraryNewMovieListener;
 import crema.domain.Movie;
 
 /**
@@ -7,7 +8,7 @@ import crema.domain.Movie;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public interface MovieNameService {
+public interface MovieNameService extends MediaLibraryNewMovieListener {
 
     /**
      * Will make a best guess on the name of a movie based on the name

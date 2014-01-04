@@ -63,12 +63,15 @@ public class FileSize {
 
     private final long fileSize;
 
+    private final Unit unit;
+
     /**
      * Constructor.
      */
     public FileSize(final long fileSize) {
         Validate.isTrue(fileSize >= 0, "file size cannot be negative");
         this.fileSize = fileSize;
+        unit = getUnit();
     }
 
     /**
@@ -83,7 +86,6 @@ public class FileSize {
      */
     @Override
     public String toString() {
-        Unit unit = getUnit();
         return String.format(unit.getFormat(), unit.getNumUnits(fileSize), unit);
     }
 
@@ -91,9 +93,9 @@ public class FileSize {
      * @return the appropriate unit of measure for this file size
      */
     private Unit getUnit() {
-        for (Unit unit : Unit.values()) {
-            if (unit.isWithinThreshold(fileSize)) {
-                return unit;
+        for (Unit fileSizeUnit : Unit.values()) {
+            if (fileSizeUnit.isWithinThreshold(fileSize)) {
+                return fileSizeUnit;
             }
         }
         throw new IllegalStateException("Unit of measure not found for " + fileSize);

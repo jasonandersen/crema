@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.Validate;
 
@@ -25,6 +26,8 @@ public class MediaLibrary {
 
     public static final String FIELD_BASE_DIR = "baseDirectory";
 
+    private transient Set<MediaLibraryNewMovieListener> newMovieListeners;
+
     private File baseDirectory;
 
     private String name;
@@ -40,6 +43,7 @@ public class MediaLibrary {
      */
     public MediaLibrary() {
         movies = new HashMap<String, Movie>();
+        newMovieListeners = new HashSet<MediaLibraryNewMovieListener>();
     }
 
     /**
@@ -90,6 +94,7 @@ public class MediaLibrary {
         }
 
         movies.put(movie.getRelativeFilePath(), movie);
+        notifyListenersNewMovie(movie);
     }
 
     /**
@@ -123,11 +128,29 @@ public class MediaLibrary {
     }
 
     /**
+     * Registers a new listener to this media library.
+     * @param listener
+     */
+    public void addNewMovieListener(final MediaLibraryNewMovieListener listener) {
+        newMovieListeners.add(listener);
+    }
+
+    /**
      * Testing method to set the movies map to facilitate easier testing.
      * @param movies
      */
     protected void setMovies(final Map<String, Movie> movies) {
         this.movies = movies;
+    }
+
+    /**
+     * Notifies listeners that a new movie has been added.
+     * @param movie
+     */
+    private void notifyListenersNewMovie(final Movie movie) {
+        for (MediaLibraryNewMovieListener listener : newMovieListeners) {
+            listener.movieAdded(movie);
+        }
     }
 
     public String getName() {

@@ -1,6 +1,5 @@
 package crema.util.text;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,12 +18,13 @@ public class MovieNameTokenizer {
 
     private static Logger log = LoggerFactory.getLogger(MovieNameTokenizer.class);
 
-    private final List<TokenDecorator> decorators;
+    private final Tokenizer tokenizer;
 
     /**
      * Constructor.
      */
     public MovieNameTokenizer() {
+        List<TokenDecorator> decorators = new LinkedList<TokenDecorator>();
         decorators = new LinkedList<TokenDecorator>();
         /*
          * split the file name up into word tokens
@@ -44,6 +44,8 @@ public class MovieNameTokenizer {
          * correct the case of the tokens
          */
         decorators.add(new CaseCorrectionDecorator());
+
+        tokenizer = new Tokenizer(decorators);
     }
 
     /**
@@ -51,13 +53,8 @@ public class MovieNameTokenizer {
      * @return
      */
     public List<String> tokenize(final String fileName) {
-        List<String> tokens = new ArrayList<String>();
-        tokens.add(fileName);
-        for (TokenDecorator decorator : decorators) {
-            decorator.decorate(tokens);
-        }
-        log.debug("file name: {} tokens: {}", fileName, tokens);
-        return tokens;
+        log.debug("tokenizing {}", fileName);
+        return tokenizer.tokenize(fileName);
     }
 
 }

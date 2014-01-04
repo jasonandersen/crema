@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import crema.domain.MediaLibrary;
-import crema.domain.Movie;
 import crema.exception.MediaFileException;
 import crema.service.MovieFileDiscoveryService;
 import crema.service.MovieNameService;
 import crema.util.PathUtils;
+import crema.util.text.FileNameMovieAttributesProvider;
 import crema.util.text.MultiPartFileDetector;
 
 /**
@@ -49,6 +49,9 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
     @Autowired
     private MultiPartFileDetector multiPartDetector;
 
+    @Autowired
+    private FileNameMovieAttributesProvider fileNameDetailsProvider;
+
     /**
      * Constructor.
      */
@@ -63,18 +66,9 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
     public void discoverMovies(final MediaLibrary library) throws MediaFileException {
         Validate.notNull(library);
         Validate.notNull(library.getBaseDirectory());
+        library.addNewMovieListener(movieNameService);
+        library.addNewMovieListener(fileNameDetailsProvider);
         discover(library, library.getBaseDirectory());
-        injectMovieNames(library);
-    }
-
-    /**
-     * Injects names of the movies into the library.
-     * @param library
-     */
-    private void injectMovieNames(final MediaLibrary library) {
-        for (Movie movie : library.getMovies()) {
-            movieNameService.guessName(movie);
-        }
     }
 
     /**

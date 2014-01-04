@@ -46,6 +46,8 @@ public class CommonMovieCrapWords {
             "\\[.*\\]" /* anything surrounded in brackets is suspect */
     };
 
+    //TODO refactor to use ReleaseYearMatcher, RecordingSource and DisplayResolution
+
     private static final Collection<Pattern> PATTERNS;
 
     /**

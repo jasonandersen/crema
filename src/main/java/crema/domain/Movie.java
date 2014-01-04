@@ -20,12 +20,15 @@ public class Movie implements HasName {
 
     private String name;
 
+    private final Attributes attributes;
+
     /**
      * Constructor.
      */
     public Movie() {
         id = UUID.randomUUID();
         mediaFiles = new LinkedList<MediaFile>();
+        attributes = new Attributes();
     }
 
     /**
@@ -137,5 +140,21 @@ public class Movie implements HasName {
      */
     public String getSource() {
         return "";
+    }
+
+    /**
+     * @param type
+     * @return an attribute of the specified type, will return null if no attributes exist of that type
+     */
+    public Attribute getAttribute(final AttributeType type) {
+        return attributes.getAttribute(type);
+    }
+
+    /**
+     * Adds a single attribute to this movie.
+     * @param attribute
+     */
+    public void addAttribute(final Attribute attribute) {
+        attributes.addAttribute(attribute);
     }
 }

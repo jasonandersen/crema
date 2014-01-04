@@ -25,6 +25,13 @@ public class MovieNameServiceImpl implements MovieNameService {
     private MovieNameTokenizer tokenizer;
 
     /**
+     * @see crema.domain.MediaLibraryNewMovieListener#movieAdded(crema.domain.Movie)
+     */
+    public void movieAdded(final Movie movie) {
+        guessName(movie);
+    }
+
+    /**
      * @see crema.service.MovieNameService#guessName(crema.domain.Movie)
      */
     public void guessName(final Movie movie) {
