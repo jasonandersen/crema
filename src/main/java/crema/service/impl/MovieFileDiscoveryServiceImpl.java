@@ -50,7 +50,7 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
     private MultiPartFileDetector multiPartDetector;
 
     @Autowired
-    private FileNameMovieAttributesProvider fileNameDetailsProvider;
+    private FileNameMovieAttributesProvider fileNameAttributesProvider;
 
     /**
      * Constructor.
@@ -67,7 +67,7 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
         Validate.notNull(library);
         Validate.notNull(library.getBaseDirectory());
         library.addNewMovieListener(movieNameService);
-        library.addNewMovieListener(fileNameDetailsProvider);
+        library.addNewMovieListener(fileNameAttributesProvider);
         discover(library, library.getBaseDirectory());
     }
 

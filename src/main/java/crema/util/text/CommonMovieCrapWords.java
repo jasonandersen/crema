@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import crema.domain.DisplayResolution;
 import crema.domain.RecordingSource;
-import crema.util.BeanContext;
 
 /**
  * List of crap words that often appear in movie file names that aren't
@@ -45,7 +44,7 @@ public class CommonMovieCrapWords {
             String regex = String.format("^%s$", crapPattern);
             PATTERNS.add(Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
         }
-        releaseYearMatcher = BeanContext.getBean(ReleaseYearMatcher.class);
+        releaseYearMatcher = new ReleaseYearMatcher();
     }
 
     /**
