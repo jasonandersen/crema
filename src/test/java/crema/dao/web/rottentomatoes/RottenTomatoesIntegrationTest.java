@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import crema.test.AbstractIntegrationTest;
 
 /**
- * Testing the {@link RottenTomatoesMovieAttributeProvider} class.
+ * Runs live integration tests against the Rotten Tomatoes API web service.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
