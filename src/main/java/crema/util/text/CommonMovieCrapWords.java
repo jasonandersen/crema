@@ -77,7 +77,7 @@ public class CommonMovieCrapWords {
 
     /**
      * @param token
-     * @return
+     * @return true if this token indicates a movie release year
      */
     private static boolean isReleaseYear(final String token) {
         return releaseYearMatcher.matches(token) != null;
