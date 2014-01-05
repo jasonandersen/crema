@@ -4,11 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Strips out the multi part indicators from the movie name tokens.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
+@Component
 public class MultiPartIndicatorDecorator implements TokenDecorator {
 
     /**

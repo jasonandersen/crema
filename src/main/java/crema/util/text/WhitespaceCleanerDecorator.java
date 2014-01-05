@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * Cleans up any whitespace within tokens, trims tokens and deletes any whitespace only or 
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
+@Component
 public class WhitespaceCleanerDecorator implements TokenDecorator {
 
     private static Logger log = LoggerFactory.getLogger(WhitespaceCleanerDecorator.class);

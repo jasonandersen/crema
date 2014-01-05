@@ -1,4 +1,4 @@
-package crema.util.text;
+package crema.service.impl;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +15,11 @@ import crema.domain.MediaLibraryNewMovieListener;
 import crema.domain.Movie;
 import crema.domain.RecordingSource;
 import crema.service.MovieAttributesProvider;
+import crema.util.text.ReleaseYearMatcher;
+import crema.util.text.TokenBoundaryDecorator;
+import crema.util.text.TokenDecorator;
+import crema.util.text.Tokenizer;
+import crema.util.text.WhitespaceCleanerDecorator;
 
 /**
  * Provides attributes about a movie based on the name of the files.
@@ -32,10 +37,13 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
     /**
      * Constructor.
      */
-    public FileNameMovieAttributesProvider() {
+    @Autowired
+    public FileNameMovieAttributesProvider(
+            final TokenBoundaryDecorator tokenBoundaryDecorator,
+            final WhitespaceCleanerDecorator whitespaceCleanerDecorator) {
         List<TokenDecorator> decorators = new LinkedList<TokenDecorator>();
-        decorators.add(new TokenBoundaryDecorator());
-        decorators.add(new WhitespaceCleanerDecorator());
+        decorators.add(tokenBoundaryDecorator);
+        decorators.add(whitespaceCleanerDecorator);
         tokenizer = new Tokenizer(decorators);
     }
 
@@ -55,12 +63,12 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
         List<String> tokens = tokenizer.tokenize(fileName);
         /*
          * Don't evaluate the first token for attributes since that token is presumed to be part of the
-         * file name, not an attribute.
+         * movie name, not an attribute.
          */
         tokens.remove(0);
-        seekRecordingSourceTokens(movie, tokens);
-        seekReleaseYearTokens(movie, tokens);
-        seekDisplayResolution(movie, tokens);
+        seekRecordingSourceAttribute(movie, tokens);
+        seekReleaseYearAttribute(movie, tokens);
+        seekDisplayResolutionAttribute(movie, tokens);
     }
 
     /**
@@ -68,7 +76,7 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
      * @param movie
      * @param tokens
      */
-    private void seekDisplayResolution(final Movie movie, final List<String> tokens) {
+    private void seekDisplayResolutionAttribute(final Movie movie, final List<String> tokens) {
         for (String token : tokens) {
             for (DisplayResolution resolution : DisplayResolution.values()) {
                 if (resolution.matches(token)) {
@@ -84,7 +92,7 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
      * @param movie
      * @param tokens
      */
-    private void seekReleaseYearTokens(final Movie movie, final List<String> tokens) {
+    private void seekReleaseYearAttribute(final Movie movie, final List<String> tokens) {
         for (String token : tokens) {
             String yearToken = releaseYearMatcher.matches(token);
             if (yearToken != null) {
@@ -99,7 +107,7 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
      * @param movie
      * @param tokens
      */
-    private void seekRecordingSourceTokens(final Movie movie, final List<String> tokens) {
+    private void seekRecordingSourceAttribute(final Movie movie, final List<String> tokens) {
         for (String token : tokens) {
             for (RecordingSource source : RecordingSource.values()) {
                 if (source.matches(token)) {

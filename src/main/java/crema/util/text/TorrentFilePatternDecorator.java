@@ -2,6 +2,9 @@ package crema.util.text;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /**
  * Tries to take movie names typically found from torrent files and reduce them down
  * to something legible. For example: <p/>
@@ -16,22 +19,19 @@ import java.util.List;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
+@Component
 public class TorrentFilePatternDecorator implements TokenDecorator {
 
-    /*
-     * Some examples:
-     * 
-     * Somers.Town.2008.LIMITED.DVDRip.XviD-DMT
-     * Half.Nelson.LiMiTED.DVDRip.XviD-LMG
-     * I'm.Not.There.[2007].DvDrip[Eng]-aXXo
-     * Last Chance Harvey[2008]DvDrip[Eng]-FXG
-     * The.Dark.Knight.Returns.2013.iNTERNAL.BDRi
-     * Snatch.2000.1080p.AC3(Dolby).5.1ch.Blu-ray.PS3-TEAM
-     * Snatch (2000) - IPOD CLASSIC by empetrojki
-     * Mystery.Men.1999.BDRip.576P.X264.AC3-FaNGDiNG0
-     * Mystery Men (1999) [HDDVDMux720p.Ita-Eng-Spa][Nautilus-BT]
-     * Snatch (2000) 720p BrRip x264 - DagarX
+    private final CommonMovieCrapWordsMatcher crapWordsMatcher;
+
+    /**
+     * Constructor.
+     * @param crapWordsMatcher
      */
+    @Autowired
+    public TorrentFilePatternDecorator(final CommonMovieCrapWordsMatcher crapWordsMatcher) {
+        this.crapWordsMatcher = crapWordsMatcher;
+    }
 
     /**
      * @see crema.util.text.TokenDecorator#decorate(java.util.List, java.lang.String)
@@ -62,7 +62,7 @@ public class TorrentFilePatternDecorator implements TokenDecorator {
         int index;
         for (index = 0; index < tokens.size(); index++) {
             String token = tokens.get(index);
-            if (CommonMovieCrapWords.isCrapWord(token)) {
+            if (crapWordsMatcher.isCrapWord(token)) {
                 return index;
             }
         }

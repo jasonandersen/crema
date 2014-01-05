@@ -52,6 +52,6 @@ public class TokenBoundaryDecoratorTest extends AbstractTokenDecoratorTest {
      */
     @Override
     protected TokenDecorator getDecorator() {
-        return new TokenBoundaryDecorator();
+        return new TokenBoundaryDecorator(new CommonMovieCrapWordsMatcher());
     }
 }

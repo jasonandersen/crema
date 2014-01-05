@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
 
 /**
  * Capitalizes case on tokens.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
+@Component
 public class CaseCorrectionDecorator implements TokenDecorator {
 
     private static final Pattern ROMAN_NUMERAL = Pattern.compile("^(i|v|x){1,4}$", Pattern.CASE_INSENSITIVE);

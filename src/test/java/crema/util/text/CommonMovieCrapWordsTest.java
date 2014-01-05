@@ -9,8 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-
-import crema.util.text.CommonMovieCrapWords;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -49,6 +48,9 @@ public class CommonMovieCrapWordsTest {
 
     private boolean expectedResult;
 
+    @Autowired
+    private CommonMovieCrapWordsMatcher crapWordsMatcher;
+
     /**
      * Constructor.
      * @param word
@@ -57,11 +59,12 @@ public class CommonMovieCrapWordsTest {
     public CommonMovieCrapWordsTest(String word, boolean expectedResult) {
         this.word = word;
         this.expectedResult = expectedResult;
+        this.crapWordsMatcher = new CommonMovieCrapWordsMatcher();
     }
 
     @Test
     public void testIsCrapWord() {
-        boolean result = CommonMovieCrapWords.isCrapWord(word);
+        boolean result = crapWordsMatcher.isCrapWord(word);
         assertEquals(expectedResult, result);
     }
 }

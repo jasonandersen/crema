@@ -7,9 +7,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import crema.util.text.CommonMovieCrapWordsDecorator;
-import crema.util.text.TokenDecorator;
-
 /**
  * Testing the {@link CommonMovieCrapWorksDecorator} class.
  * 
@@ -75,7 +72,7 @@ public class CommonMovieCrapWordsDecoratorTest extends AbstractTokenDecoratorTes
      */
     @Override
     protected TokenDecorator getDecorator() {
-        return new CommonMovieCrapWordsDecorator();
+        return new CommonMovieCrapWordsDecorator(new CommonMovieCrapWordsMatcher());
     }
 
 }

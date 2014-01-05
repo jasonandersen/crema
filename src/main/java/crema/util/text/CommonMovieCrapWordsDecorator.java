@@ -4,15 +4,30 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /**
  * Cleans out any common terms found in movie file names that aren't part of the title.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
+@Component
 public class CommonMovieCrapWordsDecorator implements TokenDecorator {
 
     private static final Pattern UNBOUNDED_YEAR_PATTERN =
             Pattern.compile("^(19|20)\\d\\d$", Pattern.CASE_INSENSITIVE);
+
+    private CommonMovieCrapWordsMatcher crapWordsMatcher;
+
+    /**
+     * Constructor.
+     * @param crapWordsMatcher
+     */
+    @Autowired
+    public CommonMovieCrapWordsDecorator(final CommonMovieCrapWordsMatcher crapWordsMatcher) {
+        this.crapWordsMatcher = crapWordsMatcher;
+    }
 
     /**
      * @see crema.util.text.TokenDecorator#decorate(java.util.List, java.lang.String)
@@ -41,7 +56,7 @@ public class CommonMovieCrapWordsDecorator implements TokenDecorator {
         if (isUnboundedYearAsFirstToken(token, index)) {
             return false;
         }
-        if (CommonMovieCrapWords.isCrapWord(token)) {
+        if (crapWordsMatcher.isCrapWord(token)) {
             return true;
         }
         if (isUnboundedYear(token, index)) {

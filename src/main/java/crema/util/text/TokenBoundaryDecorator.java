@@ -4,11 +4,15 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /**
  * Uses common word separators to define token boundaries within a string.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
+@Component
 public class TokenBoundaryDecorator implements TokenDecorator {
 
     /**
@@ -22,6 +26,16 @@ public class TokenBoundaryDecorator implements TokenDecorator {
      * http://stackoverflow.com/questions/7593969/regex-to-split-camelcase-or-titlecase-advanced
      */
     private static final String REGEX_CAMEL_CASE = "(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])";
+
+    private CommonMovieCrapWordsMatcher crapWordsMatcher;
+
+    /**
+     * @param commonMovieCrapWordsMatcher
+     */
+    @Autowired
+    public TokenBoundaryDecorator(final CommonMovieCrapWordsMatcher crapWordsMatcher) {
+        this.crapWordsMatcher = crapWordsMatcher;
+    }
 
     /**
      * @see crema.util.text.TokenDecorator#decorate(java.util.List, java.lang.String)
@@ -55,7 +69,7 @@ public class TokenBoundaryDecorator implements TokenDecorator {
     private List<String> splitOnCamelCase(final List<String> tokens) {
         List<String> newTokens = new LinkedList<String>();
         for (String token : tokens) {
-            if (CommonMovieCrapWords.isCrapWord(token)) {
+            if (crapWordsMatcher.isCrapWord(token)) {
                 /*
                  * If the token is a crap word, just add it as is and we'll let other decorators clean it up
                  */

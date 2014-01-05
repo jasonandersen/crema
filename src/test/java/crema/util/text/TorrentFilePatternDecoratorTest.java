@@ -5,9 +5,6 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
-import crema.util.text.TokenDecorator;
-import crema.util.text.TorrentFilePatternDecorator;
-
 /**
  * Testing the {@link TorrentFilePatternDecorator} class.
  * 
@@ -48,7 +45,7 @@ public class TorrentFilePatternDecoratorTest extends AbstractTokenDecoratorTest 
      */
     @Override
     protected TokenDecorator getDecorator() {
-        return new TorrentFilePatternDecorator();
+        return new TorrentFilePatternDecorator(new CommonMovieCrapWordsMatcher());
     }
 
 }

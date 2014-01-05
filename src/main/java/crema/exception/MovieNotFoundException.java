@@ -10,7 +10,7 @@ public class MovieNotFoundException extends CremaException {
     /**
      * @param message
      */
-    public MovieNotFoundException(String message) {
+    public MovieNotFoundException(final String message) {
         super(message);
     }
 

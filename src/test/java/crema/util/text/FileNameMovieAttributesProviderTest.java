@@ -18,6 +18,7 @@ import crema.domain.AttributeType;
 import crema.domain.MediaLibrary;
 import crema.domain.Movie;
 import crema.exception.MediaFileException;
+import crema.service.impl.FileNameMovieAttributesProvider;
 import crema.test.TestUtils;
 
 /**
@@ -83,7 +84,9 @@ public class FileNameMovieAttributesProviderTest {
 
     @Before
     public void setup() {
-        detailsProvider = new FileNameMovieAttributesProvider();
+        TokenBoundaryDecorator tokenBoundaryDecorator = new TokenBoundaryDecorator(new CommonMovieCrapWordsMatcher());
+        detailsProvider = new FileNameMovieAttributesProvider(tokenBoundaryDecorator,
+                new WhitespaceCleanerDecorator());
         detailsProvider.setReleaseYearMatcher(new ReleaseYearMatcher());
     }
 

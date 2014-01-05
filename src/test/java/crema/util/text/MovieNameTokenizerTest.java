@@ -5,9 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
-
-import crema.util.text.MovieNameTokenizer;
 
 /**
  * Testing specific defects in the {@link MovieNameTokenizer} class.
@@ -16,9 +15,34 @@ import crema.util.text.MovieNameTokenizer;
  */
 public class MovieNameTokenizerTest {
 
-    private MovieNameTokenizer tokenizer = new MovieNameTokenizer();
+    private MovieNameTokenizer tokenizer;
 
     private List<String> tokens;
+
+    /*
+            final TokenBoundaryDecorator tokenBoundaryDecorator,
+            final WhitespaceCleanerDecorator whitespaceCleanerDecorator,
+            final TorrentFilePatternDecorator torrentFilePatternDecorator,
+            final CommonMovieCrapWordsDecorator commonMovieCrapWordsDecorator,
+            final MultiPartIndicatorDecorator multiPartIndicatorDecorator,
+            final CaseCorrectionDecorator caseCorrectionDecorator
+     */
+
+    @Before
+    public void setup() {
+        CommonMovieCrapWordsMatcher crapWordsMatcher = new CommonMovieCrapWordsMatcher();
+        TokenBoundaryDecorator tokenBoundaryDecorator = new TokenBoundaryDecorator(crapWordsMatcher);
+        WhitespaceCleanerDecorator whitespaceCleanerDecorator = new WhitespaceCleanerDecorator();
+        TorrentFilePatternDecorator torrentFilePatternDecorator = new TorrentFilePatternDecorator(crapWordsMatcher);
+        CommonMovieCrapWordsDecorator commonMovieCrapWordsDecorator = new CommonMovieCrapWordsDecorator(
+                crapWordsMatcher);
+        MultiPartIndicatorDecorator multiPartIndicatorDecorator = new MultiPartIndicatorDecorator();
+        CaseCorrectionDecorator caseCorrectionDecorator = new CaseCorrectionDecorator();
+
+        tokenizer = new MovieNameTokenizer(tokenBoundaryDecorator, whitespaceCleanerDecorator,
+                torrentFilePatternDecorator, commonMovieCrapWordsDecorator, multiPartIndicatorDecorator,
+                caseCorrectionDecorator);
+    }
 
     /**
      * Getting an exception out of the WhitespaceCleanerTokenDecorator:

@@ -4,16 +4,20 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import crema.domain.DisplayResolution;
 import crema.domain.RecordingSource;
 
 /**
- * List of crap words that often appear in movie file names that aren't
- * part of the title itself.
+ * Finds words within a movie title that aren't actually part of the movie name itself
+ * but meta data about the movie.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class CommonMovieCrapWords {
+@Service
+public class CommonMovieCrapWordsMatcher {
 
     /**
      * List of commonly found crap words in movie file names.
@@ -29,29 +33,21 @@ public class CommonMovieCrapWords {
             "\\[.*\\]" /* anything surrounded in brackets is suspect */
     };
 
-    //TODO refactor to use ReleaseYearMatcher, RecordingSource and DisplayResolution
+    private final Collection<Pattern> miscPatterns;
 
-    private static final Collection<Pattern> PATTERNS;
-
-    private static ReleaseYearMatcher releaseYearMatcher;
+    @Autowired
+    private ReleaseYearMatcher releaseYearMatcher;
 
     /**
-     * Compile all the regex patterns
+     * Constructor.
      */
-    static {
-        PATTERNS = new HashSet<Pattern>();
+    public CommonMovieCrapWordsMatcher() {
+        miscPatterns = new HashSet<Pattern>();
         for (String crapPattern : CRAP_PATTERNS) {
             String regex = String.format("^%s$", crapPattern);
-            PATTERNS.add(Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
+            miscPatterns.add(Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
         }
         releaseYearMatcher = new ReleaseYearMatcher();
-    }
-
-    /**
-     * Private constructor - no instantiation!
-     */
-    private CommonMovieCrapWords() {
-        //no instantiation for you!
     }
 
     /**
@@ -59,7 +55,7 @@ public class CommonMovieCrapWords {
      * @param token
      * @return true if the argument matches a crap word
      */
-    public static boolean isCrapWord(final String token) {
+    public boolean isCrapWord(final String token) {
         if (isReleaseYear(token)) {
             return true;
         }
@@ -79,7 +75,7 @@ public class CommonMovieCrapWords {
      * @param token
      * @return true if this token indicates a movie release year
      */
-    private static boolean isReleaseYear(final String token) {
+    private boolean isReleaseYear(final String token) {
         return releaseYearMatcher.matches(token) != null;
     }
 
@@ -87,7 +83,7 @@ public class CommonMovieCrapWords {
      * @param token
      * @return true if this token indicates a recording source
      */
-    private static boolean isRecordingSource(final String token) {
+    private boolean isRecordingSource(final String token) {
         for (RecordingSource source : RecordingSource.values()) {
             if (source.matches(token)) {
                 return true;
@@ -100,7 +96,7 @@ public class CommonMovieCrapWords {
      * @param token
      * @return true if this token indicates a display resolution
      */
-    private static boolean isDisplayResolution(final String token) {
+    private boolean isDisplayResolution(final String token) {
         for (DisplayResolution resolution : DisplayResolution.values()) {
             if (resolution.matches(token)) {
                 return true;
@@ -113,8 +109,8 @@ public class CommonMovieCrapWords {
      * @param token
      * @return true if this token is one of the miscellaneous crap words defined earlier
      */
-    private static boolean isMiscCrapWord(final String token) {
-        for (Pattern pattern : PATTERNS) {
+    private boolean isMiscCrapWord(final String token) {
+        for (Pattern pattern : miscPatterns) {
             if (pattern.matcher(token).matches()) {
                 return true;
             }

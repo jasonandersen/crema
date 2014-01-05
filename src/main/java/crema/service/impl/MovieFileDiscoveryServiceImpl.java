@@ -17,7 +17,6 @@ import crema.exception.MediaFileException;
 import crema.service.MovieFileDiscoveryService;
 import crema.service.MovieNameService;
 import crema.util.PathUtils;
-import crema.util.text.FileNameMovieAttributesProvider;
 import crema.util.text.MultiPartFileDetector;
 
 /**
