@@ -39,6 +39,7 @@ public class CommonMovieCrapWords {
             "hd",
             "480i",
             "576i",
+            "576p",
             "480p",
             "720p",
             "1080i",

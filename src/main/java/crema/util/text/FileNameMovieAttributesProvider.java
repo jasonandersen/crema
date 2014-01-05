@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import crema.domain.Attribute;
 import crema.domain.AttributeSource;
 import crema.domain.AttributeType;
+import crema.domain.DisplayResolution;
 import crema.domain.MediaLibraryNewMovieListener;
 import crema.domain.Movie;
 import crema.domain.RecordingSource;
@@ -52,12 +53,34 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
         Validate.notNull(movie);
         String fileName = movie.getFirstMediaFile().getFileNameWithoutExtension();
         List<String> tokens = tokenizer.tokenize(fileName);
+        /*
+         * Don't evaluate the first token for attributes since that token is presumed to be part of the
+         * file name, not an attribute.
+         */
+        tokens.remove(0);
         seekRecordingSourceTokens(movie, tokens);
         seekReleaseYearTokens(movie, tokens);
-
+        seekDisplayResolution(movie, tokens);
     }
 
     /**
+     * Look for tokens that indicate a display resolution.
+     * @param movie
+     * @param tokens
+     */
+    private void seekDisplayResolution(final Movie movie, final List<String> tokens) {
+        for (String token : tokens) {
+            for (DisplayResolution resolution : DisplayResolution.values()) {
+                if (resolution.matches(token)) {
+                    addAttribute(movie, AttributeType.DISPLAY_RESOLUTION, AttributeSource.FILE_NAME, resolution);
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
+     * Looks for tokens that indicate a release year.
      * @param movie
      * @param tokens
      */
@@ -66,6 +89,7 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
             String yearToken = releaseYearMatcher.matches(token);
             if (yearToken != null) {
                 addAttribute(movie, AttributeType.RELEASE_YEAR, AttributeSource.FILE_NAME, yearToken);
+                return;
             }
         }
     }
@@ -80,6 +104,7 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
             for (RecordingSource source : RecordingSource.values()) {
                 if (source.matches(token)) {
                     addAttribute(movie, AttributeType.RECORDING_SOURCE, AttributeSource.FILE_NAME, source);
+                    return;
                 }
             }
         }

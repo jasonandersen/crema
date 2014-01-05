@@ -33,22 +33,15 @@ public class FileNameMovieAttributesProviderTest {
         return Arrays.asList(new Object[][] {
                 { "Somers.Town.2008.LIMITED.DVDRip.XviD-DMT.avi", "2008", null, "DVD" },
                 { "I'm.Not.There.[2007].DvDrip[Eng]1080p-aXXo.avi", "2007", "1080p", "DVD" },
-                { "The.Dark.Knight.Returns.2013.iNTERNAL.720p.BDRi.avi", "2013", "720p", "BlueRay" },
+                { "The.Dark.Knight.Returns.(2013).iNTERNAL.720p.BDRip.avi", "2013", "720p", "BlueRay" },
                 { "blah.bray.avi", null, null, "BlueRay" },
                 { "BLAH.BRAY.AVI", null, null, "BlueRay" },
-                /*{ "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" },
-                { "", "", "", "" }*/
+                { "I'm.Not.There.[2007].DvDrip[Eng]-aXXo.avi", "2007", null, "DVD" },
+                { "Snatch (2000) 720p BrRip x264 - DagarX.avi", "2000", "720p", "BlueRay" },
+                { "Snatch.2000.1080p.AC3(Dolby).5.1ch.Bluray.PS3-TEAM.avi", "2000", "1080p", "BlueRay" },
+                { "Mystery.Men.1999.BDRip.576P.X264.AC3-FaNGDiNG0.avi", "1999", "576p", "BlueRay" },
+                { "Mystery Men (1999) [HDDVDMux.720p.Ita-Eng-Spa][Nautilus-BT].avi", "1999", "720p", null },
+                { "Godfather part II.avi", null, null, null }
         });
     }
 

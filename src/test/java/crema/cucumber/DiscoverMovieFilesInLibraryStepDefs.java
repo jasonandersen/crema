@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import crema.domain.Attribute;
+import crema.domain.AttributeType;
 import crema.domain.MediaLibrary;
 import crema.domain.Movie;
 import crema.service.MediaLibraryService;
@@ -136,19 +138,29 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
     @Then("^the year of the movie is \"([^\"]*)\"$")
     public void the_year_of_the_movie_is(String year) throws Throwable {
         Movie movie = mediaLibrary.getMovies().get(0);
-        assertEquals(year, movie.getReleaseYear());
+        assertEquals(year, getAttribute(movie, AttributeType.RELEASE_YEAR));
     }
 
     @Then("^the resolution of the movie is \"([^\"]*)\"$")
     public void the_resolution_of_the_movie_is(String resolution) throws Throwable {
         Movie movie = mediaLibrary.getMovies().get(0);
-        assertEquals(resolution, movie.getResolution());
+        assertEquals(resolution, getAttribute(movie, AttributeType.DISPLAY_RESOLUTION));
     }
 
     @Then("^the source of the movie is \"([^\"]*)\"$")
     public void the_source_of_the_movie_is(String source) throws Throwable {
         Movie movie = mediaLibrary.getMovies().get(0);
-        assertEquals(source, movie.getSource());
+        assertEquals(source, getAttribute(movie, AttributeType.RECORDING_SOURCE));
+    }
+
+    /**
+     * @param movie
+     * @param type
+     * @return the toString() value for a given attribute, will return an empty string if the attribute doesn't exist
+     */
+    private String getAttribute(Movie movie, AttributeType type) {
+        Attribute attribute = movie.getAttribute(type);
+        return attribute == null ? "" : attribute.getValue().toString();
     }
 
     /**
