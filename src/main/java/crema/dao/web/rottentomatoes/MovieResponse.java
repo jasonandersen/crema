@@ -14,11 +14,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MovieResponse {
 
-    /**
-     * URL used to call API to request this object.
+    /*
+     * FIXME - lots of cleanup to do in this class!
      */
-    public static final String REQUEST_URL =
-            "http://api.rottentomatoes.com/api/public/v1.0/movies/{RT_MOVIE_ID}.json?apikey={RT_API_KEY}";
 
     /*
      * NOTE: see original JSON response in comments at the bottom of the class
@@ -193,7 +191,7 @@ public class MovieResponse {
      * An individual cast member in a movie and the characters they played.
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class CastMember {
+    public static class CastMember {
 
         @JsonProperty("id")
         private int castMemberId;
@@ -221,7 +219,7 @@ public class MovieResponse {
     /**
      * A director of a movie.
      */
-    public class Director {
+    public static class Director {
 
         @JsonProperty("name")
         private String name;
