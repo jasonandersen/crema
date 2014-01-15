@@ -28,13 +28,13 @@ public class MovieNameServiceImpl implements MovieNameService {
      * @see crema.domain.MediaLibraryNewMovieListener#movieAdded(crema.domain.Movie)
      */
     public void movieAdded(final Movie movie) {
-        guessName(movie);
+        deriveName(movie);
     }
 
     /**
-     * @see crema.service.MovieNameService#guessName(crema.domain.Movie)
+     * @see crema.service.MovieNameService#deriveName(crema.domain.Movie)
      */
-    public void guessName(final Movie movie) {
+    public void deriveName(final Movie movie) {
         String fileName = movie.getFirstMediaFile().getFileNameWithoutExtension();
         List<String> tokens = tokenizer.tokenize(fileName);
         String movieName = assembleTokens(tokens);

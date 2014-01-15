@@ -13,16 +13,24 @@ public enum AttributeType {
      */
 
     RELEASE_YEAR,
+    GENRES,
+    SYNOPSIS,
+    MPAA_RATING,
+    RUNTIME,
+    CRITICS_CONSENSUS,
+    CRITICS_SCORE,
+    AUDIENCE_SCORE,
+    IMAGES,
+
+    MOVIE_ID,
     DISPLAY_RESOLUTION,
-    RECORDING_SOURCE
+    RECORDING_SOURCE,
 
     /*
      * possible members:
-     *  +isValid()
-     *  +isSingular()
-     *  +isComposite()
-     *  
-     *  -priority
+     *  +isValid(Object value)
+     *  +getPlurality()
+     *  +isVisible()
      */
 
 }

@@ -22,15 +22,15 @@ import crema.util.text.Tokenizer;
 import crema.util.text.WhitespaceCleanerDecorator;
 
 /**
- * Provides attributes about a movie based on the name of the files.
+ * Provides attributes about a movie based on the name of the media files 
+ * that make up that movie.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @Service
 public class FileNameMovieAttributesProvider implements MovieAttributesProvider, MediaLibraryNewMovieListener {
 
-    @Autowired
-    private ReleaseYearMatcher releaseYearMatcher;
+    private final ReleaseYearMatcher releaseYearMatcher;
 
     private final Tokenizer tokenizer;
 
@@ -40,11 +40,13 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
     @Autowired
     public FileNameMovieAttributesProvider(
             final TokenBoundaryDecorator tokenBoundaryDecorator,
-            final WhitespaceCleanerDecorator whitespaceCleanerDecorator) {
+            final WhitespaceCleanerDecorator whitespaceCleanerDecorator,
+            final ReleaseYearMatcher releaseYearMatcher) {
         List<TokenDecorator> decorators = new LinkedList<TokenDecorator>();
         decorators.add(tokenBoundaryDecorator);
         decorators.add(whitespaceCleanerDecorator);
         tokenizer = new Tokenizer(decorators);
+        this.releaseYearMatcher = releaseYearMatcher;
     }
 
     /**
@@ -130,14 +132,6 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
 
         Attribute attribute = new Attribute(type, source, value);
         movie.addAttribute(attribute);
-    }
-
-    /**
-     * Setter used for testing.
-     * @param releaseYearMatcher
-     */
-    public void setReleaseYearMatcher(final ReleaseYearMatcher releaseYearMatcher) {
-        this.releaseYearMatcher = releaseYearMatcher;
     }
 
 }

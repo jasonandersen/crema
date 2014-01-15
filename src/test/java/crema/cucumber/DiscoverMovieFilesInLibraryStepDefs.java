@@ -173,7 +173,7 @@ public class DiscoverMovieFilesInLibraryStepDefs extends AbstractCucumberStepDef
 
     /**
      * @param movieName
-     * @return
+     * @return true if the movie has multiple media files associated with it
      */
     private boolean hasMultipleMediaFiles(String movieName) {
         Collection<Movie> movies = mediaLibrary.getMovies(movieName);

@@ -1,4 +1,4 @@
-package crema.dao.web.rottentomatoes.v1_0;
+package crema.dao.web.rottentomatoes;
 
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ public class MovieResponse {
      */
 
     @JsonProperty("id")
-    private int movieId;
+    private String movieId;
 
     @JsonProperty("title")
     private String title;
@@ -69,11 +69,11 @@ public class MovieResponse {
     @JsonProperty("links")
     private Map<String, String> links;
 
-    public int getMovieId() {
+    public String getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(final int movieId) {
+    public void setMovieId(final String movieId) {
         this.movieId = movieId;
     }
 
@@ -81,7 +81,7 @@ public class MovieResponse {
         return title;
     }
 
-    public void setTitle(final String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -89,23 +89,39 @@ public class MovieResponse {
         return year;
     }
 
-    public void setYear(final int year) {
+    public void setYear(int year) {
         this.year = year;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
     }
 
     public String getMpaaRating() {
         return mpaaRating;
     }
 
-    public void setMpaaRating(final String mpaaRating) {
+    public void setMpaaRating(String mpaaRating) {
         this.mpaaRating = mpaaRating;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
     }
 
     public String getCriticsConsensus() {
         return criticsConsensus;
     }
 
-    public void setCriticsConsensus(final String criticsConsensus) {
+    public void setCriticsConsensus(String criticsConsensus) {
         this.criticsConsensus = criticsConsensus;
     }
 
@@ -113,7 +129,7 @@ public class MovieResponse {
         return ratings;
     }
 
-    public void setRatings(final Map<String, String> ratings) {
+    public void setRatings(Map<String, String> ratings) {
         this.ratings = ratings;
     }
 
@@ -121,7 +137,7 @@ public class MovieResponse {
         return synopsis;
     }
 
-    public void setSynopsis(final String synopsis) {
+    public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
     }
 
@@ -129,7 +145,7 @@ public class MovieResponse {
         return posterUrls;
     }
 
-    public void setPosterUrls(final Map<String, String> posterUrls) {
+    public void setPosterUrls(Map<String, String> posterUrls) {
         this.posterUrls = posterUrls;
     }
 
@@ -137,56 +153,40 @@ public class MovieResponse {
         return abridgedCast;
     }
 
-    public void setAbridgedCast(final List<CastMember> abridgedCast) {
+    public void setAbridgedCast(List<CastMember> abridgedCast) {
         this.abridgedCast = abridgedCast;
-    }
-
-    public Map<String, String> getAlternateIds() {
-        return alternateIds;
-    }
-
-    public void setAlternateIds(final Map<String, String> alternateIds) {
-        this.alternateIds = alternateIds;
-    }
-
-    public Map<String, String> getLinks() {
-        return links;
-    }
-
-    public void setLinks(final Map<String, String> links) {
-        this.links = links;
-    }
-
-    public List<String> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(final List<String> genres) {
-        this.genres = genres;
-    }
-
-    public int getRuntime() {
-        return runtime;
-    }
-
-    public void setRuntime(final int runtime) {
-        this.runtime = runtime;
     }
 
     public List<Director> getAbridgedDirectors() {
         return abridgedDirectors;
     }
 
-    public void setAbridgedDirectors(final List<Director> abridgedDirectors) {
+    public void setAbridgedDirectors(List<Director> abridgedDirectors) {
         this.abridgedDirectors = abridgedDirectors;
+    }
+
+    public Map<String, String> getAlternateIds() {
+        return alternateIds;
+    }
+
+    public void setAlternateIds(Map<String, String> alternateIds) {
+        this.alternateIds = alternateIds;
     }
 
     public String getStudio() {
         return studio;
     }
 
-    public void setStudio(final String studio) {
+    public void setStudio(String studio) {
         this.studio = studio;
+    }
+
+    public Map<String, String> getLinks() {
+        return links;
+    }
+
+    public void setLinks(Map<String, String> links) {
+        this.links = links;
     }
 
     /**
@@ -208,25 +208,14 @@ public class MovieResponse {
             return castMemberId;
         }
 
-        public void setCastMemberId(final int castMemberId) {
-            this.castMemberId = castMemberId;
-        }
-
         public String getName() {
             return name;
-        }
-
-        public void setName(final String name) {
-            this.name = name;
         }
 
         public List<String> getCharacters() {
             return characters;
         }
 
-        public void setCharacters(final List<String> characters) {
-            this.characters = characters;
-        }
     }
 
     /**
@@ -239,10 +228,6 @@ public class MovieResponse {
 
         public String getName() {
             return name;
-        }
-
-        public void setName(final String name) {
-            this.name = name;
         }
     }
 

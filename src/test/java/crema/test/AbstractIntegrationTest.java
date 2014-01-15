@@ -1,6 +1,9 @@
 package crema.test;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -81,6 +84,28 @@ public abstract class AbstractIntegrationTest {
     @After
     public void truncateDatabase() {
         truncator.truncate();
+    }
+
+    /**
+     * Pings a URL for availability. Use this method to determine if an external web service is available
+     * prior to testing.
+     * @param url
+     * @param timeout
+     * @return true if the URL is available, false if it is not
+     */
+    protected boolean ping(String candidateUrl, int timeout) {
+        log.debug("pinging {}", candidateUrl);
+        String url = candidateUrl.replaceFirst("https", "http"); // Otherwise an exception may be thrown on invalid SSL certificates.
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            connection.setConnectTimeout(timeout);
+            connection.setReadTimeout(timeout);
+            int responseCode = connection.getResponseCode();
+            log.debug("response {}", responseCode);
+            return (200 <= responseCode && responseCode <= 399);
+        } catch (IOException exception) {
+            return false;
+        }
     }
 
     private class CremaDirectoryCleanupShutdownHook extends Thread {

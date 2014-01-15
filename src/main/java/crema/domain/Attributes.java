@@ -1,6 +1,10 @@
 package crema.domain;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -11,6 +15,8 @@ import java.util.TreeSet;
  */
 public class Attributes implements Iterable<Attribute> {
 
+    private final Map<AttributeSource, AttributesResult> results;
+
     private final SortedSet<Attribute> attributes;
 
     /**
@@ -18,6 +24,7 @@ public class Attributes implements Iterable<Attribute> {
      */
     public Attributes() {
         attributes = new TreeSet<Attribute>();
+        results = new HashMap<AttributeSource, AttributesResult>();
     }
 
     /**
@@ -46,9 +53,25 @@ public class Attributes implements Iterable<Attribute> {
     }
 
     /**
+     * Adds a result.
+     * @param result
+     */
+    public void addResult(final AttributesResult result) {
+        if (result == null) {
+            return;
+        }
+        results.put(result.getSource(), result);
+        if (result instanceof AttributesResultSuccessful) {
+            AttributesResultSuccessful successfulResult = (AttributesResultSuccessful) result;
+            attributes.addAll(successfulResult.getAttributes());
+        }
+    }
+
+    /**
      * Adds a single attribute.
      * @param attribute
      */
+    @Deprecated
     public void addAttribute(final Attribute attribute) {
         if (attribute == null) {
             return;
@@ -71,6 +94,13 @@ public class Attributes implements Iterable<Attribute> {
             }
         }
         return builder.toString();
+    }
+
+    /**
+     * @return an unmodifiable collection of attributes
+     */
+    public Collection<Attribute> getAllAttributes() {
+        return Collections.unmodifiableSet(attributes);
     }
 
 }

@@ -46,7 +46,7 @@ public class FileNameMovieAttributesProviderTest {
         });
     }
 
-    private FileNameMovieAttributesProvider detailsProvider;
+    private FileNameMovieAttributesProvider attributeProvider;
 
     private Movie movie;
 
@@ -85,14 +85,13 @@ public class FileNameMovieAttributesProviderTest {
     @Before
     public void setup() {
         TokenBoundaryDecorator tokenBoundaryDecorator = new TokenBoundaryDecorator(new CommonMovieCrapWordsMatcher());
-        detailsProvider = new FileNameMovieAttributesProvider(tokenBoundaryDecorator,
-                new WhitespaceCleanerDecorator());
-        detailsProvider.setReleaseYearMatcher(new ReleaseYearMatcher());
+        attributeProvider = new FileNameMovieAttributesProvider(tokenBoundaryDecorator,
+                new WhitespaceCleanerDecorator(), new ReleaseYearMatcher());
     }
 
     @Test
     public void test() {
-        detailsProvider.provideAttributes(movie);
+        attributeProvider.provideAttributes(movie);
         String actualYear = getAttributeValue(AttributeType.RELEASE_YEAR);
         String actualResolution = getAttributeValue(AttributeType.DISPLAY_RESOLUTION);
         String actualSource = getAttributeValue(AttributeType.RECORDING_SOURCE);

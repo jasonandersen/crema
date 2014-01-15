@@ -1,5 +1,6 @@
 package crema.domain;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -119,6 +120,14 @@ public class Movie implements HasName {
     }
 
     /**
+     * Adds a single attributes result to the attributes for this movie.
+     * @param result
+     */
+    public void addAttributesResult(final AttributesResult result) {
+        attributes.addResult(result);
+    }
+
+    /**
      * @param type
      * @return an attribute of the specified type, will return null if no attributes exist of that type
      */
@@ -127,9 +136,17 @@ public class Movie implements HasName {
     }
 
     /**
+     * @return an unmodifiable collection of all the attributes applied to this movie
+     */
+    public Collection<Attribute> getAllAttributes() {
+        return attributes.getAllAttributes();
+    }
+
+    /**
      * Adds a single attribute to this movie.
      * @param attribute
      */
+    @Deprecated
     public void addAttribute(final Attribute attribute) {
         attributes.addAttribute(attribute);
     }

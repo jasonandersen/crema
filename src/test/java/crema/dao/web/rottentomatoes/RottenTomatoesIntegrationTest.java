@@ -1,11 +1,15 @@
 package crema.dao.web.rottentomatoes;
 
-import org.junit.Assume;
-import org.junit.BeforeClass;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import crema.domain.Movie;
 import crema.test.AbstractIntegrationTest;
 
 /**
@@ -17,31 +21,47 @@ public class RottenTomatoesIntegrationTest extends AbstractIntegrationTest {
 
     private static Logger log = LoggerFactory.getLogger(RottenTomatoesIntegrationTest.class);
 
+    private static Boolean isRottenTomatoesSiteAvailable;
+
+    @Autowired
+    private RottenTomatoesMovieAttributesProvider provider;
+
+    @Autowired
+    private EndpointBuilder endpointBuilder;
+
+    private Movie movie;
+
     /**
      * If the rotten tomatoes site can't be acccessed, skip these tests.
      */
-    @BeforeClass
-    public static void validateEnvironment() {
-        Assume.assumeTrue(canAccessRottenTomatoesSite());
+    @Before
+    public void setupTests() {
+        assumeTrue(canAccessRottenTomatoesSite());
+        movie = new Movie();
+        movie.setName("Toy Story 3");
+    }
+
+    @Test
+    public void test() {
+        assertTrue(movie.getAllAttributes().isEmpty());
+        provider.provideAttributes(movie);
+        assertTrue(!movie.getAllAttributes().isEmpty());
     }
 
     /**
      * @return true if we can access www.rottentomatoes.com while running this test
      */
-    private static boolean canAccessRottenTomatoesSite() {
+    private boolean canAccessRottenTomatoesSite() {
         /*
          * any time we can't access the RT website, we want to skip all these tests, not fail them
          */
-        boolean canAccess = false;
-        if (!canAccess) {
+        if (isRottenTomatoesSiteAvailable == null) {
+            isRottenTomatoesSiteAvailable = ping(endpointBuilder.buildPingUrl(), 1000);
+        }
+        if (!isRottenTomatoesSiteAvailable) {
             log.warn("cannot access Rotten Tomatoes site - skipping test");
         }
-        return canAccess;
-    }
-
-    @Test
-    public void test() {
-        //noop
+        return isRottenTomatoesSiteAvailable;
     }
 
 }

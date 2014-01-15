@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans 
-    xmlns="http://www.springframework.org/schema/beans" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <context:annotation-config />
-    
+
     <context:component-scan base-package="crema" />
-    
+
     <bean id="defaultCremaDirectoryName" class="java.lang.String">
         <constructor-arg value=".crema" />
     </bean>
-    
+
     <bean id="defaultDatabaseFile" class="java.lang.String">
         <constructor-arg value="crema.db" />
     </bean>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </list>
+        </property>
+        <property name="interceptors">
+            <list>
+                <bean class="crema.dao.web.GzipClientHttpRequestInterceptor" />
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" id="mappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <bean class="org.springframework.http.MediaType">
+                    <constructor-arg value="application" />
+                    <constructor-arg value="json" />
+                    <constructor-arg value="#{T(java.nio.charset.Charset).forName('UTF-8')}" />
+                </bean>
+                <bean class="org.springframework.http.MediaType">
+                    <constructor-arg value="application" />
+                    <constructor-arg value="*+json" />
+                    <constructor-arg value="#{T(java.nio.charset.Charset).forName('UTF-8')}" />
+                </bean>
+                <bean class="org.springframework.http.MediaType">
+                    <constructor-arg value="text" />
+                    <constructor-arg value="javascript" />
+                    <constructor-arg value="#{T(java.nio.charset.Charset).forName('UTF-8')}" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+
 
 </beans>
