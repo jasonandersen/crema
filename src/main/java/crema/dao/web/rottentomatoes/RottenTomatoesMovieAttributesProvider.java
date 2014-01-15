@@ -52,7 +52,7 @@ public class RottenTomatoesMovieAttributesProvider implements MovieAttributesPro
         }
         AttributesResult result = null;
         try {
-            MovieSearchResponse searchResponse = search(movie);
+            MovieSearchResponse searchResponse = searchForMovieRecord(movie);
             if (containsSearchResults(searchResponse)) {
                 MovieSearchResult movieSearchResult = chooseClosestMatch(searchResponse);
                 MovieResponse movieResponse = retrieveMovieRecord(movieSearchResult.getMovieId());
@@ -73,7 +73,7 @@ public class RottenTomatoesMovieAttributesProvider implements MovieAttributesPro
      * @return search results for a single movie
      * @throws AttributesProviderException
      */
-    protected MovieSearchResponse search(final Movie movie) throws AttributesProviderException {
+    private MovieSearchResponse searchForMovieRecord(final Movie movie) throws AttributesProviderException {
         String query = movie.getName();
         URI url = buildUri(endpointBuilder.buildSearchUrl(query));
         ResponseEntity<MovieSearchResponse> response = restOperations.exchange(
