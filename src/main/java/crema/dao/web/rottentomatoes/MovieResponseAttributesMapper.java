@@ -19,7 +19,7 @@ import crema.domain.Link;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class MovieResponseAttributesBuilder {
+public class MovieResponseAttributesMapper {
 
     private static final String AUDIENCE_SCORE = "audience_score";
 
@@ -35,7 +35,7 @@ public class MovieResponseAttributesBuilder {
      * Constructor.
      * @param response
      */
-    public MovieResponseAttributesBuilder(final MovieResponse response) {
+    public MovieResponseAttributesMapper(final MovieResponse response) {
         this.response = response;
         this.result = buildResult();
     }

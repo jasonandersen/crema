@@ -134,7 +134,7 @@ public class RottenTomatoesMovieAttributesProvider implements MovieAttributesPro
      */
     private AttributesResult buildSuccessfulResult(final MovieResponse movieResponse) {
         Validate.notNull(movieResponse);
-        MovieResponseAttributesBuilder attributesBuilder = new MovieResponseAttributesBuilder(movieResponse);
+        MovieResponseAttributesMapper attributesBuilder = new MovieResponseAttributesMapper(movieResponse);
         return attributesBuilder.getResult();
     }
 

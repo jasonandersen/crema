@@ -21,15 +21,15 @@ import crema.domain.AttributesResultSuccessful;
 import crema.domain.Link;
 
 /**
- * Testing the {@link MovieResponseAttributesBuilderTest} class.
+ * Testing the {@link MovieResponseAttributesMapper} class.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
-public class MovieResponseAttributesBuilderTest {
+public class MovieResponseAttributesMapperTest {
 
     private MovieResponse response;
 
-    private MovieResponseAttributesBuilder builder;
+    private MovieResponseAttributesMapper builder;
 
     private AttributesResult result;
 
@@ -169,7 +169,7 @@ public class MovieResponseAttributesBuilderTest {
     }
 
     private void run() {
-        builder = new MovieResponseAttributesBuilder(response);
+        builder = new MovieResponseAttributesMapper(response);
         result = builder.getResult();
     }
 }
