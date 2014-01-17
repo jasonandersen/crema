@@ -56,7 +56,7 @@ public class RottenTomatoesMovieAttributesProvider implements MovieAttributesPro
             if (containsSearchResults(searchResponse)) {
                 MovieSearchResult movieSearchResult = chooseClosestMatch(searchResponse);
                 MovieResponse movieResponse = retrieveMovieRecord(movieSearchResult.getMovieId());
-                result = buildResult(movieResponse);
+                result = buildSuccessfulResult(movieResponse);
             } else {
                 result = buildEmptyResult();
             }
@@ -132,7 +132,7 @@ public class RottenTomatoesMovieAttributesProvider implements MovieAttributesPro
      * @param movieResponse
      * @return can return either AttributesResultSuccessful or AttributesResultNoResultsFound
      */
-    private AttributesResult buildResult(final MovieResponse movieResponse) {
+    private AttributesResult buildSuccessfulResult(final MovieResponse movieResponse) {
         Validate.notNull(movieResponse);
         MovieResponseAttributesBuilder attributesBuilder = new MovieResponseAttributesBuilder(movieResponse);
         return attributesBuilder.getResult();
