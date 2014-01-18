@@ -44,7 +44,7 @@ public class RottenTomatoesIntegrationTest extends AbstractIntegrationTest {
     @Test
     public void test() {
         assertTrue(movie.getAllAttributes().isEmpty());
-        provider.provideAttributes(movie);
+        provider.decorateMovie(movie);
         assertTrue(!movie.getAllAttributes().isEmpty());
     }
 

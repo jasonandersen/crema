@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
 
 import crema.domain.Attribute;
@@ -23,10 +22,19 @@ import crema.domain.AttributesResultNoResultsFound;
 import crema.domain.AttributesResultSuccessful;
 import crema.domain.Link;
 import crema.domain.Movie;
-import crema.service.MovieAttributesProvider;
+import crema.service.MovieDecorator;
 
-@Service
-public class RottenTomatoesMovieAttributesProvider2 implements MovieAttributesProvider {
+/**
+ * This is demonstration code only. This is a fantastic example of what crappy code
+ * looks like. This code should never (EVER) be actually used. This is the result of
+ * refactoring (more like DEfactoring) the {@link RottenTomatoesMovieAttributesProvider}
+ * class into a steaming hot mess. I want to demonstrate the difference between code
+ * that works and code that both works and also is readable and maintainable.
+ * 
+ * @author Jason Andersen (andersen.jason@gmail.com)
+ */
+@Deprecated
+public class RottenTomatoesMovieAttributesProvider2 implements MovieDecorator {
 
     private static Logger log = LoggerFactory.getLogger(RottenTomatoesMovieAttributesProvider.class);
 
@@ -34,9 +42,9 @@ public class RottenTomatoesMovieAttributesProvider2 implements MovieAttributesPr
     private RestOperations restOperations;
 
     /**
-     * @see crema.service.MovieAttributesProvider#provideAttributes(crema.domain.Movie)
+     * @see crema.service.MovieDecorator#decorateMovie(crema.domain.Movie)
      */
-    public void provideAttributes(final Movie movie) {
+    public void decorateMovie(final Movie movie) {
         if (movie == null) {
             return;
         }

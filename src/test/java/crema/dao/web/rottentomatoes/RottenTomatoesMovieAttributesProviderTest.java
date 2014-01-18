@@ -59,7 +59,7 @@ public class RottenTomatoesMovieAttributesProviderTest extends AbstractIntegrati
         mockServer.expect(requestTo(movieUrl)).andRespond(
                 withSuccess(json("toy_story_3.json"), MediaType.APPLICATION_JSON));
 
-        provider.provideAttributes(movie);
+        provider.decorateMovie(movie);
     }
 
     @Test

@@ -19,7 +19,7 @@ import crema.domain.AttributesResultException;
 import crema.domain.AttributesResultNoResultsFound;
 import crema.domain.Movie;
 import crema.exception.AttributesProviderException;
-import crema.service.MovieAttributesProvider;
+import crema.service.MovieDecorator;
 
 /**
  * Provides movie attributes by calling the Rotten Tomatoes REST API. For more information,
@@ -30,7 +30,7 @@ import crema.service.MovieAttributesProvider;
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @Service
-public class RottenTomatoesMovieAttributesProvider implements MovieAttributesProvider {
+public class RottenTomatoesMovieAttributesProvider implements MovieDecorator {
 
     private static Logger log = LoggerFactory.getLogger(RottenTomatoesMovieAttributesProvider.class);
 
@@ -43,9 +43,9 @@ public class RottenTomatoesMovieAttributesProvider implements MovieAttributesPro
     private RestOperations restOperations;
 
     /**
-     * @see crema.service.MovieAttributesProvider#provideAttributes(crema.domain.Movie)
+     * @see crema.service.MovieDecorator#decorateMovie(crema.domain.Movie)
      */
-    public void provideAttributes(final Movie movie) {
+    public void decorateMovie(final Movie movie) {
         log.debug("providing attributes for movie: {}", movie);
         if (movie == null) {
             return;

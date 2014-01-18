@@ -62,7 +62,7 @@ public class RetrieveMovieAttributesFromRottenTomatoesStepDefs extends AbstractC
 
     @When("^I retrieve RottenTomatoes.com attributes for that movie$")
     public void I_retrieve_RottenTomatoes_com_attributes_for_that_movie() throws Throwable {
-        provider.provideAttributes(movie);
+        provider.decorateMovie(movie);
     }
 
     @Then("^the movie's release year is (\\d+)$")

@@ -14,7 +14,7 @@ import crema.domain.DisplayResolution;
 import crema.domain.MediaLibraryNewMovieListener;
 import crema.domain.Movie;
 import crema.domain.RecordingSource;
-import crema.service.MovieAttributesProvider;
+import crema.service.MovieDecorator;
 import crema.util.text.ReleaseYearMatcher;
 import crema.util.text.TokenBoundaryDecorator;
 import crema.util.text.TokenDecorator;
@@ -28,7 +28,7 @@ import crema.util.text.WhitespaceCleanerDecorator;
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @Service
-public class FileNameMovieAttributesProvider implements MovieAttributesProvider, MediaLibraryNewMovieListener {
+public class FileNameMovieAttributesProvider implements MovieDecorator, MediaLibraryNewMovieListener {
 
     private final ReleaseYearMatcher releaseYearMatcher;
 
@@ -53,13 +53,13 @@ public class FileNameMovieAttributesProvider implements MovieAttributesProvider,
      * @see crema.domain.MediaLibraryNewMovieListener#movieAdded(crema.domain.Movie)
      */
     public void movieAdded(final Movie movie) {
-        provideAttributes(movie);
+        decorateMovie(movie);
     }
 
     /**
-     * @see crema.service.MovieAttributesProvider#provideAttributes(crema.domain.Movie)
+     * @see crema.service.MovieDecorator#decorateMovie(crema.domain.Movie)
      */
-    public void provideAttributes(final Movie movie) {
+    public void decorateMovie(final Movie movie) {
         Validate.notNull(movie);
         String fileName = movie.getFirstMediaFile().getFileNameWithoutExtension();
         List<String> tokens = tokenizer.tokenize(fileName);

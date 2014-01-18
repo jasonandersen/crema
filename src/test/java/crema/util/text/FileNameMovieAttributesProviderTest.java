@@ -91,7 +91,7 @@ public class FileNameMovieAttributesProviderTest {
 
     @Test
     public void test() {
-        attributeProvider.provideAttributes(movie);
+        attributeProvider.decorateMovie(movie);
         String actualYear = getAttributeValue(AttributeType.RELEASE_YEAR);
         String actualResolution = getAttributeValue(AttributeType.DISPLAY_RESOLUTION);
         String actualSource = getAttributeValue(AttributeType.RECORDING_SOURCE);
