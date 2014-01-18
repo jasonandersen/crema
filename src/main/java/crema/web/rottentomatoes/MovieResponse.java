@@ -1,4 +1,4 @@
-package crema.dao.web.rottentomatoes;
+package crema.web.rottentomatoes;
 
 import java.util.List;
 import java.util.Map;

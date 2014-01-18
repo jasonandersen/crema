@@ -1,4 +1,4 @@
-package crema.dao.web.rottentomatoes;
+package crema.web.rottentomatoes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -23,6 +23,8 @@ import org.springframework.web.client.RestTemplate;
 import crema.domain.AttributeType;
 import crema.domain.Movie;
 import crema.test.AbstractIntegrationTest;
+import crema.web.rottentomatoes.EndpointBuilder;
+import crema.web.rottentomatoes.RottenTomatoesMovieAttributesProvider;
 
 /**
  * Testing the {@link RottenTomatoesMovieAttributesProvider} class.

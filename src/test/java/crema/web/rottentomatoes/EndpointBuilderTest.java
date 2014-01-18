@@ -1,9 +1,11 @@
-package crema.dao.web.rottentomatoes;
+package crema.web.rottentomatoes;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import crema.web.rottentomatoes.EndpointBuilder;
 
 /**
  * Testing the {@link EndpointBuilder} class.

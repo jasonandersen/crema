@@ -1,4 +1,4 @@
-package crema.dao.web.rottentomatoes;
+package crema.web.rottentomatoes;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.domain.Movie;
 import crema.test.AbstractIntegrationTest;
+import crema.web.rottentomatoes.EndpointBuilder;
+import crema.web.rottentomatoes.RottenTomatoesMovieAttributesProvider;
 
 /**
  * Runs live integration tests against the Rotten Tomatoes API web service.

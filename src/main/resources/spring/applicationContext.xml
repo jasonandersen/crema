@@ -20,7 +20,7 @@
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <property name="messageConverters">
             <list>
-                <bean class="crema.dao.web.GzipHttpMessageConverterProxy">
+                <bean class="crema.web.GzipHttpMessageConverterProxy">
                     <constructor-arg>
                         <ref bean="mappingJacksonHttpMessageConverter" />
                     </constructor-arg>

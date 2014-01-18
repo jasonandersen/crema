@@ -1,4 +1,4 @@
-package crema.dao.web.rottentomatoes;
+package crema.web.rottentomatoes;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import crema.dao.web.rottentomatoes.RottenTomatoesMovieAttributesProvider;
 import crema.domain.Movie;
 import crema.exception.CremaException;
 import crema.service.MovieDecorationService;
 import crema.service.MovieDecorator;
+import crema.web.rottentomatoes.RottenTomatoesMovieAttributesProvider;
 
 /**
  * Aggregates all the {@link MovieDecorator} objects and executes them in order

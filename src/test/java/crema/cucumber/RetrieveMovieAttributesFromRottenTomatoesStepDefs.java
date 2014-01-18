@@ -14,10 +14,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
-import crema.dao.web.rottentomatoes.EndpointBuilder;
-import crema.dao.web.rottentomatoes.RottenTomatoesMovieAttributesProvider;
 import crema.domain.AttributeType;
 import crema.domain.Movie;
+import crema.web.rottentomatoes.EndpointBuilder;
+import crema.web.rottentomatoes.RottenTomatoesMovieAttributesProvider;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

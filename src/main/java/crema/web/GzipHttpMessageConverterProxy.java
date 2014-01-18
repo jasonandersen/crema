@@ -1,4 +1,4 @@
-package crema.dao.web;
+package crema.web;
 
 import java.io.IOException;
 import java.io.InputStream;

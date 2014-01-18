@@ -1,4 +1,4 @@
-package crema.dao.web.rottentomatoes;
+package crema.web.rottentomatoes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -19,6 +19,8 @@ import crema.domain.AttributesResult;
 import crema.domain.AttributesResultNoResultsFound;
 import crema.domain.AttributesResultSuccessful;
 import crema.domain.Link;
+import crema.web.rottentomatoes.MovieResponse;
+import crema.web.rottentomatoes.MovieResponseAttributesMapper;
 
 /**
  * Testing the {@link MovieResponseAttributesMapper} class.

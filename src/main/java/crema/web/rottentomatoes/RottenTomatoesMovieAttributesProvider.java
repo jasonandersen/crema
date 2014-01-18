@@ -1,4 +1,4 @@
-package crema.dao.web.rottentomatoes;
+package crema.web.rottentomatoes;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
 
-import crema.dao.web.rottentomatoes.MovieSearchResponse.MovieSearchResult;
 import crema.domain.AttributeSource;
 import crema.domain.AttributesResult;
 import crema.domain.AttributesResultException;
@@ -20,6 +19,7 @@ import crema.domain.AttributesResultNoResultsFound;
 import crema.domain.Movie;
 import crema.exception.AttributesProviderException;
 import crema.service.MovieDecorator;
+import crema.web.rottentomatoes.MovieSearchResponse.MovieSearchResult;
 
 /**
  * Provides movie attributes by calling the Rotten Tomatoes REST API. For more information,
