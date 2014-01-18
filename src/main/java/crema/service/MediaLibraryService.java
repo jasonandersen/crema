@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import crema.domain.MediaLibrary;
+import crema.exception.CremaException;
 import crema.exception.DuplicateMediaLibraryException;
 import crema.exception.MediaLibraryException;
 
@@ -20,8 +21,9 @@ public interface MediaLibraryService {
      * @param name
      * @return the created MediaLibrary
      * @throws MediaLibraryException 
+     * @throws CremaException 
      */
-    MediaLibrary createMediaLibrary(File path, String name) throws MediaLibraryException;
+    MediaLibrary createMediaLibrary(File path, String name) throws MediaLibraryException, CremaException;
 
     /**
      * Reads a media library from persistence.

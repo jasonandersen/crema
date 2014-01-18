@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import crema.domain.MediaLibrary;
-import crema.exception.MediaFileException;
+import crema.exception.CremaException;
+import crema.service.MovieDecorationService;
 import crema.service.MovieFileDiscoveryService;
-import crema.service.MovieNameService;
 import crema.util.PathUtils;
 import crema.util.text.MultiPartFileDetector;
 
@@ -43,13 +43,10 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
     private List<String> extensions;
 
     @Autowired
-    private MovieNameService movieNameService;
+    private MovieDecorationService movieDecorationService;
 
     @Autowired
     private MultiPartFileDetector multiPartDetector;
-
-    @Autowired
-    private FileNameMovieAttributesProvider fileNameAttributesProvider;
 
     /**
      * Constructor.
@@ -59,14 +56,13 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
     }
 
     /**
-     * @throws MediaFileException 
+     * @throws CremaException 
      * @see crema.service.MovieFileDiscoveryService#discoverMovies(crema.domain.MediaLibrary)
      */
-    public void discoverMovies(final MediaLibrary library) throws MediaFileException {
+    public void discoverMovies(final MediaLibrary library) throws CremaException {
         Validate.notNull(library);
         Validate.notNull(library.getBaseDirectory());
-        library.addNewMovieListener(movieNameService);
-        library.addNewMovieListener(fileNameAttributesProvider);
+        library.addNewMovieListener(movieDecorationService);
         discover(library, library.getBaseDirectory());
     }
 
@@ -74,9 +70,9 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
      * Discover movie files within a media library base directory.
      * @param library
      * @param directory
-     * @throws MediaFileException 
+     * @throws CremaException 
      */
-    private void discover(final MediaLibrary library, final File directory) throws MediaFileException {
+    private void discover(final MediaLibrary library, final File directory) throws CremaException {
         Validate.notNull(directory, "Directory cannot be null!");
         Validate.isTrue(directory.isDirectory(), "File must be a directory!");
         Queue<File> directoryChildren = sortChildrenByPath(directory);
@@ -105,10 +101,10 @@ public class MovieFileDiscoveryServiceImpl implements MovieFileDiscoveryService 
      * Inspects a single file object to determine if it is a movie file.
      * @param library
      * @param file
-     * @throws MediaFileException 
+     * @throws CremaException 
      */
     private void inspectFile(final MediaLibrary library, final File file, final Queue<File> siblingFiles)
-            throws MediaFileException {
+            throws CremaException {
         if (!isMovie(file)) {
             return;
         }

@@ -17,7 +17,7 @@ import crema.domain.Attribute;
 import crema.domain.AttributeType;
 import crema.domain.MediaLibrary;
 import crema.domain.Movie;
-import crema.exception.MediaFileException;
+import crema.exception.CremaException;
 import crema.service.impl.FileNameMovieAttributesProvider;
 import crema.test.TestUtils;
 
@@ -63,10 +63,10 @@ public class FileNameMovieAttributesProviderTest {
      * @param expectedResolution
      * @param expectedSource
      * @throws IOException 
-     * @throws MediaFileException 
+     * @throws CremaException 
      */
     public FileNameMovieAttributesProviderTest(String fileName, String expectedYear, String expectedResolution,
-            String expectedSource) throws IOException, MediaFileException {
+            String expectedSource) throws IOException, CremaException {
 
         this.expectedResolution = expectedResolution;
         this.expectedSource = expectedSource;

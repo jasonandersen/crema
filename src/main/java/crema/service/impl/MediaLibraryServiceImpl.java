@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 
 import crema.dao.MediaLibraryDAO;
 import crema.domain.MediaLibrary;
+import crema.exception.CremaException;
 import crema.exception.DuplicateMediaLibraryException;
 import crema.exception.InvalidMediaLibraryDirectoryException;
-import crema.exception.MediaFileException;
-import crema.exception.MediaLibraryException;
 import crema.service.MediaLibraryService;
 import crema.service.MovieFileDiscoveryService;
 
@@ -31,9 +30,10 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
     private MovieFileDiscoveryService movieFileDiscoverService;
 
     /**
+     * @throws CremaException 
      * @see crema.service.MediaLibraryService#createMediaLibrary(java.io.File, java.lang.String)
      */
-    public MediaLibrary createMediaLibrary(final File path, final String name) throws MediaLibraryException {
+    public MediaLibrary createMediaLibrary(final File path, final String name) throws CremaException {
         Validate.notNull(path);
         Validate.notNull(name);
 
@@ -100,9 +100,9 @@ public class MediaLibraryServiceImpl implements MediaLibraryService {
     /**
      * Discover any movie files that exist within the library.
      * @param library
-     * @throws MediaFileException 
+     * @throws CremaException 
      */
-    private void discoverMovieFiles(final MediaLibrary library) throws MediaFileException {
+    private void discoverMovieFiles(final MediaLibrary library) throws CremaException {
         movieFileDiscoverService.discoverMovies(library);
     }
 

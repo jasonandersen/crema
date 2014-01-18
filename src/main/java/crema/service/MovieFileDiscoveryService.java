@@ -1,6 +1,7 @@
 package crema.service;
 
 import crema.domain.MediaLibrary;
+import crema.exception.CremaException;
 import crema.exception.MediaFileException;
 
 /**
@@ -14,6 +15,7 @@ public interface MovieFileDiscoveryService {
      * Discovers any movies files that exist within this MediaLibrary.
      * @param library
      * @throws MediaFileException 
+     * @throws CremaException 
      */
-    void discoverMovies(final MediaLibrary library) throws MediaFileException;
+    void discoverMovies(final MediaLibrary library) throws MediaFileException, CremaException;
 }

@@ -8,6 +8,7 @@ import crema.domain.Movie;
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
+@Deprecated
 public interface MovieNameService extends MediaLibraryNewMovieListener {
 
     /**

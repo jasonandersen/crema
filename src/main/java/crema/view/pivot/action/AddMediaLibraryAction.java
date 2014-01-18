@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import crema.domain.MediaLibrary;
+import crema.exception.CremaException;
 import crema.exception.MediaLibraryException;
 import crema.service.MediaLibraryService;
 
@@ -83,8 +84,9 @@ public class AddMediaLibraryAction extends Action {
     /**
      * Call the service to create the library.
      * @return the created library
+     * @throws CremaException 
      */
-    private void createLibrary() {
+    private void createLibrary() throws CremaException {
         String name = "Media Library 2";
         try {
             mediaLibrary = libraryService.createMediaLibrary(mediaLibraryFile, name);
@@ -107,7 +109,11 @@ public class AddMediaLibraryAction extends Action {
             if (sheet.getResult()) {
                 Sequence<File> selectedFiles = fileBrowserSheet.getSelectedFiles();
                 mediaLibraryFile = selectedFiles.get(0);
-                createLibrary();
+                try {
+                    createLibrary();
+                } catch (CremaException e) {
+                    log.error(e.getMessage(), e);
+                }
             }
         }
     }

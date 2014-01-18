@@ -8,33 +8,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import crema.domain.Movie;
-import crema.service.MovieNameService;
+import crema.exception.CremaException;
+import crema.service.MovieDecorator;
 import crema.util.text.MovieNameTokenizer;
 
 /**
- * Implementation of {@link MovieNameService}.
+ * Decorates a movie by deriving the name of the movie from the file names
+ * that make up the movie.
  * 
  * @author Jason Andersen (andersen.jason@gmail.com)
  */
 @Service
-public class MovieNameServiceImpl implements MovieNameService {
+public class MovieNameDecorator implements MovieDecorator {
 
-    private static Logger log = LoggerFactory.getLogger(MovieNameServiceImpl.class);
+    private static Logger log = LoggerFactory.getLogger(MovieNameDecorator.class);
 
     @Autowired
     private MovieNameTokenizer tokenizer;
 
     /**
-     * @see crema.domain.MediaLibraryNewMovieListener#movieAdded(crema.domain.Movie)
+     * @see crema.service.MovieDecorator#decorateMovie(crema.domain.Movie)
      */
-    public void movieAdded(final Movie movie) {
+    public void decorateMovie(final Movie movie) throws CremaException {
         deriveName(movie);
     }
 
     /**
      * @see crema.service.MovieNameService#deriveName(crema.domain.Movie)
      */
-    public void deriveName(final Movie movie) {
+    private void deriveName(final Movie movie) {
         String fileName = movie.getFirstMediaFile().getFileNameWithoutExtension();
         List<String> tokens = tokenizer.tokenize(fileName);
         String movieName = assembleTokens(tokens);

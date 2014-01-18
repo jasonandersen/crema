@@ -13,7 +13,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.Validate;
 
-import crema.exception.MediaFileException;
+import crema.exception.CremaException;
 
 /**
  * A library housing media files.
@@ -72,9 +72,9 @@ public class MediaLibrary {
     /**
      * Overloaded method to allow a movie to be added by one file.
      * @param file
-     * @throws MediaFileException 
+     * @throws CremaException 
      */
-    public void addMovie(final File file) throws MediaFileException {
+    public void addMovie(final File file) throws CremaException {
         List<File> fileList = new LinkedList<File>();
         fileList.add(file);
         addMovie(fileList);
@@ -83,9 +83,9 @@ public class MediaLibrary {
     /**
      * Adds a movie file to this library.
      * @param file
-     * @throws MediaFileException 
+     * @throws CremaException 
      */
-    public void addMovie(final List<File> files) throws MediaFileException {
+    public void addMovie(final List<File> files) throws CremaException {
         Validate.notNull(files);
         Movie movie = new Movie();
         for (File file : files) {
@@ -146,8 +146,9 @@ public class MediaLibrary {
     /**
      * Notifies listeners that a new movie has been added.
      * @param movie
+     * @throws CremaException 
      */
-    private void notifyListenersNewMovie(final Movie movie) {
+    private void notifyListenersNewMovie(final Movie movie) throws CremaException {
         for (MediaLibraryNewMovieListener listener : newMovieListeners) {
             listener.movieAdded(movie);
         }

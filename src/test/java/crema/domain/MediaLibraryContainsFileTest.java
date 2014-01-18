@@ -10,7 +10,7 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
-import crema.exception.MediaFileException;
+import crema.exception.CremaException;
 import crema.test.TestUtils;
 
 /**
@@ -27,7 +27,7 @@ public class MediaLibraryContainsFileTest {
     private Collection<File> files = new ArrayList<File>();
 
     @Before
-    public void setupLibrary() throws MediaFileException, IOException {
+    public void setupLibrary() throws IOException, CremaException {
         String[] paths = {
                 "subdir1/subdir2/movie.avi",
                 "subdir1/subdir2/movie.mpg",

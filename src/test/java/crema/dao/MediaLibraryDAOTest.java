@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import crema.domain.MediaLibrary;
 import crema.domain.Movie;
+import crema.exception.CremaException;
 import crema.exception.DuplicateMediaLibraryException;
-import crema.exception.MediaFileException;
 import crema.test.AbstractIntegrationTest;
 import crema.test.TestUtils;
 
@@ -66,7 +66,7 @@ public class MediaLibraryDAOTest extends AbstractIntegrationTest {
     }
 
     @Test
-    public void testMovieIsSavedCorrectly() throws IOException, MediaFileException, DuplicateMediaLibraryException {
+    public void testMovieIsSavedCorrectly() throws IOException, CremaException {
         File file = TestUtils.buildFileRelativeToDirectory(directory, "movie.mpg");
         library.addMovie(file);
         assertFalse(library.getMoviesByFilePath().isEmpty());

@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import crema.exception.CremaException;
 import crema.exception.MediaFileException;
 import crema.test.TestUtils;
 
@@ -39,7 +40,7 @@ public class MediaLibraryAddMovieTest {
     }
 
     @Test
-    public void testSingleFile() throws IOException, MediaFileException {
+    public void testSingleFile() throws IOException, CremaException {
         String relativePath = "sub-dir1/sub-dir1a/movie1.avi";
         File testFile = TestUtils.buildFileRelativeToDirectory(baseDirectory, relativePath);
         library.addMovie(testFile);
@@ -50,7 +51,7 @@ public class MediaLibraryAddMovieTest {
     }
 
     @Test
-    public void testMultipleFiles() throws IOException, MediaFileException {
+    public void testMultipleFiles() throws IOException, CremaException {
         String[] paths = new String[] {
                 "sub-dir1/sub-dir2/movie.avi",
                 "sub-dir1/sub-dir2/movie.wmv",
@@ -75,7 +76,7 @@ public class MediaLibraryAddMovieTest {
     }
 
     @Test(expected = MediaFileException.class)
-    public void testFileOutsideMediaLibrary() throws IOException, MediaFileException, InterruptedException {
+    public void testFileOutsideMediaLibrary() throws IOException, InterruptedException, CremaException {
         /*
          * This test can fail if it runs too fast because the directory name is based on System.currentTimeMillis()
          * so we pause long enough so it won't fail.
@@ -89,13 +90,13 @@ public class MediaLibraryAddMovieTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testNullFile() throws MediaFileException {
+    public void testNullFile() throws CremaException {
         File nullArg = null;
         library.addMovie(nullArg);
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void testDeletingAMovie() throws IOException, MediaFileException {
+    public void testDeletingAMovie() throws IOException, CremaException {
         String relativePath = "sub-dir1/sub-dir1a/movie1.avi";
         File testFile = TestUtils.buildFileRelativeToDirectory(baseDirectory, relativePath);
         library.addMovie(testFile);
